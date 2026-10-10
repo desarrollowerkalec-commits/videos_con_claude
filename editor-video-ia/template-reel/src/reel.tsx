@@ -186,16 +186,32 @@ export const SubsV: React.FC<{ keywords: string[]; hide: [number, number][]; yAt
           opacity: Math.min(1, p * 2),
           display: "flex",
           flexWrap: "wrap",
+          alignItems: "baseline",
           justifyContent: "center",
           gap: "0 20px",
           maxWidth: 1000,
         }}
       >
         {ch.words.map((w, i) => {
-          const spoken = t >= w.s;
+          // karaoke por palabra: la que se está diciendo = acento + más grande + bold.
+          // El resto de la frase queda en blanco más chico (lo ya dicho) o atenuado (lo que falta).
+          const active = t >= w.s && t < w.e;
+          const spoken = t >= w.e;
           const key = kw.has(clean(w.w));
+          const hl = active || (key && (spoken || active));
           return (
-            <span key={i} style={{ color: key && spoken ? C.lime : spoken ? C.text : "rgba(244,242,248,.45)" }}>
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                color: hl ? C.lime : spoken ? C.text : "rgba(255,255,255,.4)",
+                fontSize: active ? "1.12em" : "0.82em",
+                fontWeight: active ? 900 : 800,
+                transform: active ? "translateY(-2px)" : "none",
+                textShadow: hl ? `0 0 26px ${C.lime}66, 0 3px 8px rgba(0,0,0,.6)` : "0 3px 8px rgba(0,0,0,.55)",
+                transition: "font-size .08s linear",
+              }}
+            >
               {w.w.replace(/[.,]$/, "")}
             </span>
           );
@@ -326,6 +342,38 @@ export const CommentCTA: React.FC<{ from: number; keyword: string; sub: string }
         <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 52, color: C.text, lineHeight: 1.25, maxWidth: 900, opacity: prog(t, from + 0.7, 0.4) }}>
           {sub}
         </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ---------- hero: número / remate con glow dorado ----------
+/**
+ * Dato o palabra-remate gigante, centrado, con glow del color de acento (estilo "2026 encendido").
+ * Usar con cuentagotas: 1–2 por reel, en el punchline o el número fuerte. Ocultar los subtítulos
+ * en ese tramo (hide en SubsV) para no duplicar texto. `big` = número/palabra, `small` = bajada corta.
+ */
+export const HeroGlow: React.FC<{ from: number; to: number; big: string; small?: string; top?: number }> = ({
+  from,
+  to,
+  big,
+  small,
+  top = 470,
+}) => {
+  const t = useT();
+  if (t < from - 0.1 || t > to + 0.4) return null;
+  const o = prog(t, from, 0.35) * (1 - prog(t, to, 0.3));
+  const p = pop(t, from, 0.6);
+  const pulse = 1 + 0.03 * Math.sin((t - from) * 5);
+  return (
+    <AbsoluteFill style={{ opacity: o }}>
+      <div style={{ position: "absolute", top, left: 0, right: 0, textAlign: "center", fontFamily: TITLE, transform: `scale(${(0.8 + 0.2 * p) * pulse})` }}>
+        <div style={{ fontWeight: 900, fontSize: 300, lineHeight: 0.9, letterSpacing: -6, color: C.lime, textShadow: `0 0 60px ${C.lime}, 0 0 120px ${C.lime}aa, 0 0 20px ${C.lime}` }}>
+          {big}
+        </div>
+        {small && (
+          <div style={{ marginTop: 20, fontWeight: 800, fontSize: 70, letterSpacing: 2, color: C.text, textShadow: "0 4px 24px rgba(0,0,0,.7)" }}>{small}</div>
+        )}
       </div>
     </AbsoluteFill>
   );

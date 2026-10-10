@@ -2,9 +2,14 @@
 # Render final: Remotion → (música con ducking opcional) → loudnorm -14 LUFS.
 # Uso: render.sh <carpeta edicion-...> "<ruta salida.mp4>" [musica.wav] [volumen_musica=0.16]
 set -e
+# En la nube (red cerrada): exportá REMOTION_BROWSER_EXECUTABLE (ruta a un chrome/headless_shell ya
+# instalado) y, si hace falta, REMOTION_IGNORE_CERT=1. En Mac no hace falta (Remotion baja su chrome).
+RFLAGS=""
+[ -n "$REMOTION_BROWSER_EXECUTABLE" ] && RFLAGS="$RFLAGS --browser-executable=$REMOTION_BROWSER_EXECUTABLE"
+[ -n "$REMOTION_IGNORE_CERT" ] && RFLAGS="$RFLAGS --ignore-certificate-errors"
 WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.16}"
 cd "$WORK/remotion"
-npx remotion render src/index.ts Main out/render.mp4 --crf=18 --log=error 2>&1 | grep -v "network requests" || true
+npx remotion render src/index.ts Main out/render.mp4 --crf=18 $RFLAGS --log=error 2>&1 | grep -v "network requests" || true
 D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/render.mp4)
 ffmpeg -v error -y -i out/render.mp4 -vn -af "loudnorm=I=-14:TP=-1.5:LRA=11" -ar 48000 "$WORK/voz_sfx.wav"
 if [ -n "$MUSIC" ]; then
