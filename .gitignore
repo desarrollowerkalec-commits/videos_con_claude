@@ -1,0 +1,14 @@
+# Dependencias que se reinstalan con setup.sh (no se versionan)
+editor-video-ia/engine/node_modules/
+editor-video-ia/.venv/
+**/node_modules/
+
+# Proyectos de edición y salidas de render (se generan por video)
+edicion-*/
+Reels - */
+**/out/
+*.mp4
+*.mov
+
+# Sistema
+.DS_Store
