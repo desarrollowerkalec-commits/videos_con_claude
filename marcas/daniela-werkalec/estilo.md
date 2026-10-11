@@ -43,6 +43,24 @@ Para destacar partes o textos (como el viral de traducción):
 - Cada palabra **entra con su propia animación** (desde el costado · hacia arriba · fade · pop) y se van
   acomodando hasta formar la frase; al final **salen todas juntas**. (Implementado en `RemarkPhrase`.)
 
+### Dinámica de referencia (viral "Google acaba de convertir cualquier auricular")
+
+Analizada de los primeros ~2 s del video de Daniela:
+
+- Las palabras **aparecen de a una, sincronizadas con la voz** (~cada 0.3 s).
+- **Layout en cascada / apilado** (NO una sola línea): cada palabra en su posición, componiendo la frase en varias líneas/alturas.
+- **Fuente y color distintos por palabra**:
+  - Palabra clave 1 (p. ej. "Google") → **serif grande AMARILLA (True Fate)** con **flash de glow** al entrar.
+  - Conector (p. ej. "acaba") → sans blanca bold, más chica.
+  - "de convertir" → **serif itálica blanca**, mediana.
+  - "cualquier" → sans blanca chica.
+  - Palabra clave 2 (p. ej. "auricular") → **amarilla bold con glow**.
+- **1–2 palabras amarillas con glow** (las clave); el resto blanco.
+- Entrada: fade + leve escala; las amarillas con **flash de brillo**.
+- Frase completa → sostiene → sale.
+
+> Pendiente: actualizar `RemarkPhrase` de una línea centrada → **cascada apilada** con 2 palabras clave amarillas.
+
 ## Overlays de sombra
 
 - **Central (chico):** elipse oscura difuminada **detrás de la palabra principal** del remate, para destacarla.
