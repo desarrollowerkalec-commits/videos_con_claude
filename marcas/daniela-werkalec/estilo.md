@@ -158,10 +158,10 @@ que el reencuadre y los "cambios de ángulo" se sientan reales.
 
 ### Placa de cierre (motion graphics)
 
-En vez de una placa plana, cerrar con **motion graphics** sobre fondo oscuro + puntos (NeuralBg):
+En vez de una placa plana negra, cerrar con **motion graphics** sobre la **oficina en blur oscurecida** (frame del propio video, desenfocado):
 - **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
-- **Nombre** en True Fate + credenciales (Corredora inmobiliaria · Experta en Tecnología e IA para inmobiliarias) + `@danielawerkalec`.
+- **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + `@danielawerkalec`. En su propia cuenta evitar taglines genéricos largos ("…para inmobiliarias").
 - Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA).
 
 ## Pipeline
