@@ -134,7 +134,9 @@ Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame 
 | Ícono del ángulo | **PNG real** (`assets/iconos/`) | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
 | URL | **Arimo 400** (fina, sin bold) | 32 px | centrada, y ≈ 1500 |
 
-Bloque de texto: `top ≈ 760`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
+Bloque de texto: `top ≈ 720`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
+
+**Fondo:** overlay base **suave** (la foto se ve) + **banda oscura gruesa detrás del texto** que sube arriba de "Hoy" y baja pasando el recuadro, fundida arriba y abajo (la foto se ve arriba y abajo). **Encuadrar la cara alta** (reframe/zoom del frame) para que ni la banda ni las palabras la tapen. **Ícono transparente** sobre la foto.
 
 ## Efectos y motion graphics (ref: reel VoiceStudio)
 
