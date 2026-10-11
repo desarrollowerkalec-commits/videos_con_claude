@@ -99,6 +99,7 @@ Analizada de los primeros ~2 s del video de Daniela:
 
 - Pista oficial **"Forward Momentum"** (house luminoso, ~120 BPM, cálido), generada en **Google Labs / MusicFX** → libre de derechos para la marca: `editor-video-ia/assets/music/forward-momentum.mp3`.
 - Entra **sola en todos los renders** (default en `render.sh`): cama a volumen 0.42 con **ducking** bajo la voz → mezcla final ~−14 LUFS, música ~10 dB bajo la voz.
+- **Arranca en el 2.º 10** (ahí entra el beat; los primeros ~10 s son intro suave). Configurable: 5.º argumento de `render.sh` = segundo de inicio.
 - Para otra pista en un render puntual: pasar la ruta como 3er argumento a `render.sh`; `"none"` la saca.
 - Nota: la síntesis por código (osciladores) no da calidad profesional. Para nuevas camas, generar en MusicFX/Suno/Udio o usar catálogo (Epidemic, Artlist, Pixabay) y guardarlas acá.
 
@@ -160,7 +161,8 @@ que el reencuadre y los "cambios de ángulo" se sientan reales.
 
 ### Placa de cierre (motion graphics)
 
-En vez de una placa plana negra, cerrar con **motion graphics** sobre la **oficina en blur oscurecida** (frame del propio video, desenfocado):
+En vez de una placa plana negra, cerrar con **motion graphics** sobre la **oficina de fondo** (NO negro, NO la figura de Daniela):
+- Fondo = **recorte de la pared/oficina SIN su cuerpo**, desenfocado suave y con velo oscuro. En este caso: la **pared de ladrillo con el cartel WERKALEC** (zona bien iluminada, de marca). Clave: tomar una región donde NO esté su cuerpo (si se blurea el frame entero, su camisa/figura se ve como un borrón) — el `<Img>` va dentro de un `AbsoluteFill` para que no lo tape el fondo base.
 - **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
 - **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + `@danielawerkalec`. En su propia cuenta evitar taglines genéricos largos ("…para inmobiliarias").

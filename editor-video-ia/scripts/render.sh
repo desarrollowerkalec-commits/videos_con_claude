@@ -8,18 +8,23 @@ RFLAGS=""
 [ -n "$REMOTION_BROWSER_EXECUTABLE" ] && RFLAGS="$RFLAGS --browser-executable=$REMOTION_BROWSER_EXECUTABLE"
 [ -n "$REMOTION_IGNORE_CERT" ] && RFLAGS="$RFLAGS --ignore-certificate-errors"
 SKILL="$(cd "$(dirname "$0")/.." && pwd)"
-WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.42}"
-# Música por defecto: pista chill de marca (SIEMPRE, salvo que se pase otra ruta o "none").
-if [ -z "$MUSIC" ] && [ -f "$SKILL/assets/music/forward-momentum.mp3" ]; then MUSIC="$SKILL/assets/music/forward-momentum.mp3"; fi
+WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.42}"; MSTART="${5:-}"
+# Música por defecto: pista de marca (SIEMPRE, salvo que se pase otra ruta o "none").
+# Se arranca en el 2do 10 (el beat entra ahí; los primeros ~10s son intro suave).
+if [ -z "$MUSIC" ] && [ -f "$SKILL/assets/music/forward-momentum.mp3" ]; then
+  MUSIC="$SKILL/assets/music/forward-momentum.mp3"; [ -z "$MSTART" ] && MSTART=10
+fi
 [ "$MUSIC" = "none" ] && MUSIC=""
+[ -z "$MSTART" ] && MSTART=0
 cd "$WORK/remotion"
 npx remotion render src/index.ts Main out/render.mp4 --crf=18 $RFLAGS --log=error 2>&1 | grep -v "network requests" || true
 D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/render.mp4)
 ffmpeg -v error -y -i out/render.mp4 -vn -af "loudnorm=I=-14:TP=-1.5:LRA=11" -ar 48000 "$WORK/voz_sfx.wav"
 if [ -n "$MUSIC" ]; then
   FO=$(python3 -c "print(max(0,$D-1.6))")
+  MEND=$(python3 -c "print($MSTART+$D)")
   ffmpeg -v error -y -i "$WORK/voz_sfx.wav" -i "$MUSIC" -filter_complex \
-    "[1:a]atrim=0:$D,asetpts=PTS-STARTPTS,aresample=48000,volume=$MVOL,afade=t=in:d=0.8,afade=t=out:st=$FO:d=1.6[m];[0:a]asplit=2[v][sc];[m][sc]sidechaincompress=threshold=0.12:ratio=2.5:attack=25:release=350[md];[v][md]amix=inputs=2:normalize=0,alimiter=limit=0.89[out]" \
+    "[1:a]atrim=$MSTART:$MEND,asetpts=PTS-STARTPTS,aresample=48000,volume=$MVOL,afade=t=in:d=0.8,afade=t=out:st=$FO:d=1.6[m];[0:a]asplit=2[v][sc];[m][sc]sidechaincompress=threshold=0.12:ratio=2.5:attack=25:release=350[md];[v][md]amix=inputs=2:normalize=0,alimiter=limit=0.89[out]" \
     -map "[out]" -ar 48000 "$WORK/mezcla.wav"
   A="$WORK/mezcla.wav"
 else
