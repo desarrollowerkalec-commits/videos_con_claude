@@ -17,12 +17,14 @@ Este es el formato que querés de base:
 - Frases cortas de **3–4 palabras** en pantalla a la vez (no palabra suelta aislada).
   Ej.: `solo mostrás` · `en vos` · `qué vendés` · `si solo mostrás`.
 - La **palabra que se está diciendo** se resalta: **dorado + tamaño más grande + bold**.
-  El resto de la frase: **blanco, más chico**.
+  El resto de la frase: **blanco** (toda visible, no se atenúa).
 - Es highlight tipo karaoke, pero la diferencia la marca el **color Y el tamaño**, no solo el color.
 - Minúscula / sentence case. **Nunca** mayúscula sostenida.
-- Posición: tercio inferior, centrado.
-- Contorno/sombra oscura sutil para legibilidad sobre cualquier fondo.
-- Tipografía: bold redondeada (Montserrat 800 por defecto).
+- Posición: hacia el **centro** del cuadro (ni pegado abajo ni sobre la cara).
+- **Sin caja de fondo.** Cada palabra con **contorno oscuro nítido** (tipo sticker) para leerse
+  sobre cualquier fondo (confirmado en el video de referencia: dorado con borde negro).
+- Tipografía: bold redondeada (Montserrat 800/900 por defecto).
+- Estructura del reel: mucho **b-roll** intercalado (cutaways) + placas de texto sobre fondo plano.
 
 ## Texto destacado — HERO (del video viral)
 

@@ -172,43 +172,42 @@ export const SubsV: React.FC<{ keywords: string[]; hide: [number, number][]; yAt
     <div style={{ position: "absolute", bottom: 1920 - (yAt(t) + 50), left: 40, right: 40, display: "flex", justifyContent: "center" }}>
       <div
         style={{
-          padding: "12px 28px",
-          borderRadius: 20,
-          background: "rgba(11,10,16,.7)",
           fontFamily: TITLE,
           fontWeight: 900,
-          fontSize: 76,
+          fontSize: 78,
           lineHeight: 1.05,
           letterSpacing: -1,
           color: C.text,
           textAlign: "center",
-          transform: `scale(${0.85 + 0.15 * p})`,
+          transform: `scale(${0.9 + 0.1 * p})`,
           opacity: Math.min(1, p * 2),
           display: "flex",
           flexWrap: "wrap",
           alignItems: "baseline",
           justifyContent: "center",
-          gap: "0 20px",
+          gap: "0 18px",
           maxWidth: 1000,
         }}
       >
         {ch.words.map((w, i) => {
-          // karaoke por palabra: la que se está diciendo = acento + más grande + bold.
-          // El resto de la frase queda en blanco más chico (lo ya dicho) o atenuado (lo que falta).
+          // karaoke por palabra: la que se está diciendo = acento + más grande. El resto de la frase,
+          // blanca. SIN caja de fondo: cada palabra lleva contorno oscuro (tipo sticker) para leerse
+          // sobre cualquier fondo. Replica el formato de los reels de Daniela Werkalec.
           const active = t >= w.s && t < w.e;
-          const spoken = t >= w.e;
           const key = kw.has(clean(w.w));
-          const hl = active || (key && (spoken || active));
+          const hl = active || (key && t >= w.s);
           return (
             <span
               key={i}
               style={{
                 display: "inline-block",
-                color: hl ? C.lime : spoken ? C.text : "rgba(255,255,255,.4)",
-                fontSize: active ? "1.12em" : "0.82em",
-                fontWeight: active ? 900 : 800,
+                color: hl ? C.lime : C.text,
+                fontSize: active ? "1.14em" : "0.84em",
+                fontWeight: 900,
                 transform: active ? "translateY(-2px)" : "none",
-                textShadow: hl ? `0 0 26px ${C.lime}66, 0 3px 8px rgba(0,0,0,.6)` : "0 3px 8px rgba(0,0,0,.55)",
+                WebkitTextStroke: "7px #0E0D0B",
+                paintOrder: "stroke fill",
+                textShadow: "0 4px 10px rgba(0,0,0,.45)",
                 transition: "font-size .08s linear",
               }}
             >
