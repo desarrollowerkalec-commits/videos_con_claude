@@ -1,9 +1,19 @@
 # Handoff — Edición VLOG_7 (marca daniela-werkalec)
 
-> Nota para el Claude de la sesión nueva. La sesión anterior quedó atrapada en un
-> contenedor nacido **sin** acceso a HuggingFace (403 del proxy), así que no pudo
-> transcribir. La config de red ya se corrigió; esta sesión nace con HF habilitado.
-> Trabajá en la rama **`claude/laughing-bardeen-u3knko`**.
+> Nota para el Claude de la sesión nueva. Trabajá en la rama **`claude/laughing-bardeen-u3knko`**.
+>
+> **LEÉ ESTO ANTES DE TRANSCRIBIR (causa raíz del bloqueo, confirmada tras 4 sesiones):**
+> La política de red **se congela cuando NACE el contenedor**. Editar la allowlist
+> y re-chequear en una sesión YA ABIERTA no sirve: ese contenedor nunca levanta el
+> cambio. Hay que **guardar la config y abrir una sesión NUEVA**. Los dominios ya
+> estaban bien cargados (`huggingface.co` + `cas-bridge.xethub.hf.co` + `xethub.hf.co`);
+> el problema nunca fue *qué* dominios, sino chequear en el contenedor viejo.
+> Hay **un solo entorno** ("Default — trusted network access", `env_018AKTucLEvaWLJrVJtbkp9G`),
+> así que no hay confusión de entornos posible.
+>
+> **Protocolo obligatorio al arrancar:** correr primero el chequeo de red de abajo.
+> Si da 403 en una sesión recién nacida con la config guardada → NO es cuestión de
+> cargar más dominios: es la plataforma no aplicando la allowlist → escalar a soporte.
 
 ## Qué es el video
 - Archivo: **VLOG_7.mp4** — la usuaria lo re-adjunta en el chat (NO está versionado; `*.mp4` va al `.gitignore`).
