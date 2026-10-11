@@ -104,17 +104,18 @@ Base: **letras blancas sobre fondo negro**, con UN color de acento según el tip
 
 ## Portadas (covers)
 
-Una portada por reel. Combina **color del ángulo + blanco** sobre foto de Daniela oscurecida. Orden:
+Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame con **boca cerrada**). Todo **centrado**, combinando **color del ángulo + blanco**. Specs:
 
-1. **Línea 1 — script** (BREATHING): `Hoy: <algo>` — "Hoy:" en color de ángulo, resto blanco. *(stand-in hasta subir BREATHING: Satisfy.)*
-2. **Línea 2 — ANTON** (titular grande), mezcla color de ángulo + blanco por palabra. Detrás va la **sombra separadora** horizontal.
-3. **Línea 3 — Montserrat** (bold), blanco + palabra clave en color de ángulo.
-4. **Línea 4 — caja fina** (Arimo, Arial-like) con recuadro finito.
-- **Ícono** del ángulo (color de ángulo) **a la izquierda**.
-- **www.danielawerkalec.com.ar** centrado abajo.
-- Elegir un frame con **boca cerrada** (no mid-palabra).
+| Elemento | Fuente | Tamaño | Posición / nota |
+|---|---|---|---|
+| 1 · "Hoy: <algo>" | **BREATHING** | ~104 px | "Hoy:" en color de ángulo, resto blanco |
+| 2 · Titular | **ANTON** | ~104 px, **UNA sola línea** (nowrap), grande | mezcla color de ángulo + blanco por palabra; **sombra separadora** horizontal detrás |
+| 3 · Bajada | **Montserrat 800** | 52 px, letter-spacing **−2** | blanco + palabra clave en color de ángulo |
+| 4 · Caja | **Arimo** | 34 px | recuadro fino (1.5 px) centrado |
+| Ícono del ángulo | SVG color de ángulo | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
+| URL | **Arimo 400** (fina, sin bold) | 32 px | centrada, y ≈ 1500 |
 
-Fuentes: **Anton** + **Montserrat** + **Arimo** (ya disponibles) + **BREATHING** (custom, subir .ttf; por ahora Satisfy).
+Bloque de texto: `top ≈ 760`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
 
 ## Efectos y motion graphics (ref: reel VoiceStudio)
 
