@@ -28,7 +28,8 @@ Pendiente de archivos reales (cuando Daniela los suba, reemplazan a los similare
 
 ## Subtítulos (running captions)
 
-- Playfair, frases de **2–4 palabras**, hacia el **centro-bajo** del cuadro.
+- Playfair, frases de **2–4 palabras**, **al nivel del pecho** (abajo de la boca) — no pegados abajo ni arriba como título.
+- Corren **desde el inicio** del reel (nada de título suelto en Montserrat arriba de todo).
 - **Palabra hablada**: amarillo `#FFCC00` + más grande + **cajita amarilla suave** + **contorno negro nítido** (tipo sticker). El resto de la frase, blanco.
 - Sin caja de fondo general. Sentence case, nunca mayúscula sostenida.
 
@@ -37,16 +38,32 @@ Pendiente de archivos reales (cuando Daniela los suba, reemplazan a los similare
 Para destacar partes o textos (como el viral de traducción):
 
 - Frase **compuesta por palabras de distinta fuente, peso y tamaño**.
-- Palabra o número **grande en amarillo (True Fate) con GLOW**.
-- El resto: combinación de Red Hat (bold/light), PT Serif itálica y Montserrat, **todas con glow**.
-- Cada palabra **entra con una animación distinta** (fade · desde el costado · brillo) y se van
-  acomodando hasta componer la frase. *(Set exacto de animaciones: pendiente — Daniela pasa un video de referencia.)*
+- Palabra o número **grande en amarillo (True Fate) con GLOW** y **sombra detrás** (overlay central) para que quede "por encima".
+- El resto: combinación de Red Hat (bold/light), PT Serif itálica y Montserrat, en **blanco** con glow suave.
+- Cada palabra **entra con su propia animación** (desde el costado · hacia arriba · fade · pop) y se van
+  acomodando hasta formar la frase; al final **salen todas juntas**. (Implementado en `RemarkPhrase`.)
+
+## Overlays de sombra
+
+- **Central (chico):** elipse oscura difuminada **detrás de la palabra principal** del remate, para destacarla.
+- **Separador (horizontal):** band de sombra **debajo de la línea ANTON** en las portadas, separa línea 1 de la 2 y la 3 de la 4.
+- Recreados como vectores (recolorables). Si se quieren los PNG exactos de Daniela, subirlos como archivo.
+
+## Íconos por ángulo (SVG, color del ángulo)
+
+| Ángulo | Ícono |
+|---|---|
+| Vlogs / personales (celeste) | corazón |
+| Opiniones / reflexión (fucsia) | cara-voz (perfil + ondas) |
+| Prompts / guías (amarillo) | globo de diálogo |
+| Apps / herramientas (verde) | grilla (4 cuadrados) |
+| Noticias / novedades (rojo) | estrella |
 
 ## Otros elementos (pendientes de referencia)
 
 - **Logos de apps** cuando se nombran (ChatGPT, Claude, WhatsApp, Gemini…): insignia tipo `ToolBadge`.
 - **Texto detrás de la persona** (palabras entre el fondo y el sujeto): requiere segmentación del sujeto por frame.
-- **Light leaks / destellos** en los cortes entre clips.
+- **Efectos / color grade por ángulo** (ver sección Efectos).
 
 ## Estructura y ritmo
 
@@ -82,24 +99,22 @@ Base: **letras blancas sobre fondo negro**, con UN color de acento según el tip
 | Verde | `#2DAF8C` | Apps, herramientas, páginas, recomendaciones |
 | Rojo | `#FF3131` | Noticias, novedades, cosas nuevas que llaman la atención |
 
-> Decisión pendiente: si el acento del reel (resalte de subtítulos + remate) **sigue el color del ángulo**
-> o si los subtítulos quedan siempre en amarillo y solo la portada cambia. Recomendado: que el reel use el color del ángulo (sistema coherente).
-
-Cada ángulo tiene un **ícono** propio (los pasa Daniela).
+**Color en el reel:** color PRINCIPAL = amarillo `#FFCC00` (palabra hablada + palabra grande del remate).
+**2do color = el color del ángulo** (fucsia, celeste, verde, etc.): CTA, badges y acentos. Así el reel combina con su portada.
 
 ## Portadas (covers)
 
-Una portada por reel. Estructura (ver covers reales):
+Una portada por reel. Combina **color del ángulo + blanco** sobre foto de Daniela oscurecida. Orden:
 
-- Fondo: **foto de Daniela** (un frame del reel u otra), oscurecida sobre negro.
-- Línea superior en **BREATHING** (script firma): `Hoy: <algo>` — acento + blanco. *(stand-in hasta subir BREATHING: Allura / Great Vibes / Sacramento.)*
-- Titular grande en **ANTON** (sans condensada), mezcla de **color de acento + blanco** por palabra.
-- Sub-línea opcional (en caja o plana).
-- **Ícono** del ángulo (color de acento).
-- **www.danielawerkalec.com.ar** abajo.
-- Color de acento = el del ángulo del contenido.
+1. **Línea 1 — script** (BREATHING): `Hoy: <algo>` — "Hoy:" en color de ángulo, resto blanco. *(stand-in hasta subir BREATHING: Satisfy.)*
+2. **Línea 2 — ANTON** (titular grande), mezcla color de ángulo + blanco por palabra. Detrás va la **sombra separadora** horizontal.
+3. **Línea 3 — Montserrat** (bold), blanco + palabra clave en color de ángulo.
+4. **Línea 4 — caja fina** (Arimo, Arial-like) con recuadro finito.
+- **Ícono** del ángulo (color de ángulo) **a la izquierda**.
+- **www.danielawerkalec.com.ar** centrado abajo.
+- Elegir un frame con **boca cerrada** (no mid-palabra).
 
-Fuentes: **Anton** (Google, ya disponible) + **BREATHING** (custom, subir .ttf).
+Fuentes: **Anton** + **Montserrat** + **Arimo** (ya disponibles) + **BREATHING** (custom, subir .ttf; por ahora Satisfy).
 
 ## Efectos y motion graphics (ref: reel VoiceStudio)
 
