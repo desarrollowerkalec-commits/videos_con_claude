@@ -156,6 +156,14 @@ Límites honestos (no es magia de post):
 Recomendación de captura para Daniela: grabar con buena luz y **2 tomas** (una abierta, una cerrada) para
 que el reencuadre y los "cambios de ángulo" se sientan reales.
 
+### Placa de cierre (motion graphics)
+
+En vez de una placa plana, cerrar con **motion graphics** sobre fondo oscuro + puntos (NeuralBg):
+- **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
+- **Waveform** line-art (barras del color del ángulo, animadas) debajo.
+- **Nombre** en True Fate + credenciales (Corredora inmobiliaria · Experta en Tecnología e IA para inmobiliarias) + `@danielawerkalec`.
+- Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA).
+
 ## Pipeline
 
 `prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final) → portada (cover).
