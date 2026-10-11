@@ -97,8 +97,10 @@ Analizada de los primeros ~2 s del video de Daniela:
 
 ## Música
 
-- Pista original **chill corporativa** libre de derechos: `editor-video-ia/assets/music/chill-corporativa.wav`.
-- Se usa como cama a ~−14 LUFS (volumen 0.14 en `render.sh`, con ducking bajo la voz).
+- Pista oficial **"Forward Momentum"** (house luminoso, ~120 BPM, cálido), generada en **Google Labs / MusicFX** → libre de derechos para la marca: `editor-video-ia/assets/music/forward-momentum.mp3`.
+- Entra **sola en todos los renders** (default en `render.sh`): cama a volumen 0.42 con **ducking** bajo la voz → mezcla final ~−14 LUFS, música ~10 dB bajo la voz.
+- Para otra pista en un render puntual: pasar la ruta como 3er argumento a `render.sh`; `"none"` la saca.
+- Nota: la síntesis por código (osciladores) no da calidad profesional. Para nuevas camas, generar en MusicFX/Suno/Udio o usar catálogo (Epidemic, Artlist, Pixabay) y guardarlas acá.
 
 ## CTA
 
