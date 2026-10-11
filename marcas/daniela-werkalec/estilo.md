@@ -1,59 +1,75 @@
-# Estilo de marca — Daniela Werkalec (para edición de reels)
+# Estilo de marca — Daniela Werkalec · danielawerkalec.com.ar
 
-Spec capturada del análisis de tus videos reales (VLOG viral de traducción + video de
-formato de subtítulos). Esto es lo que la skill `editor-video-ia` tiene que replicar.
+Spec para edición de reels (skill `editor-video-ia`). Capturado de los videos reales de Daniela
+(VLOG viral de traducción + reels con subtítulos karaoke) y de sus decisiones de tipografía.
 
-## Identidad
+## Identidad / colores
 
-- **Acento:** dorado (`#F2B705`), segundo tono bronce (`#C98A2E`).
-- **Texto:** blanco puro.
-- **Usuario / marca de agua:** `@danielawerkalec`.
-- **Tono visual:** cálido, natural, aspiracional. Nada chillón salvo el dorado de énfasis.
+- **Dorado de marca** `#F2B705`, bronce secundario `#C98A2E`.
+- **Amarillo** de subtítulos y palabra de remate `#FFCC00`.
+- **Texto** blanco puro `#FFFFFF`. Fondo oscuro de placas `#0B0A10`.
+- Usuario / marca de agua: `@danielawerkalec`.
+- Tono visual: cálido, natural, aspiracional. Nada chillón salvo el amarillo/dorado de énfasis.
 
-## Subtítulos — FORMATO PRINCIPAL (del video nuevo)
+## Tipografías
 
-Este es el formato que querés de base:
+Archivos propios en `editor-video-ia/assets/fonts/`; el resto por Google Fonts.
 
-- Frases cortas de **3–4 palabras** en pantalla a la vez (no palabra suelta aislada).
-  Ej.: `solo mostrás` · `en vos` · `qué vendés` · `si solo mostrás`.
-- La **palabra que se está diciendo** se resalta: **dorado + tamaño más grande + bold**.
-  El resto de la frase: **blanco** (toda visible, no se atenúa).
-- Es highlight tipo karaoke, pero la diferencia la marca el **color Y el tamaño**, no solo el color.
-- Minúscula / sentence case. **Nunca** mayúscula sostenida.
-- Posición: hacia el **centro** del cuadro (ni pegado abajo ni sobre la cara).
-- **Sin caja de fondo.** Cada palabra con **contorno oscuro nítido** (tipo sticker) para leerse
-  sobre cualquier fondo (confirmado en el video de referencia: dorado con borde negro).
-- Tipografía: bold redondeada (Montserrat 800/900 por defecto).
-- Estructura del reel: mucho **b-roll** intercalado (cutaways) + placas de texto sobre fondo plano.
+| Uso | Fuente | Nota |
+|---|---|---|
+| **Subtítulos base** (running captions) | **Playfair Display** (serif) | el efecto karaoke que le gusta |
+| **Palabra GRANDE amarilla** (remate) | **True Fate = Neato Serif** (local, `assets/fonts/NeatoSerif-Regular.ttf`) | con glow |
+| Variación de remate — sans | **Red Hat Display** (400/700/900) | reemplaza a *Indivisible* |
+| Variación de remate — serif | **PT Serif** + itálica | reemplaza a *SchoolBook* |
+| Variación de remate — sans | Montserrat | |
 
-## Texto destacado — HERO (del video viral)
+Pendiente de archivos reales (cuando Daniela los suba, reemplazan a los similares): **Indivisible**,
+**SchoolBook**, **Neato Serif Rough** (versión gastada para las palabras grandes amarillas).
 
-Para remates y números, segundo nivel de énfasis:
+## Subtítulos (running captions)
 
-- Palabra o número grande, centrado, con **glow dorado** (efecto brillo/neón suave).
-  Referencia: el `2026` en dorado encendido del video viral.
-- Se usa con cuentagotas: 1–2 por reel, en el punchline o el dato fuerte.
-- Es la aproximación con glow/sombra; no es idéntico pixel a pixel a un motion de After Effects.
+- Playfair, frases de **2–4 palabras**, hacia el **centro-bajo** del cuadro.
+- **Palabra hablada**: amarillo `#FFCC00` + más grande + **cajita amarilla suave** + **contorno negro nítido** (tipo sticker). El resto de la frase, blanco.
+- Sin caja de fondo general. Sentence case, nunca mayúscula sostenida.
+
+## Remarcar / remate (hero)
+
+Para destacar partes o textos (como el viral de traducción):
+
+- Frase **compuesta por palabras de distinta fuente, peso y tamaño**.
+- Palabra o número **grande en amarillo (True Fate) con GLOW**.
+- El resto: combinación de Red Hat (bold/light), PT Serif itálica y Montserrat, **todas con glow**.
+- Cada palabra **entra con una animación distinta** (fade · desde el costado · brillo) y se van
+  acomodando hasta componer la frase. *(Set exacto de animaciones: pendiente — Daniela pasa un video de referencia.)*
+
+## Otros elementos (pendientes de referencia)
+
+- **Logos de apps** cuando se nombran (ChatGPT, Claude, WhatsApp, Gemini…): insignia tipo `ToolBadge`.
+- **Texto detrás de la persona** (palabras entre el fondo y el sujeto): requiere segmentación del sujeto por frame.
+- **Light leaks / destellos** en los cortes entre clips.
 
 ## Estructura y ritmo
 
-- Talking head (cámara) + **cutaways de b-roll** alternados.
-- Cambio visual cada **2–4 s**. Casi nunca más de ~4 s sin corte o cambio de encuadre.
-- Primeros 2 s siempre en cámara completa (el gancho es la cara).
-- B-roll típico en tus videos: capturas de producto (webs, apps) + stock que ilustra la idea
-  (gente usando lo que contás, situaciones cotidianas).
+- Talking head (cámara) + cutaways de b-roll / placas, alternados.
+- Cambio visual cada **2–4 s**. Primeros 2 s en cámara completa (el gancho es la cara).
+- Hero con glow a cuentagotas (1–2 por reel) en el remate/dato fuerte.
 
 ## B-roll — de dónde sale
 
-El b-roll NO aparece solo. Fuentes, en orden de preferencia:
+1. Capturas/clips que aporta Daniela por video (lo más fiel, sin líos de licencia).
+2. Placas de texto sobre fondo plano (cero dependencias) cuando no hay b-roll.
+3. Stock gratis (Pexels / Pixabay) — requiere red abierta + API key de cada uno.
 
-1. **Capturas/clips que aportás vos** por video (lo más fiel y sin líos de licencia).
-2. **Stock gratis** (Pexels / Pixabay) — requiere red abierta + API key gratis de cada uno;
-   se busca clip por clip según lo que se nombra en el video.
-3. Capturas de producto oficiales (webs/apps que mencionás), con crédito.
+## Música
 
-## Pendiente de definir por video
+- Pista original **chill corporativa** libre de derechos: `editor-video-ia/assets/music/chill-corporativa.wav`.
+- Se usa como cama a ~−14 LUFS (volumen 0.14 en `render.sh`, con ducking bajo la voz).
 
-- **CTA:** palabra a comentar + qué se envía. Se decide analizando cada video
-  (ej.: "Comentá GUÍA y te mando el recurso"). Hoy en `theme.ts` está provisorio.
-- **Música:** pista propia libre de derechos, o "sin música", o elegir de biblioteca libre.
+## CTA
+
+- Comentar una palabra → se responde por DM. Configurar respuesta automática (ManyChat u otra) para esa palabra.
+- Palabra + recurso se definen por video.
+
+## Pipeline
+
+`prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final).
