@@ -127,10 +127,11 @@ Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame 
 | Elemento | Fuente | Tamaño | Posición / nota |
 |---|---|---|---|
 | 1 · "Hoy: <algo>" | **BREATHING** | ~104 px | "Hoy:" en color de ángulo, resto blanco |
-| 2 · Titular | **ANTON** | ~104 px, **UNA sola línea** (nowrap), grande | mezcla color de ángulo + blanco por palabra; **sombra separadora** horizontal detrás |
+| 2 · Titular | **ANTON** | **~158 px**, **UNA sola línea** (nowrap), **al límite del ancho** (borde a borde) | mezcla color de ángulo + blanco; **2 sombras centradas** (entre script↔Anton y Anton↔Montserrat) + drop-shadow arriba/abajo → efecto **3D** |
+| 3b · Bajada corta | **Montserrat 800** | ~86 px, corta (ej. "la ventaja: el equipo") | reemplaza la bajada larga |
 | 3 · Bajada | **Montserrat 800** | 52 px, letter-spacing **−2** | blanco + palabra clave en color de ángulo |
 | 4 · Caja | **Arimo** | 34 px | recuadro fino (1.5 px) centrado |
-| Ícono del ángulo | SVG color de ángulo | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
+| Ícono del ángulo | **PNG real** (`assets/iconos/`) | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
 | URL | **Arimo 400** (fina, sin bold) | 32 px | centrada, y ≈ 1500 |
 
 Bloque de texto: `top ≈ 760`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
