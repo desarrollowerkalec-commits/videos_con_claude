@@ -70,6 +70,37 @@ Para destacar partes o textos (como el viral de traducción):
 - Comentar una palabra → se responde por DM. Configurar respuesta automática (ManyChat u otra) para esa palabra.
 - Palabra + recurso se definen por video.
 
+## Ángulos de contenido — color por ángulo
+
+Base: **letras blancas sobre fondo negro**, con UN color de acento según el tipo de contenido.
+
+| Color | Hex | Ángulo |
+|---|---|---|
+| Celeste | `#38B6FF` | Vlogs / contenidos personales |
+| Fucsia | `#CB6CE6` | Opiniones, comentarios, informes |
+| Amarillo | `#F4C910` | Prompts, guías paso a paso |
+| Verde | `#2DAF8C` | Apps, herramientas, páginas, recomendaciones |
+| Rojo | `#FF3131` | Noticias, novedades, cosas nuevas que llaman la atención |
+
+> Decisión pendiente: si el acento del reel (resalte de subtítulos + remate) **sigue el color del ángulo**
+> o si los subtítulos quedan siempre en amarillo y solo la portada cambia. Recomendado: que el reel use el color del ángulo (sistema coherente).
+
+Cada ángulo tiene un **ícono** propio (los pasa Daniela).
+
+## Portadas (covers)
+
+Una portada por reel. Estructura (ver covers reales):
+
+- Fondo: **foto de Daniela** (un frame del reel u otra), oscurecida sobre negro.
+- Línea superior en **BREATHING** (script firma): `Hoy: <algo>` — acento + blanco. *(stand-in hasta subir BREATHING: Allura / Great Vibes / Sacramento.)*
+- Titular grande en **ANTON** (sans condensada), mezcla de **color de acento + blanco** por palabra.
+- Sub-línea opcional (en caja o plana).
+- **Ícono** del ángulo (color de acento).
+- **www.danielawerkalec.com.ar** abajo.
+- Color de acento = el del ángulo del contenido.
+
+Fuentes: **Anton** (Google, ya disponible) + **BREATHING** (custom, subir .ttf).
+
 ## Pipeline
 
-`prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final).
+`prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final) → portada (cover).
