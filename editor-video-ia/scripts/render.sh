@@ -7,7 +7,11 @@ set -e
 RFLAGS=""
 [ -n "$REMOTION_BROWSER_EXECUTABLE" ] && RFLAGS="$RFLAGS --browser-executable=$REMOTION_BROWSER_EXECUTABLE"
 [ -n "$REMOTION_IGNORE_CERT" ] && RFLAGS="$RFLAGS --ignore-certificate-errors"
-WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.16}"
+SKILL="$(cd "$(dirname "$0")/.." && pwd)"
+WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.14}"
+# Música por defecto: pista chill de marca (SIEMPRE, salvo que se pase otra ruta o "none").
+if [ -z "$MUSIC" ] && [ -f "$SKILL/assets/music/chill-corporativa.wav" ]; then MUSIC="$SKILL/assets/music/chill-corporativa.wav"; fi
+[ "$MUSIC" = "none" ] && MUSIC=""
 cd "$WORK/remotion"
 npx remotion render src/index.ts Main out/render.mp4 --crf=18 $RFLAGS --log=error 2>&1 | grep -v "network requests" || true
 D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/render.mp4)
