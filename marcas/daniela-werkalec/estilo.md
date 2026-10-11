@@ -101,6 +101,24 @@ Una portada por reel. Estructura (ver covers reales):
 
 Fuentes: **Anton** (Google, ya disponible) + **BREATHING** (custom, subir .ttf).
 
+## Efectos y motion graphics (ref: reel VoiceStudio)
+
+Estética tech/explainer con **un color base por ángulo** (el mismo color del ángulo del contenido):
+
+- **Gráficos de línea** (line-art) animados en el color del ángulo, con glow: wireframes de UI, waveforms,
+  íconos, medidores, tarjetas de contorno fino. Fondo negro.
+- **Chips de pasos** arriba (`01 Paso · 02 Paso · 03 Paso`), **kicker** chico (`● QUÉ HACE`), **cursor** `|`
+  parpadeante en los titulares.
+- **Color grade / tinte** del clip hacia el color del ángulo (da el "color base").
+- **Reencuadre dinámico** del talking head (punch-in, paneo, corte abierto↔cerrado) para simular cambios de ángulo.
+
+Límites honestos (no es magia de post):
+- Ángulos de cámara **físicos nuevos** → requieren multicámara al grabar (o herramienta de IA de video aparte).
+- **Re-iluminación** → no se puede relight un clip plano; se gana al grabar (luz principal + contra + separación de fondo) y se grada en post.
+
+Recomendación de captura para Daniela: grabar con buena luz y **2 tomas** (una abierta, una cerrada) para
+que el reencuadre y los "cambios de ángulo" se sientan reales.
+
 ## Pipeline
 
 `prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final) → portada (cover).
