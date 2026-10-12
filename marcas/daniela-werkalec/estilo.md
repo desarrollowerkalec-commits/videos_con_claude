@@ -11,6 +11,17 @@ Spec para edición de reels (skill `editor-video-ia`). Capturado de los videos r
 - Usuario / marca de agua: `@danielawerkalec`.
 - Tono visual: cálido, natural, aspiracional. Nada chillón salvo el amarillo/dorado de énfasis.
 
+## Logo oficial (desde el PDF `DW_final.pdf`)
+
+Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, alta resolución):
+- `daniela-werkalec-logo.png` → logo completo a color (isotipo W con ondas + "Daniela Werkalec").
+- `daniela-werkalec-logo-blanco.png` → mismo logo en **blanco** (para fondos oscuros: placa final, portadas).
+- `daniela-werkalec-isotipo.png` → solo la **W con ondas** (marca de agua, sello chico, favicon de placa).
+
+Colores del logo: **violeta `#73308B`** (isotipo) y **gris `#4C4C4E`** (nombre). Sobre fondos oscuros usar
+siempre la versión **blanca** (el gris no se lee). El violeta del logo NO reemplaza al fucsia de ángulo
+`#CB6CE6`: son cosas distintas.
+
 ## Tipografías
 
 Archivos propios en `editor-video-ia/assets/fonts/`; el resto por Google Fonts.
