@@ -3,6 +3,23 @@
 Guía para vos (humana). El detalle técnico está en `CLAUDE.md` y `editor-video-ia/SKILL.md`;
 esto es el paso a paso práctico.
 
+## ⚡ Atajo: qué escribir al abrir la sesión (copiar y pegar)
+
+**Daniela Werkalec (marca personal):**
+> Reel para **Daniela Werkalec**, ángulo **[opiniones / vlog / prompts / apps / noticias]**.
+> [Si ya viene editado:] Ya tiene subtítulos y música: hacé la portada y sumá motion graphics.
+> [Si viene crudo:] Transcribí, proponé cortes, subtítulos, motion graphics, portada y placa final.
+
+**Marketing Digital Inmobiliario:**
+> Reel para **Marketing Digital Inmobiliario**, ángulo **[…]**. Mismo flujo que siempre.
+> (Mientras `marcas/marketing-digital-inmobiliario/estilo.md` tenga casilleros vacíos, Claude te va a
+> pedir colores/fuentes/logo antes de editar.)
+
+Siempre: **sesión nueva** sobre el repo `videos_con_claude` + adjuntar el .mp4. Una sesión por reel (o por tanda
+del mismo día). No hace falta explicar el estilo: está todo guardado en `marcas/`.
+
+---
+
 ## La idea en una línea
 
 **No volvés a la sesión vieja.** Abrís una **sesión nueva sobre este mismo repo**, subís tu video,
