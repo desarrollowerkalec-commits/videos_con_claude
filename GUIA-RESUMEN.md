@@ -59,12 +59,31 @@ Cortes cada 2–4 s, talking head + b-roll. Marca de agua `@danielawerkalec`. De
 
 ---
 
-## Pendientes (para la próxima sesión con red abierta)
+## Render en la nube (red cerrada)
 
-- [ ] Correr la **demo del VLOG_7** de punta a punta (transcripción → escenas → fotogramas → MP4).
-- [ ] Ajustar el componente de subtítulos (`SubsV`) al formato nuevo: frase + palabra activa
-      dorada y más grande.
-- [ ] Sumar el "hero word" con glow para remates/números.
+En la sesión cloud Remotion no puede descargar su navegador de render ni confía en el CA del
+proxy. Ya está resuelto con variables de entorno (los scripts las respetan; en Mac no hace falta nada):
+
+```bash
+export REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell
+export REMOTION_IGNORE_CERT=1
+export NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt   # para fetch de fuentes desde Node
+```
+
+(Usar el `headless_shell`, no el `chrome` completo: el Chrome nuevo quitó el "headless viejo" que
+Remotion necesita. La ruta exacta puede cambiar de versión: `ls /opt/pw-browsers/`.)
+
+**Transcripción (Whisper) sigue bloqueada:** `faster-whisper` baja el modelo de `huggingface.co` y
+el proxy devuelve **403**. Hay que habilitar `huggingface.co` (y su CDN, p. ej. `cdn-lfs.huggingface.co`
+y `*.hf.co`) en **Red del entorno → dominios permitidos**, y abrir una **sesión nueva** (el cambio no
+aplica a la sesión en curso). Recién ahí `prep.py` transcribe.
+
+## Pendientes
+
+- [ ] Correr la **demo del VLOG_7** de punta a punta. Hecho salvo transcripción: fotogramas OK,
+      falta la transcripción real (403 de HuggingFace) y el MP4 final.
+- [x] Ajustar `SubsV`: frase + **palabra activa dorada y más grande** (karaoke por color y tamaño).
+- [x] Sumar el **hero** con glow dorado para remates/números (`HeroGlow` en `reel.tsx`).
 - [ ] Definir **CTA por video** (palabra a comentar + qué se envía) analizando cada guion.
 - [ ] Configurar **b-roll** desde Pexels/Pixabay (API key gratis de cada uno) o con clips propios.
 

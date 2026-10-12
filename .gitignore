@@ -12,3 +12,7 @@ Reels - */
 
 # Sistema
 .DS_Store
+
+# Cache de Python
+__pycache__/
+*.pyc
