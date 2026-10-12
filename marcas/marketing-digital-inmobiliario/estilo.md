@@ -15,11 +15,24 @@ Tono: didáctico, claro y movilizador (formación para el sector inmobiliario). 
 - Por ser avatar: marca de agua **"✦ generado con IA"** persistente, siempre.
 - Daniela aparece como **nombre/autoridad** (ej. "DANIELA te espera en su MASTERCLASS"), no como cara.
 
+## Logo oficial (desde `logo_cuadrado.pdf`)
+
+Mismo isotipo **W con ondas** que Daniela Werkalec (sistema de marcas hermanas), en verde agua.
+Archivos en `editor-video-ia/assets/logos/` (PNG transparentes):
+- `mdi-logo.png` → W verde agua + "Marketing Digital / inmobiliario" en **negro** (solo fondos claros).
+- `mdi-logo-oscuro.png` → W verde agua + texto **blanco** → **la que va en reels, placas y portadas**.
+- `mdi-logo-blanco.png` → todo blanco (sobre fotos o fondos de color).
+- `mdi-isotipo.png` → solo la W (sello chico, marca de agua de cuenta).
+
+Ojo: en el PDF el texto viene como imagen de baja resolución (500 px): usar el logo completo a **≤ 600 px
+de ancho**. Para más grande, usar el isotipo (nítido) + el texto escrito en fuente (sans semibold tipo Open Sans).
+
 ## Color
 
 | Uso | Hex | Nota |
 |---|---|---|
-| **Acento principal (verde agua)** | **`#6AD5B7`** | palabras clave, script con glow, marcos de b-roll, CTA |
+| **Acento principal (verde agua)** | **`#6AD5B7`** | palabras clave, script con glow, marcos de b-roll, CTA (dado por Daniela) |
+| Verde del logo | `#6AD4BE` | prácticamente el mismo; usar `#6AD5B7` en gráficos |
 | Glow del acento | `#6AD5B7` → halo más cian/claro | en video el neón se ve casi cian por el glow |
 | Texto | `#FFFFFF` | base de subtítulos |
 | Fondo de placas | `#0B0A10` (heredado) | placas oscuras con halo verde agua |
@@ -66,8 +79,7 @@ minúscula sin punto, foto con exposición bajada), cambiando:
 
 | Dato | Estado |
 |---|---|
-| Logo MDI (PNG/SVG/PDF) | falta |
 | Usuario / marca de agua de cuenta | falta (`@______`) |
-| Placa final: ¿logo MDI, Clara, o "por Daniela Werkalec"? | falta definir |
+| Placa final: ¿logo MDI, Clara, o "por Daniela Werkalec"? | falta definir (propuesta: logo MDI oscuro + "por Daniela Werkalec") |
 | Música: ¿Forward Momentum u otra pista propia? | falta (recomendado: propia, para diferenciar) |
 | Nombre exacto de la fuente script original | opcional (hoy: Yellowtail) |
