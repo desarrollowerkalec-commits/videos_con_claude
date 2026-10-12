@@ -85,11 +85,23 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   varias líneas cortas, alineado a la izquierda a la derecha del ícono (x ≈ 490).
 - Sin URL ni ícono de ángulo (a diferencia de DW).
 
-## ⚠️ Pendiente (lo aporta Daniela)
+## Cuenta, placa final y música
+
+- **Instagram:** `@mktdginmobiliario` (instagram.com/mktdginmobiliario) → marca de agua de cuenta y placa final.
+- **Placa final:** **logo MDI** (`mdi-logo-oscuro.png`) + `@mktdginmobiliario`. **NO** poner "por Daniela
+  Werkalec". El paraguas futuro es **Werkalec & Asociados** (grupo empresarial, nombre a definir): cuando
+  esté, se evalúa sumarlo como firma chica. Hasta entonces, nada de firma personal.
+- **Música: "Mystic Mirage" (biblioteca de CapCut).** No se puede bajar desde acá y la música de la
+  biblioteca de CapCut está licenciada para usarse dentro de CapCut. Por eso:
+  **los reels de MDI se renderizan SIN música** (`render.sh <carpeta> <salida> none`) y Daniela le agrega
+  Mystic Mirage en CapCut al final (dejar la voz ya normalizada; la música en CapCut a ~15–20 % bajo la voz).
+  Si algún día hay un archivo con licencia de uso fuera de CapCut, guardarlo en `editor-video-ia/assets/music/`
+  y pasarlo como 3er argumento a `render.sh`.
+
+## ⚠️ Pendiente
 
 | Dato | Estado |
 |---|---|
-| Usuario / marca de agua de cuenta | falta (`@______`) |
-| Placa final: ¿logo MDI, Clara, o "por Daniela Werkalec"? | falta definir (propuesta: logo MDI oscuro + "por Daniela Werkalec") |
-| Música: ¿Forward Momentum u otra pista propia? | falta (recomendado: propia, para diferenciar) |
+| Nombre del paraguas (Werkalec & Asociados u otro) | a definir |
 | Nombre exacto de la fuente script original | opcional (hoy: Yellowtail) |
+| Logo MDI en vector (texto del PDF es de baja resolución) | opcional |
