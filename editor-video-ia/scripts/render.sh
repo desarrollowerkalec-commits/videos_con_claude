@@ -8,12 +8,19 @@ RFLAGS=""
 [ -n "$REMOTION_BROWSER_EXECUTABLE" ] && RFLAGS="$RFLAGS --browser-executable=$REMOTION_BROWSER_EXECUTABLE"
 [ -n "$REMOTION_IGNORE_CERT" ] && RFLAGS="$RFLAGS --ignore-certificate-errors"
 SKILL="$(cd "$(dirname "$0")/.." && pwd)"
-WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-0.42}"; MSTART="${5:-}"
-# Música por defecto: pista de marca (SIEMPRE, salvo que se pase otra ruta o "none").
-# Se arranca en el 2do 10 (el beat entra ahí; los primeros ~10s son intro suave).
-if [ -z "$MUSIC" ] && [ -f "$SKILL/assets/music/forward-momentum.mp3" ]; then
-  MUSIC="$SKILL/assets/music/forward-momentum.mp3"; [ -z "$MSTART" ] && MSTART=10
+WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-}"; MSTART="${5:-}"
+# Música por defecto según la marca (variable MARCA; vacía = Daniela Werkalec). Siempre, salvo otra ruta o "none".
+#   MARCA=dw  (default) → Forward Momentum, desde el 2.º 10 (ahí entra el beat), volumen 0.42
+#   MARCA=mdi           → mdi-fondo.mp3 (Marketing Digital Inmobiliario), desde el 2.º 17.5 (groove completo),
+#                         volumen 0.23 (la pista es ~5 dB más fuerte que Forward Momentum)
+if [ -z "$MUSIC" ]; then
+  if [ "${MARCA:-dw}" = "mdi" ]; then
+    MUSIC="$SKILL/assets/music/mdi-fondo.mp3"; [ -z "$MSTART" ] && MSTART=17.5; [ -z "$MVOL" ] && MVOL=0.23
+  elif [ -f "$SKILL/assets/music/forward-momentum.mp3" ]; then
+    MUSIC="$SKILL/assets/music/forward-momentum.mp3"; [ -z "$MSTART" ] && MSTART=10
+  fi
 fi
+[ -z "$MVOL" ] && MVOL=0.42
 [ "$MUSIC" = "none" ] && MUSIC=""
 [ -z "$MSTART" ] && MSTART=0
 cd "$WORK/remotion"

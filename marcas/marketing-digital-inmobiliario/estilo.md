@@ -91,20 +91,18 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 - **Placa final:** **logo MDI** (`mdi-logo-oscuro.png`) + `@mktdginmobiliario`. **NO** poner "por Daniela
   Werkalec". El paraguas futuro es **Werkalec & Asociados** (grupo empresarial, nombre a definir): cuando
   esté, se evalúa sumarlo como firma chica. Hasta entonces, nada de firma personal.
-- **Música: PISTA PROPIA (pendiente).** Daniela la genera en Google Labs (MusicFX) — se descartó "Mystic
-  Mirage" de CapCut (licencia solo dentro de CapCut). Cuando llegue: guardarla como
-  `editor-video-ia/assets/music/mdi-<nombre>.mp3` y pasarla como 3er argumento a `render.sh` en TODOS los
-  reels de MDI (la de DW, Forward Momentum, es la default y NO va en MDI). Anotar acá el segundo donde entra
-  el beat (5.º argumento). **Mientras no exista: renderizar MDI con `none`.**
-  Prompt sugerido (distinto a DW, que es house cálido): *Calm modern electronic, ~100 BPM, airy synth pads,
-  soft plucks, light percussion, clean and optimistic, educational/explainer background, no vocals,
-  instrumental, loopable.*
+- **Música: pista propia `editor-video-ia/assets/music/mdi-fondo.mp3`** (generada por Daniela en Google,
+  "Trimmed Intro", 2:56, ~122 BPM). Entra **sola** si se renderiza con `MARCA=mdi`:
+  `MARCA=mdi bash editor-video-ia/scripts/render.sh <carpeta> "$PWD/<carpeta>/Reel.mp4"`
+  → arranca en el **2.º 17.5** (ahí entra el groove completo; 1–16 s es intro con bajo, 16–17.5 s un corte),
+  volumen 0.23 con ducking (la pista es ~5 dB más fuerte que Forward Momentum). Hay un cambio de sección más
+  intenso en el 2.º 64 de la pista (≈ 46 s de reel): en reels largos, revisar que no pise la voz.
+  **Nunca** usar Forward Momentum en MDI (es la de Daniela Werkalec).
 
 ## ⚠️ Pendiente
 
 | Dato | Estado |
 |---|---|
-| Música propia de MDI (Google Labs / MusicFX) | la pasa Daniela |
 | Nombre del paraguas (Werkalec & Asociados u otro) | a definir |
 | Nombre exacto de la fuente script original | opcional (hoy: Yellowtail) |
 | Logo MDI en vector (texto del PDF es de baja resolución) | opcional |
