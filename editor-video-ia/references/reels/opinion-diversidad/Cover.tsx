@@ -42,9 +42,9 @@ export const Cover: React.FC = () => {
             TRADUCIR<Neq size={130} /><span style={{ color: F }}>ENTENDER</span>
           </div>
         </div>
-        {/* 3 · Bajada: UNA sola línea, al ancho justo */}
-        <div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 84, letterSpacing: -2, lineHeight: 1, whiteSpace: "nowrap", color: W, textShadow: shadow3D, marginTop: 2, position: "relative", zIndex: 1 }}>
-          La IA <span style={{ color: F }}>traduce</span> el idioma.
+        {/* 3 · Bajada: UNA sola línea, 52 px fijo, en minúscula (solo siglas en mayúscula) y sin punto final */}
+        <div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 52, letterSpacing: -2, lineHeight: 1.05, whiteSpace: "nowrap", color: W, textShadow: shadow3D, marginTop: 2, position: "relative", zIndex: 1 }}>
+          la IA <span style={{ color: F }}>traduce</span> el idioma
         </div>
         {/* 4 · Caja Arimo */}
         <div style={{ fontFamily: ARIMO, fontSize: 34, color: W, border: `1.5px solid ${W}`, padding: "12px 28px", marginTop: 30 }}>

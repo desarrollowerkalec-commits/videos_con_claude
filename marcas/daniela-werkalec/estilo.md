@@ -132,7 +132,7 @@ Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame 
 | 1 · "Hoy: <algo>" | **BREATHING** | ~104 px | "Hoy:" en color de ángulo, resto blanco |
 | 2 · Titular | **ANTON** | **~158 px**, **UNA sola línea** (nowrap), **al límite del ancho** (borde a borde) | mezcla color de ángulo + blanco; **2 sombras centradas** (entre script↔Anton y Anton↔Montserrat) + drop-shadow arriba/abajo → efecto **3D** |
 | 3b · Bajada corta | **Montserrat 800** | ~86 px, corta (ej. "la ventaja: el equipo") | reemplaza la bajada larga |
-| 3 · Bajada | **Montserrat 800** | **UNA línea**, ancho justo (~84 px), letter-spacing **−2** | blanco + palabra clave en color de ángulo |
+| 3 · Bajada | **Montserrat 800** | **52 px**, **UNA línea**, letter-spacing **−2**, minúscula y sin punto final | blanco + palabra clave en color de ángulo |
 | 4 · Caja | **Arimo** | 34 px | recuadro fino (1.5 px) centrado |
 | Ícono del ángulo | **PNG real** (`assets/iconos/`) | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
 | URL | **Arimo 400** (fina, sin bold) | 32 px | centrada, y ≈ 1500 |
@@ -143,9 +143,10 @@ Bloque de texto: `top ≈ 720`, centrado. Fuentes ya instaladas: Anton, Montserr
 margen negativo ~−20 px y line-height ~1). Por eso la **sombra del titular Anton** es fuerte arriba y abajo y
 **cae sobre la línea de arriba y la de abajo**: eso da el efecto 3D. No separar las líneas con bandas sueltas.
 
-**Línea 3 (bajada) = UNA sola línea, justa al ancho** (Montserrat 800, letter-spacing −2, nowrap; tamaño
-ajustado para que llene ~el ancho del titular, ej. 84 px para "La IA traduce el idioma."). Una frase corta con
-**una palabra en color de ángulo**. Nunca dos líneas.
+**Línea 3 (bajada) = UNA sola línea**, Montserrat 800 **52 px fijo** (no se agranda para llenar el ancho:
+la tipografía más grande es SIEMPRE Anton), letter-spacing −2, nowrap. **Todo en minúscula** (solo siglas como
+IA en mayúscula; ni siquiera la primera palabra) y **sin punto final**. Una palabra en color de ángulo.
+Ej.: "la IA **traduce** el idioma".
 
 **Exposición de la foto (NUEVO):** bajarle la exposición a la FOTO misma (`brightness ~0.65`), no solo
 taparla con overlay. Así la banda oscura del medio puede ser más suave (~0.6–0.7 de opacidad) y **no se nota
