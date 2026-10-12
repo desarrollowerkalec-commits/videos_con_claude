@@ -57,15 +57,25 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 - Posición: tercio medio-bajo (≈ 45–60 % del alto), centrados. Sin caja de fondo.
 - Frases cortas (2–5 palabras por línea), aparecen por frase; la palabra script entra con fade + glow.
 
-## B-roll / placas
+## Motion graphics y b-roll — LENGUAJE PROPIO DE MDI (no heredar el de DW)
 
-- (Subtítulos del reel = Montserrat + Yellowtail; **portada = Lato**. No mezclar.)
-- **Tarjeta inclinada (3D tilt)** con **borde fino verde agua + glow**, sobre fondo oscuro, con la imagen
-  de apoyo adentro (persona trabajando, laptop, escritorio). Leve rotación/perspectiva y deriva lenta.
-- **Picture-in-picture** debajo del subtítulo (imagen de apoyo en recuadro, Clara arriba).
-- Capturas de pantalla (ej. el texto generado por la IA) en tarjeta blanca chica arriba, sobre Clara.
-- Título de bloque tipo "**PROMPTS**" en Montserrat 900 caps blanco con **eco en script verde agua
-  outline** debajo (mismo término repetido en Yellowtail contorneado).
+> ⚠️ Error ya cometido: aplicar los paneles oscuros line-art / chips / kicker de Daniela Werkalec. **En MDI NO.**
+> Código de referencia que funciona: `editor-video-ia/references/reels/mdi/` (`kit.tsx` + `video.tsx`, reel "charla").
+
+- **Subtítulos palabra por palabra**, **alineados a la IZQUIERDA** (x ≈ 66), y ≈ 1150 (sube a ≈ 900 cuando hay PiP,
+  baja a ≈ 1630 durante los cortes a tarjeta). Script Yellowtail verde agua con glow para la palabra clave; variante
+  caps para énfasis/CTA. Remate: palabras grandes CENTRADAS (caps blancas + script gigante), sin sombra negra.
+- **B-roll de corte:** entra a pantalla completa con **blur** → se achica a **tarjeta inclinada 3D** (≈ 800×1280) con
+  **borde fino verde agua + glow**, sobre fondo **negro verdoso** (`#061416`, halo `#0E3A38`), girando lento (rotateY).
+- **PiP:** tarjeta inclinada en la mitad de abajo (Clara arriba), fundida a negro hacia abajo.
+- **Captura blanca** (tarjeta tipo screenshot) sobre el pecho de Clara (ej. la invitación a la charla).
+- **Título grande caps blanco + eco script CONTORNEADO verde agua** arriba, sobre velo oscuro, letras con flicker/blur.
+- **Transiciones por blur.**
+- **Qué poner en las tarjetas:** fotos de b-roll que pase Daniela (lo ideal, como el demo) o, si no hay,
+  **pantallas de interfaz realistas** (WhatsApp desbordado, agente IA conversando, CRM con el lead que pasa a
+  "para atender", notificación en pantalla de bloqueo). Canva genera imágenes pero acá solo llega una miniatura
+  de 150 px: no sirve para video.
+- Subtítulos del reel = Montserrat + Yellowtail; **portada = Lato**. No mezclar.
 
 ## Portada (DEFINIDA — ejemplos de Daniela en `referencia/portada_ej1.jpg`, `portada_ej2.jpg`)
 

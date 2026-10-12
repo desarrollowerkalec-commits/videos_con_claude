@@ -13,6 +13,8 @@ export type CoverMDIProps = {
   bg: string; // foto en public/
   bgTop?: number; // desplazamiento vertical de la foto (cara alta)
   kicker?: string[]; // ej. ["CHARLA", "ONLINE"] (opcional, con flecha diagonal arriba)
+  kickerTop?: number;
+  kickerLeft?: number;
   title: string[]; // líneas del titular
   titleSize?: number;
   titleTop?: number;
@@ -38,7 +40,7 @@ const HeartBubble: React.FC<{ size: number }> = ({ size }) => (
 );
 
 export const CoverMDI: React.FC<CoverMDIProps> = ({
-  bg, bgTop = 0, kicker, title, titleSize = 190, titleTop = 800, arrow, sub, subSize = 64, subLeft = 350,
+  bg, bgTop = 0, kicker, kickerTop, kickerLeft = 316, title, titleSize = 190, titleTop = 800, arrow, sub, subSize = 64, subLeft = 350,
 }) => {
   const titleBottom = titleTop + title.length * titleSize * 0.86 + titleSize * 0.14;
   return (
@@ -48,7 +50,7 @@ export const CoverMDI: React.FC<CoverMDIProps> = ({
       <AbsoluteFill style={{ background: `linear-gradient(180deg, transparent 0%, transparent 42%, rgba(70,120,150,0.35) 54%, rgba(78,136,157,0.75) 60%, rgba(105,197,191,0.95) 68%, ${MDI_TEAL} 73%, ${MDI_TEAL} 100%)` }} />
       {arrow && <Arrow {...arrow} />}
       {kicker && (
-        <div style={{ position: "absolute", left: 316, top: titleTop - 300, fontFamily: LATO, fontWeight: 700, fontSize: 82, lineHeight: 1.08, color: "#fff", textShadow: SHADOW }}>
+        <div style={{ position: "absolute", left: kickerLeft, top: kickerTop ?? titleTop - 300, fontFamily: LATO, fontWeight: 700, fontSize: 82, lineHeight: 1.08, color: "#fff", textShadow: SHADOW }}>
           {kicker.map((k) => <div key={k}>{k}</div>)}
         </div>
       )}
@@ -66,13 +68,18 @@ export const CoverMDI: React.FC<CoverMDIProps> = ({
   );
 };
 
-// Ejemplo (reel "Cómo usar Claude" de Clara)
+// Portada de este reel
 export const CoverMDIEjemplo: React.FC = () => (
   <CoverMDI
-    bg="img/clara-bg.jpg"
-    bgTop={-60}
-    title={["¿ Cómo", "usar", "CLAUDE…"]}
-    arrow={{ x: 790, y: 900, dir: "left" }}
-    sub={["En tus", "descripciones y", "olvidarte de la", "“hoja en", "blanco”"]}
+    bg="img/cover-bg.jpg"
+    bgTop={-230}
+    kicker={["CHARLA", "ONLINE"]}
+    kickerTop={640}
+    kickerLeft={300}
+    arrow={{ x: 120, y: 590, dir: "downright" }}
+    titleTop={850}
+    titleSize={168}
+    title={["¿Tu", "WhatsApp", "es un CAOS?"]}
+    sub={["Jueves 15/10", "17 hs · gratis"]}
   />
 );
