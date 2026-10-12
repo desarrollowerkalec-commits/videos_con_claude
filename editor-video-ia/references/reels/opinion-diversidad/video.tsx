@@ -417,7 +417,7 @@ const SRemate: React.FC = () => {
   if (o <= 0) return null;
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: 1290, height: 500, opacity: o }}>
-      <div style={{ position: "absolute", left: 0, top: -40, width: 1080, height: 580, background: "radial-gradient(ellipse 48% 46% at 50% 50%, rgba(8,6,12,0.93), rgba(8,6,12,0.7) 55%, transparent 78%)" }} />
+      {/* sin sombra/overlay negro detrás del remate (decisión de marca) */}
       <div style={{ position: "absolute", left: 90, top: 30 }}>
         <Word at={39.28} from="pop" hero style={{ fontFamily: TRUEFATE, fontSize: 150, color: Y, lineHeight: 1 }}>Entender</Word>
       </div>

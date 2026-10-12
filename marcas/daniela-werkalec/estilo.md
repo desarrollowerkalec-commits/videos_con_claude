@@ -38,7 +38,7 @@ Pendiente de archivos reales (cuando Daniela los suba, reemplazan a los similare
 Para destacar partes o textos (como el viral de traducción):
 
 - Frase **compuesta por palabras de distinta fuente, peso y tamaño**.
-- Palabra o número **grande en amarillo (True Fate) con GLOW** y **sombra detrás** (overlay central) para que quede "por encima".
+- Palabra o número **grande en amarillo (True Fate) con GLOW**. **SIN sombra negra ni overlay oscuro detrás** de la frase en cascada: las palabras van directo sobre el video (solo su glow y una sombra de texto fina para legibilidad).
 - El resto: combinación de Red Hat (bold/light), PT Serif itálica y Montserrat, en **blanco** con glow suave.
 - Cada palabra **entra con su propia animación** (desde el costado · hacia arriba · fade · pop) y se van
   acomodando hasta formar la frase; al final **salen todas juntas**. (Implementado en `RemarkPhrase`.)
@@ -63,8 +63,8 @@ Analizada de los primeros ~2 s del video de Daniela:
 
 ## Overlays de sombra
 
-- **Central (chico):** elipse oscura difuminada **detrás de la palabra principal** del remate, para destacarla.
-- **Separador (horizontal):** band de sombra **debajo de la línea ANTON** en las portadas, separa línea 1 de la 2 y la 3 de la 4.
+- ~~Central (chico): elipse oscura detrás de la palabra principal del remate~~ → **NO se usa en el remate en cascada** (decisión de Daniela). Las palabras animadas van sin overlay negro detrás.
+- **Separador (horizontal):** en portadas ya no va como banda suelta: la sombra la da el propio titular Anton, que cae sobre las líneas vecinas (ver Portadas).
 - Recreados como vectores (recolorables). Si se quieren los PNG exactos de Daniela, subirlos como archivo.
 
 ## Íconos por ángulo (SVG, color del ángulo)
