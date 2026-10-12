@@ -488,8 +488,9 @@ const EndPlate: React.FC = () => {
       </svg>
       <div style={{ position: "absolute", left: 0, right: 0, top: 1120, textAlign: "center" }}>
         <In at={s + 0.5}><div style={{ fontFamily: TRUEFATE, fontSize: 104, color: W, textShadow: `0 0 18px ${W}55` }}>Daniela Werkalec</div></In>
-        <In at={s + 0.75}><div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 40, letterSpacing: 3, color: F, marginTop: 8 }}>Corredora inmobiliaria</div></In>
-        <In at={s + 0.95}><div style={{ fontFamily: MONT, fontWeight: 600, fontSize: 36, color: `${W}CC`, marginTop: 26 }}>@danielawerkalec</div></In>
+        <In at={s + 0.75}><div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 40, letterSpacing: 3, color: F, marginTop: 8 }}>Corredora Inmobiliaria</div></In>
+        <In at={s + 0.9}><div style={{ fontFamily: MONT, fontWeight: 700, fontSize: 34, letterSpacing: 0.5, color: W, marginTop: 6 }}><span style={{ color: F }}>+</span> Experta en Tecnología e IA para negocios</div></In>
+        <In at={s + 1.05}><div style={{ fontFamily: MONT, fontWeight: 600, fontSize: 36, color: `${W}CC`, marginTop: 26 }}>@danielawerkalec</div></In>
       </div>
     </AbsoluteFill>
   );

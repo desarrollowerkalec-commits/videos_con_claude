@@ -177,7 +177,10 @@ En vez de una placa plana negra, cerrar con **motion graphics** sobre la **ofici
 - Fondo = **recorte de la pared/oficina SIN su cuerpo**, desenfocado suave y con velo oscuro. En este caso: la **pared de ladrillo con el cartel WERKALEC** (zona bien iluminada, de marca). Clave: tomar una región donde NO esté su cuerpo (si se blurea el frame entero, su camisa/figura se ve como un borrón) — el `<Img>` va dentro de un `AbsoluteFill` para que no lo tape el fondo base.
 - **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
-- **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + `@danielawerkalec`. En su propia cuenta evitar taglines genéricos largos ("…para inmobiliarias").
+- **Nombre** en True Fate + credencial en DOS líneas (SIEMPRE, desde el reel "diversidad"):
+  1. **"Corredora Inmobiliaria"** — Montserrat 800, color del ángulo.
+  2. **"+ Experta en Tecnología e IA para negocios"** — Montserrat 700, blanco (el "+" en color del ángulo).
+  Debajo, `@danielawerkalec`. No inventar otros taglines.
 - Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA).
 
 ## Pipeline
