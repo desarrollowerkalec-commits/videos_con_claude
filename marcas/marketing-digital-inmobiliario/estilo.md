@@ -59,6 +59,7 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 
 ## B-roll / placas
 
+- (Subtítulos del reel = Montserrat + Yellowtail; **portada = Lato**. No mezclar.)
 - **Tarjeta inclinada (3D tilt)** con **borde fino verde agua + glow**, sobre fondo oscuro, con la imagen
   de apoyo adentro (persona trabajando, laptop, escritorio). Leve rotación/perspectiva y deriva lenta.
 - **Picture-in-picture** debajo del subtítulo (imagen de apoyo en recuadro, Clara arriba).
@@ -66,14 +67,23 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 - Título de bloque tipo "**PROMPTS**" en Montserrat 900 caps blanco con **eco en script verde agua
   outline** debajo (mismo término repetido en Yellowtail contorneado).
 
-## Portada (propuesta — confirmar con la primera)
+## Portada (DEFINIDA — ejemplos de Daniela en `referencia/portada_ej1.jpg`, `portada_ej2.jpg`)
 
-Misma estructura y reglas de DW (líneas pegadas, sombra del titular sobre vecinas, bajada 52 px en
-minúscula sin punto, foto con exposición bajada), cambiando:
-- Línea 1 (script) → **Yellowtail** verde agua (en vez de BREATHING).
-- Titular → **Montserrat 900 caps** (o Anton si se prefiere el mismo peso que DW) blanco + verde agua.
-- Foto de fondo = **Clara** con boca cerrada.
-- URL: `marketingdigitalinmobiliario.com.ar`.
+**Distinta a la de DW** (no hereda la portada centrada con Anton/BREATHING). Plantilla lista:
+`editor-video-ia/references/reels/mdi/CoverMDI.tsx` (props: título, kicker, flecha, bajada).
+
+- **Tipografía: LATO** (Bold 700) en todo. Texto **blanco**, **alineado a la izquierda** (x ≈ 110).
+- **Fondo:** foto de Clara (u otra imagen) arriba; **degradé** hacia abajo: foto → velo azul petróleo
+  (`≈ #4E889D`) → **verde agua sólido `#69D5BE`** desde ~72 % del alto hasta abajo.
+- **Titular:** Lato Bold ~190 px, line-height ~0.86, 2–4 líneas, mezcla de minúscula y MAYÚSCULA
+  (ej. "¿ Cómo / usar / CLAUDE…", "USD 50.000.000 / perdidos por / ChatGPT"). **Sombra dura** desplazada
+  abajo-derecha (gris, poco blur) → efecto 3D.
+- **Flecha blanca de bloque** apuntando al titular o al sujeto (horizontal ← o diagonal ↘).
+- **Kicker opcional** arriba del titular: Lato Bold caps ~82 px (ej. "CHARLA / ONLINE") con flecha diagonal.
+- **Línea separadora** blanca fina (3 px) debajo del titular, de x≈105 a ≈795.
+- **Bajada:** ícono **globo de diálogo con corazón** (outline blanco) + texto Lato Bold ~64 px, blanco,
+  varias líneas cortas, alineado a la izquierda a la derecha del ícono (x ≈ 490).
+- Sin URL ni ícono de ángulo (a diferencia de DW).
 
 ## ⚠️ Pendiente (lo aporta Daniela)
 
