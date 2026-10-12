@@ -13,6 +13,18 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 - `marcas/daniela-werkalec/estilo.md` → **la biblia de estilo** (colores, tipografías, subtítulos karaoke, remate en cascada, portadas, placa final, música, ángulos). **Leer SIEMPRE antes de editar.**
 - `edicion-*/` → carpetas por-video (gitignored, descartables). Cada reel vive en una.
 
+## Marcas (una carpeta por marca en `marcas/`)
+
+| Marca | Estilo |
+|---|---|
+| Daniela Werkalec (marca personal) | `marcas/daniela-werkalec/estilo.md` — **sistema base** |
+| Marketing Digital Inmobiliario | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; solo define lo que cambia |
+
+Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
+estilo base y DESPUÉS el de la marca (que pisa colores, fuentes, subtítulos, logo, placa final).
+Código de referencia reutilizable: `editor-video-ia/references/reels/opinion-diversidad/` (cambiar solo
+las constantes de color/fuente de `kit.tsx` y los textos).
+
 ## Regla de oro: leer el estilo primero
 
 Antes de tocar un video, **leé `marcas/daniela-werkalec/estilo.md` completo.** Ahí está todo lo
