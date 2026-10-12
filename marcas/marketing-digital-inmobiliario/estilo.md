@@ -91,17 +91,20 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 - **Placa final:** **logo MDI** (`mdi-logo-oscuro.png`) + `@mktdginmobiliario`. **NO** poner "por Daniela
   Werkalec". El paraguas futuro es **Werkalec & Asociados** (grupo empresarial, nombre a definir): cuando
   esté, se evalúa sumarlo como firma chica. Hasta entonces, nada de firma personal.
-- **Música: "Mystic Mirage" (biblioteca de CapCut).** No se puede bajar desde acá y la música de la
-  biblioteca de CapCut está licenciada para usarse dentro de CapCut. Por eso:
-  **los reels de MDI se renderizan SIN música** (`render.sh <carpeta> <salida> none`) y Daniela le agrega
-  Mystic Mirage en CapCut al final (dejar la voz ya normalizada; la música en CapCut a ~15–20 % bajo la voz).
-  Si algún día hay un archivo con licencia de uso fuera de CapCut, guardarlo en `editor-video-ia/assets/music/`
-  y pasarlo como 3er argumento a `render.sh`.
+- **Música: PISTA PROPIA (pendiente).** Daniela la genera en Google Labs (MusicFX) — se descartó "Mystic
+  Mirage" de CapCut (licencia solo dentro de CapCut). Cuando llegue: guardarla como
+  `editor-video-ia/assets/music/mdi-<nombre>.mp3` y pasarla como 3er argumento a `render.sh` en TODOS los
+  reels de MDI (la de DW, Forward Momentum, es la default y NO va en MDI). Anotar acá el segundo donde entra
+  el beat (5.º argumento). **Mientras no exista: renderizar MDI con `none`.**
+  Prompt sugerido (distinto a DW, que es house cálido): *Calm modern electronic, ~100 BPM, airy synth pads,
+  soft plucks, light percussion, clean and optimistic, educational/explainer background, no vocals,
+  instrumental, loopable.*
 
 ## ⚠️ Pendiente
 
 | Dato | Estado |
 |---|---|
+| Música propia de MDI (Google Labs / MusicFX) | la pasa Daniela |
 | Nombre del paraguas (Werkalec & Asociados u otro) | a definir |
 | Nombre exacto de la fuente script original | opcional (hoy: Yellowtail) |
 | Logo MDI en vector (texto del PDF es de baja resolución) | opcional |
