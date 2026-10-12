@@ -16,38 +16,38 @@ const Sep: React.FC<{ top: number }> = ({ top }) => (
   <div style={{ width: 1080, height: 70, marginTop: top, marginBottom: top, background: "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,0.85), rgba(0,0,0,0.4) 55%, transparent 75%)" }} />
 );
 
+// Sombra del titular: fuerte arriba y abajo, se derrama sobre la línea de arriba y la de abajo (efecto 3D)
+const ANTON_SHADOW = "0 -14px 26px rgba(0,0,0,0.9), 0 16px 28px rgba(0,0,0,0.95), 0 6px 0 rgba(0,0,0,0.35)";
+
 const shadow3D = "0 6px 0 rgba(0,0,0,0.35), 0 14px 24px rgba(0,0,0,0.75), 0 -4px 14px rgba(0,0,0,0.4)";
 
 export const Cover: React.FC = () => {
   useLocalFonts();
   return (
     <AbsoluteFill style={{ background: "#0B0A10", overflow: "hidden" }}>
-      {/* foto oscurecida, cara alta (reencuadre hacia arriba) */}
-      <Img src={staticFile("img/cover-bg.jpg")} style={{ position: "absolute", left: -40, top: -190, width: 1160, height: 2140, objectFit: "cover" }} />
-      <AbsoluteFill style={{ background: "rgba(11,10,16,0.28)" }} />
-      {/* banda oscura gruesa detrás del texto, fundida arriba y abajo */}
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, transparent 0%, transparent 28%, rgba(11,10,16,0.88) 37%, rgba(11,10,16,0.93) 72%, rgba(11,10,16,0.55) 84%, transparent 96%)" }} />
+      {/* foto con la exposición BAJADA (no solo el overlay): así la banda del medio no se nota como un bloque negro */}
+      <Img src={staticFile("img/cover-bg.jpg")} style={{ position: "absolute", left: -40, top: -190, width: 1160, height: 2140, objectFit: "cover", filter: "brightness(0.66) contrast(1.05)" }} />
+      <AbsoluteFill style={{ background: "rgba(11,10,16,0.12)" }} />
+      {/* banda oscura detrás del texto, más suave y fundida arriba y abajo */}
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, transparent 0%, transparent 30%, rgba(11,10,16,0.62) 38%, rgba(11,10,16,0.72) 50%, rgba(11,10,16,0.72) 66%, rgba(11,10,16,0.4) 80%, transparent 94%)" }} />
 
-      <div style={{ position: "absolute", top: 720, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+      <div style={{ position: "absolute", top: 730, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
         {/* 1 · Hoy: … (BREATHING) */}
-        <div style={{ fontFamily: BREATHING, fontSize: 104, lineHeight: 1.25, color: W, textShadow: shadow3D }}>
+        <div style={{ fontFamily: BREATHING, fontSize: 104, lineHeight: 1, color: W, textShadow: shadow3D, position: "relative", zIndex: 1 }}>
           <span style={{ color: F }}>Hoy:</span> diversidad
         </div>
-        <Sep top={-10} />
-        {/* 2 · Titular ANTON una línea */}
-        <div style={{ fontFamily: ANTON, color: W, textShadow: shadow3D, padding: "0 26px", marginTop: 6 }}>
-          <div style={{ whiteSpace: "nowrap", fontSize: 133, lineHeight: 1 }}>
+        {/* 2 · Titular ANTON una línea, PEGADO a las líneas vecinas; su sombra cae sobre ellas */}
+        <div style={{ fontFamily: ANTON, color: W, textShadow: ANTON_SHADOW, marginTop: -22, position: "relative", zIndex: 2 }}>
+          <div style={{ whiteSpace: "nowrap", fontSize: 133, lineHeight: 0.98 }}>
             TRADUCIR<Neq size={130} /><span style={{ color: F }}>ENTENDER</span>
           </div>
         </div>
-        <Sep top={-14} />
-        {/* 3 · Bajada Montserrat 800 */}
-        <div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 52, letterSpacing: -2, lineHeight: 1.18, color: W, textShadow: shadow3D, marginTop: 6 }}>
-          La IA traduce el idioma.<br />
-          <span style={{ color: F }}>Entender</span> lo pone la persona.
+        {/* 3 · Bajada: UNA sola línea, al ancho justo */}
+        <div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 84, letterSpacing: -2, lineHeight: 1, whiteSpace: "nowrap", color: W, textShadow: shadow3D, marginTop: 2, position: "relative", zIndex: 1 }}>
+          La IA <span style={{ color: F }}>traduce</span> el idioma.
         </div>
         {/* 4 · Caja Arimo */}
-        <div style={{ fontFamily: ARIMO, fontSize: 34, color: W, border: `1.5px solid ${W}`, padding: "12px 28px", marginTop: 34 }}>
+        <div style={{ fontFamily: ARIMO, fontSize: 34, color: W, border: `1.5px solid ${W}`, padding: "12px 28px", marginTop: 30 }}>
           Lo que ninguna app te avisa
         </div>
       </div>
