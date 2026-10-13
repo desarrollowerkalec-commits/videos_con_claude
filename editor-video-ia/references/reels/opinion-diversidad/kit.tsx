@@ -67,7 +67,7 @@ export const In: React.FC<{ at: number; dy?: number; dx?: number; s0?: number; s
 };
 
 // Zona inferior (debajo de los subtítulos quemados, sobre el torso): tarjeta de vidrio oscuro
-export const DOCK = { left: 60, top: 1318, width: 960, height: 450 };
+export const DOCK = { left: 60, top: 1080, width: 880, height: 420 }; // dentro de la zona segura IG (≤ y 1500, ≤ x 940)
 export const Dock: React.FC<{ from: number; to: number; kicker?: string; bare?: boolean; children: React.ReactNode }> = ({
   from, to, kicker, bare, children,
 }) => {

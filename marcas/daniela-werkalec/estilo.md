@@ -94,6 +94,16 @@ Analizada de los primeros ~2 s del video de Daniela:
 - **Texto detrás de la persona** (palabras entre el fondo y el sujeto): requiere segmentación del sujeto por frame.
 - **Efectos / color grade por ángulo** (ver sección Efectos).
 
+## Zona segura de Instagram (OBLIGATORIA)
+
+- **Ningún texto, subtítulo ni panel con info debajo de y ≈ 1500** (los ~420 px de abajo los tapan el pie de
+  foto, el usuario y la música) ni **a la derecha de x ≈ 940** (botones me gusta / comentar / compartir).
+  Arriba, libre hasta y ≈ 250 salvo títulos centrados.
+- Consecuencia: los paneles de motion graphics van **entre el pecho y y ≈ 1500** (ej. `DOCK` top 1080 / alto 420),
+  no pegados abajo. El panel del reel "diversidad" (y 1318–1768) quedó fuera de zona: no repetir.
+- Marca de agua "✦ generado con IA" y @usuario: arriba a la izquierda (y ≈ 262), no abajo.
+- Chequeo antes de renderizar: stills con líneas guía en y=1500 y x=940.
+
 ## Estructura y ritmo
 
 - Talking head (cámara) + cutaways de b-roll / placas, alternados.
