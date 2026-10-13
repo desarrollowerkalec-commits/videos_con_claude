@@ -5,12 +5,20 @@
 // · Tarjeta blanca tipo "captura" sobre el pecho. Título grande en caps con eco script contorneado arriba.
 // · Transiciones por blur. SIN paneles oscuros line-art (eso es de Daniela Werkalec).
 import React from "react";
-import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { continueRender, delayRender, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { loadFont as loadMont } from "@remotion/google-fonts/Montserrat";
-import { loadFont as loadYT } from "@remotion/google-fonts/Yellowtail";
 
 export const MONT = loadMont("normal", { weights: ["500", "600", "700", "800", "900"], subsets: ["latin"] }).fontFamily;
-export const SCRIPT = loadYT("normal", { weights: ["400"], subsets: ["latin"] }).fontFamily;
+// Script de marca MDI: Vujahday Script (local, SIL OFL) → palabras en verde agua.
+export const SCRIPT = "VujahdayScript";
+let fontsReady: Promise<void> | null = null;
+export const useLocalFonts = () => {
+  const [h] = React.useState(() => delayRender("fuente script MDI"));
+  React.useEffect(() => {
+    if (!fontsReady) fontsReady = new FontFace(SCRIPT, `url(${staticFile("fonts/VujahdayScript-Regular.ttf")})`).load().then((f) => { document.fonts.add(f); });
+    fontsReady.then(() => continueRender(h));
+  }, [h]);
+};
 
 export const T = "#6AD5B7"; // verde agua MDI
 export const TL = "#9FF5E2"; // núcleo claro del neón
@@ -73,7 +81,7 @@ export const Captions: React.FC<{ list: Cap[]; words: WordT[]; y: (t: number) =>
             if (p <= 0) return null;
             const flash = interpolate(t, [k.at, k.at + 0.12, k.at + 0.5], [0, 1.5, 1], C);
             if (k.script && !c.caps)
-              return <span key={i} style={{ fontFamily: SCRIPT, fontSize: c.big ? 170 : 98, lineHeight: 0.95, color: TL, textShadow: neon(0.45 + 0.4 * flash), opacity: p, transform: `translateY(${(1 - p) * 10}px)`, display: "inline-block", paddingRight: 6 }}>{k.txt}</span>;
+              return <span key={i} style={{ fontFamily: SCRIPT, fontSize: c.big ? 200 : 118, lineHeight: 0.95, color: TL, textShadow: neon(0.45 + 0.4 * flash), opacity: p, transform: `translateY(${(1 - p) * 10}px)`, display: "inline-block", paddingRight: 6 }}>{k.txt}</span>;
             const key = k.script && c.caps;
             const size = c.big ? 92 : c.caps ? (key ? 70 : 46) : 62;
             return (

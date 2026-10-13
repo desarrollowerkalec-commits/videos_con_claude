@@ -3,7 +3,7 @@
 // inclinadas con borde verde agua, PiP inclinado abajo, captura blanca sobre el pecho, títulos con eco script.
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, interpolate, OffthreadVideo, Sequence, staticFile } from "remotion";
-import { BG, BigTitle, Cap, Captions, MONT, neon, pop, prog, SCRIPT, ShotCard, SOFT, T, TiltCard, TL, useT, W, WordT } from "./kit";
+import { useLocalFonts, BG, BigTitle, Cap, Captions, MONT, neon, pop, prog, SCRIPT, ShotCard, SOFT, T, TiltCard, TL, useT, W, WordT } from "./kit";
 import WORDS from "./words.json";
 
 export const FPS = 30;
@@ -354,7 +354,7 @@ const Sounds: React.FC = () => (
 );
 
 export const Main: React.FC = () => {
-  const t = useT();
+  useLocalFonts();
   return (
     <AbsoluteFill style={{ background: BG }}>
       <Sequence durationInFrames={Math.round(SRC_DUR * FPS)}>

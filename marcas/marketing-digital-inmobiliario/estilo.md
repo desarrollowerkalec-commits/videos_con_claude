@@ -45,9 +45,10 @@ Dos fuentes que se combinan dentro de la misma frase:
 
 1. **Base: Montserrat 800–900**, blanco, **sentence case**, letter-spacing apretado (≈ −2), 2 líneas
    máximo, sombra suave para legibilidad. Ej.: "¿Seguís escribiendo / tus descripciones".
-2. **Palabra clave: script manuscrito en verde agua con GLOW neón** → **Yellowtail** (Google Fonts; es la
-   más parecida a la del reel — si Daniela tiene el nombre exacto de la original, reemplazar). Más grande
-   que la base, ligeramente inclinada. Ej.: "*a mano?*", "*Facebook* y un mensaje de *WhatsApp*",
+2. **Palabra clave: script manuscrito en verde agua con GLOW neón** → **Vujahday Script** (fuente OFICIAL,
+   la pasó Daniela; archivo local `editor-video-ia/assets/fonts/VujahdayScript-Regular.ttf`, licencia SIL OFL =
+   uso comercial libre). Se carga con FontFace (ver `useLocalFonts` en `references/reels/mdi/kit.tsx`).
+   Más grande que la base (~118 px vs 62 px), ligeramente inclinada. **Ya no usar Yellowtail.** Ej.: "*a mano?*", "*Facebook* y un mensaje de *WhatsApp*",
    "para *inversores.*", "dejás de *pelear*".
 
 Variante **MAYÚSCULAS** (momentos de énfasis / CTA): todo en **Montserrat 900 caps**, la palabra clave
@@ -63,7 +64,7 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 > Código de referencia que funciona: `editor-video-ia/references/reels/mdi/` (`kit.tsx` + `video.tsx`, reel "charla").
 
 - **Subtítulos palabra por palabra**, **alineados a la IZQUIERDA** (x ≈ 66), y ≈ 1150 (sube a ≈ 900 cuando hay PiP,
-  baja a ≈ 1630 durante los cortes a tarjeta). Script Yellowtail verde agua con glow para la palabra clave; variante
+  baja a ≈ 1630 durante los cortes a tarjeta). Script Vujahday verde agua con glow para la palabra clave; variante
   caps para énfasis/CTA. Remate: palabras grandes CENTRADAS (caps blancas + script gigante), sin sombra negra.
 - **B-roll de corte:** entra a pantalla completa con **blur** → se achica a **tarjeta inclinada 3D** (≈ 800×1280) con
   **borde fino verde agua + glow**, sobre fondo **negro verdoso** (`#061416`, halo `#0E3A38`), girando lento (rotateY).
@@ -75,7 +76,7 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   **pantallas de interfaz realistas** (WhatsApp desbordado, agente IA conversando, CRM con el lead que pasa a
   "para atender", notificación en pantalla de bloqueo). Canva genera imágenes pero acá solo llega una miniatura
   de 150 px: no sirve para video.
-- Subtítulos del reel = Montserrat + Yellowtail; **portada = Lato**. No mezclar.
+- Subtítulos del reel = Montserrat + Vujahday Script; **portada = Lato**. No mezclar.
 
 ## Portada (DEFINIDA — ejemplos de Daniela en `referencia/portada_ej1.jpg`, `portada_ej2.jpg`)
 
@@ -114,5 +115,5 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 | Dato | Estado |
 |---|---|
 | Nombre del paraguas (Werkalec & Asociados u otro) | a definir |
-| Nombre exacto de la fuente script original | opcional (hoy: Yellowtail) |
+| Fuente base de subtítulos (hoy: Montserrat 800/900) | Daniela pasa la oficial |
 | Logo MDI en vector (texto del PDF es de baja resolución) | opcional |
