@@ -65,10 +65,10 @@ const CAPS: Cap[] = [
   { from: 75.7, to: 78.0, text: "el enlace para|inscribirte *gratis*", caps: true },
 ];
 const capY = (t: number) => {
-  if (inSeg(t, PIP.lista) || inSeg(t, PIP.domingo) || inSeg(t, PIP.piezas) || inSeg(t, PIP.caminos)) return 900;
+  if (inSeg(t, PIP.lista) || inSeg(t, PIP.domingo) || inSeg(t, PIP.piezas) || inSeg(t, PIP.caminos)) return 850;
   if (t >= 33.42 && t < 43.25) return 1190; // debajo de la invitación
   if (t >= 68.0 && t < 70.58) return 960; // remate grande centrado
-  if (inSeg(t, FULL.caos) || inSeg(t, FULL.bot) || inSeg(t, FULL.crm)) return 1630; // debajo de la tarjeta inclinada
+  if (inSeg(t, FULL.caos) || inSeg(t, FULL.bot) || inSeg(t, FULL.crm)) return 1290; // sobre la base de la tarjeta (zona segura: nada debajo de y≈1500)
   return 1150;
 };
 
@@ -325,7 +325,7 @@ const EndPlate: React.FC = () => {
 };
 
 const Watermark: React.FC = () => (
-  <div style={{ position: "absolute", left: 40, bottom: 40, fontFamily: MONT, fontWeight: 600, fontSize: 24, color: "#ffffffc0", textShadow: "0 2px 8px rgba(0,0,0,0.7)", letterSpacing: 1 }}>✦ generado con IA</div>
+  <div style={{ position: "absolute", left: 66, top: 262, fontFamily: MONT, fontWeight: 600, fontSize: 24, color: "#ffffffc0", textShadow: "0 2px 8px rgba(0,0,0,0.7)", letterSpacing: 1 }}>✦ generado con IA</div>
 );
 
 // ---------- sonido ----------

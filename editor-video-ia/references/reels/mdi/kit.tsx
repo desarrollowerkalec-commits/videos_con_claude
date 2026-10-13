@@ -83,15 +83,15 @@ export const Captions: React.FC<{ list: Cap[]; words: WordT[]; y: (t: number) =>
   const toks = tokenize(c, words);
   const nLines = Math.max(...toks.map((k) => k.line)) + 1;
   const center = c.big || align === "center";
-  const MAXW = 964;
+  const MAXW = 860; // zona segura IG: texto entre x 66 y x 940 (a la derecha están los botones)
   const BASE = c.big ? 104 : c.caps ? 80 : 98; // más grandes que antes (ref. "¿Seguís escribiendo / tus descripciones")
   const SCR = c.big ? 210 : 132;
   // un solo factor para todas las líneas de la frase → mismo tamaño de letra en los 2 renglones
   const fit = Math.min(1, ...Array.from({ length: nLines }).map((_, li) => MAXW / lineWidth(toks.filter((k) => k.line === li), BASE, SCR, !!(c.caps || c.big) && !toks.filter((k) => k.line === li).some((k) => k.script && !c.caps))));
   return (
-    <div style={{ position: "absolute", left: 58, right: 58, top: y(t), display: "flex", flexDirection: "column", alignItems: center ? "center" : "flex-start" }}>
+    <div style={{ position: "absolute", left: 66, right: 140, top: y(t), display: "flex", flexDirection: "column", alignItems: center ? "center" : "flex-start" }}>
       {Array.from({ length: nLines }).map((_, li) => (
-        <div key={li} style={{ display: "flex", alignItems: "baseline", gap: 0.22 * BASE * fit, flexWrap: "nowrap", whiteSpace: "nowrap", marginTop: li ? (c.big ? 0.12 : -0.16) * BASE * fit : 0 }}>
+        <div key={li} style={{ display: "flex", alignItems: "baseline", gap: 0.22 * BASE * fit, flexWrap: "nowrap", whiteSpace: "nowrap", marginTop: li ? (c.big ? 0.12 : c.caps ? -0.06 : -0.16) * BASE * fit : 0 }}>
           {toks.filter((k) => k.line === li).map((k, i) => {
             const p = prog(t, k.at - 0.04, 0.16);
             if (p <= 0) return null;
@@ -121,13 +121,13 @@ export const TiltCard: React.FC<{ from: number; to: number; mode?: "full" | "pip
   const k = Math.sin((t - from) * 0.9);
   if (mode === "full") {
     const shrink = prog(t, from + 0.2, 0.6); // 0 = pantalla completa · 1 = tarjeta
-    const w = interpolate(shrink, [0, 1], [1080, 800]);
-    const h = interpolate(shrink, [0, 1], [1920, 1280]);
+    const w = interpolate(shrink, [0, 1], [1080, 700]);
+    const h = interpolate(shrink, [0, 1], [1920, 1120]);
     return (
       <div style={{ position: "absolute", inset: 0, opacity: o, background: `radial-gradient(ellipse at 50% 45%, #0E3A38 0%, ${BG} 62%, #020707 100%)`, filter: `blur(${(inB + outB) * 18}px)` }}>
         <div style={{ position: "absolute", inset: 0, perspective: 1600 }}>
           <div style={{
-            position: "absolute", left: (1080 - w) / 2, top: (1920 - h) / 2 - 60 * shrink, width: w, height: h, overflow: "hidden",
+            position: "absolute", left: (1080 - w) / 2, top: (1920 - h) / 2 - 260 * shrink, width: w, height: h, overflow: "hidden",
             border: `${3 * shrink}px solid ${T}`, boxShadow: shrink > 0 ? `0 0 ${30 * shrink}px ${T}AA, 0 0 ${90 * shrink}px ${T}44` : "none",
             transform: `rotateY(${shrink * (9 * k) * swing}deg) rotateX(${shrink * 3}deg) rotateZ(${shrink * -2.5 * swing}deg)`,
             background: "#fff",
@@ -141,11 +141,11 @@ export const TiltCard: React.FC<{ from: number; to: number; mode?: "full" | "pip
   // pip
   const e = prog(t, from, 0.5);
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1060, height: 860, opacity: o, filter: `blur(${(inB + outB) * 10}px)` }}>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 990, height: 930, opacity: o, filter: `blur(${(inB + outB) * 10}px)` }}>
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 0%, rgba(2,8,9,0.75) 30%, rgba(2,8,9,0.95) 100%)" }} />
       <div style={{ position: "absolute", inset: 0, perspective: 1500 }}>
         <div style={{
-          position: "absolute", left: 120, top: 150, width: 840, height: 620, overflow: "hidden", background: "#fff",
+          position: "absolute", left: 100, top: 150, width: 840, height: 620, overflow: "hidden", background: "#fff",
           boxShadow: "0 30px 60px rgba(0,0,0,0.6)",
           transform: `translateY(${(1 - e) * 120}px) rotateY(${-8 + 5 * k * swing}deg) rotateZ(${-3 * swing}deg) rotateX(6deg)`,
           maskImage: "linear-gradient(180deg, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(180deg, black 70%, transparent 100%)",

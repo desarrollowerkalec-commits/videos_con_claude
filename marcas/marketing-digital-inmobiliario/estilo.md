@@ -44,10 +44,8 @@ Un solo acento fijo (no se usan los 5 colores por ángulo de DW salvo que Daniel
 Dos fuentes que se combinan dentro de la misma frase:
 
 1. **Base: Aktiv Grotesk Extended XBold** (fuente OFICIAL que pasó Daniela; Dalton Maag vía **Adobe Fonts**).
-   ⚠️ Licencia Adobe Fonts: se puede usar para renderizar, **NO se versiona** (EULA no permite redistribuir).
-   Vive en `editor-video-ia/assets/fonts-licenciadas/` (en `.gitignore`). **En una sesión nueva no está:**
-   pedirle a Daniela que suba `Aktiv_Grotesk_Ex_XBold.ttf` y copiarlo a `public/fonts/AktivGroteskEx-XBold.ttf`
-   del proyecto. Sin el archivo, el kit cae a Montserrat 900 (avisarle a Daniela antes de entregar).
+   Archivo: `editor-video-ia/assets/fonts/AktivGroteskEx-XBold.ttf` (licencia Adobe Fonts; **versionado en este repo
+   privado por decisión y bajo responsabilidad de Daniela**). Copiarlo a `public/fonts/` del proyecto.
    **Grandes** (~98 px base, ~80 px en caps; se achican solos para no pasar ~964 px de ancho), blancos,
    sentence case, **renglones PEGADOS** (line-height ~0.92 y −16 % entre líneas) y **sombra difusa oscura hacia
    abajo** (`0 6px 18px rgba(0,0,0,.55), 0 3px 6px rgba(0,0,0,.45)`). Ref: `referencia/subs_*.jpg`
@@ -103,6 +101,15 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   varias líneas cortas, alineado a la izquierda a la derecha del ícono (x ≈ 490).
 - Sin URL ni ícono de ángulo (a diferencia de DW).
 
+## Zona segura de Instagram (OBLIGATORIA — vale para TODAS las marcas)
+
+- **Ningún texto ni dato importante debajo de y ≈ 1500** (los ~420 px de abajo los tapan el pie de foto,
+  el usuario y la música) ni **a la derecha de x ≈ 940** (botones me gusta / comentar / compartir).
+  Arriba, dejar libre hasta **y ≈ 250** salvo títulos grandes centrados.
+- Subtítulos: y ≈ 1150 normal · ≈ 850 con PiP · ≈ 1290 durante cortes a tarjeta (la tarjeta termina en ≈ 1260).
+- Marca de agua "✦ generado con IA": arriba a la izquierda (x 66, y 262), no abajo.
+- Chequeo antes de renderizar: stills con líneas guía en y=1500 y x=940.
+
 ## Cuenta, placa final y música
 
 - **Instagram:** `@mktdginmobiliario` (instagram.com/mktdginmobiliario) → marca de agua de cuenta y placa final.
@@ -113,7 +120,7 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   "Trimmed Intro", 2:56, ~122 BPM). Entra **sola** si se renderiza con `MARCA=mdi`:
   `MARCA=mdi bash editor-video-ia/scripts/render.sh <carpeta> "$PWD/<carpeta>/Reel.mp4"`
   → arranca en el **2.º 17.5** (ahí entra el groove completo; 1–16 s es intro con bajo, 16–17.5 s un corte),
-  volumen 0.23 con ducking (la pista es ~5 dB más fuerte que Forward Momentum). Hay un cambio de sección más
+  volumen **0.20** con ducking (bajada un poco a pedido de Daniela) (la pista es ~5 dB más fuerte que Forward Momentum). Hay un cambio de sección más
   intenso en el 2.º 64 de la pista (≈ 46 s de reel): en reels largos, revisar que no pise la voz.
   **Nunca** usar Forward Momentum en MDI (es la de Daniela Werkalec).
 
