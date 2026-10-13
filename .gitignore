@@ -16,3 +16,6 @@ Reels - */
 # Cache de Python
 __pycache__/
 *.pyc
+
+# Fuentes con licencia comercial (Adobe Fonts / Typekit): NO se versionan (EULA no permite redistribuir)
+editor-video-ia/assets/fonts-licenciadas/

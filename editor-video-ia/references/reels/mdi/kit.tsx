@@ -11,11 +11,17 @@ import { loadFont as loadMont } from "@remotion/google-fonts/Montserrat";
 export const MONT = loadMont("normal", { weights: ["500", "600", "700", "800", "900"], subsets: ["latin"] }).fontFamily;
 // Script de marca MDI: Vujahday Script (local, SIL OFL) → palabras en verde agua.
 export const SCRIPT = "VujahdayScript";
-let fontsReady: Promise<void> | null = null;
+// Base de subtítulos MDI: Aktiv Grotesk Extended XBold (Adobe Fonts, licencia de Daniela; NO se versiona).
+// Si falta el archivo, cae a Montserrat 900.
+export const AKTIV = "AktivGroteskEx";
+export const SUB = `${AKTIV}, ${MONT}`;
+let fontsReady: Promise<unknown> | null = null;
+const loadLocal = (name: string, file: string) =>
+  new FontFace(name, `url(${staticFile(file)})`).load().then((f) => { document.fonts.add(f); }).catch(() => undefined);
 export const useLocalFonts = () => {
-  const [h] = React.useState(() => delayRender("fuente script MDI"));
+  const [h] = React.useState(() => delayRender("fuentes MDI"));
   React.useEffect(() => {
-    if (!fontsReady) fontsReady = new FontFace(SCRIPT, `url(${staticFile("fonts/VujahdayScript-Regular.ttf")})`).load().then((f) => { document.fonts.add(f); });
+    if (!fontsReady) fontsReady = Promise.all([loadLocal(SCRIPT, "fonts/VujahdayScript-Regular.ttf"), loadLocal(AKTIV, "fonts/AktivGroteskEx-XBold.ttf")]);
     fontsReady.then(() => continueRender(h));
   }, [h]);
 };
@@ -26,6 +32,8 @@ export const W = "#FFFFFF";
 export const BG = "#061416"; // negro verdoso de las placas del demo
 export const neon = (s = 1) => `0 0 ${6 * s}px ${T}, 0 0 ${18 * s}px ${T}CC, 0 0 ${38 * s}px ${T}77`;
 export const SOFT = "0 3px 10px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.6)";
+// sombra de subtítulos MDI (ref. captura de Daniela): difusa y oscura, cae hacia abajo
+export const SUBSHADOW = "0 6px 18px rgba(0,0,0,0.55), 0 3px 6px rgba(0,0,0,0.45)";
 const C = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 export const useT = () => {
@@ -65,6 +73,9 @@ const tokenize = (c: Cap, words: WordT[]): Tok[] => {
   return toks;
 };
 
+// ancho estimado (Aktiv Ex es ancha ≈ 0.66 em por carácter; el script ≈ 0.42 em)
+const lineWidth = (toks: Tok[], base: number, scr: number, upper: boolean) =>
+  toks.reduce((acc, k) => acc + k.txt.length * (k.script && !upper ? 0.42 * scr : (upper ? 0.84 : 0.66) * base * (k.script ? 1.25 : 1)) + 0.25 * base, 0);
 export const Captions: React.FC<{ list: Cap[]; words: WordT[]; y: (t: number) => number; align?: "left" | "center" }> = ({ list, words, y, align = "left" }) => {
   const t = useT();
   const c = list.find((x) => t >= x.from && t < x.to);
@@ -72,20 +83,25 @@ export const Captions: React.FC<{ list: Cap[]; words: WordT[]; y: (t: number) =>
   const toks = tokenize(c, words);
   const nLines = Math.max(...toks.map((k) => k.line)) + 1;
   const center = c.big || align === "center";
+  const MAXW = 964;
+  const BASE = c.big ? 104 : c.caps ? 80 : 98; // más grandes que antes (ref. "¿Seguís escribiendo / tus descripciones")
+  const SCR = c.big ? 210 : 132;
+  // un solo factor para todas las líneas de la frase → mismo tamaño de letra en los 2 renglones
+  const fit = Math.min(1, ...Array.from({ length: nLines }).map((_, li) => MAXW / lineWidth(toks.filter((k) => k.line === li), BASE, SCR, !!(c.caps || c.big) && !toks.filter((k) => k.line === li).some((k) => k.script && !c.caps))));
   return (
-    <div style={{ position: "absolute", left: 66, right: 50, top: y(t), display: "flex", flexDirection: "column", alignItems: center ? "center" : "flex-start", gap: c.caps ? 2 : 0 }}>
+    <div style={{ position: "absolute", left: 58, right: 58, top: y(t), display: "flex", flexDirection: "column", alignItems: center ? "center" : "flex-start" }}>
       {Array.from({ length: nLines }).map((_, li) => (
-        <div key={li} style={{ display: "flex", alignItems: "baseline", gap: c.caps ? 16 : 14, flexWrap: "nowrap", whiteSpace: "nowrap" }}>
+        <div key={li} style={{ display: "flex", alignItems: "baseline", gap: 0.22 * BASE * fit, flexWrap: "nowrap", whiteSpace: "nowrap", marginTop: li ? (c.big ? 0.12 : -0.16) * BASE * fit : 0 }}>
           {toks.filter((k) => k.line === li).map((k, i) => {
             const p = prog(t, k.at - 0.04, 0.16);
             if (p <= 0) return null;
             const flash = interpolate(t, [k.at, k.at + 0.12, k.at + 0.5], [0, 1.5, 1], C);
             if (k.script && !c.caps)
-              return <span key={i} style={{ fontFamily: SCRIPT, fontSize: c.big ? 200 : 118, lineHeight: 0.95, color: TL, textShadow: neon(0.45 + 0.4 * flash), opacity: p, transform: `translateY(${(1 - p) * 10}px)`, display: "inline-block", paddingRight: 6 }}>{k.txt}</span>;
+              return <span key={i} style={{ fontFamily: SCRIPT, fontSize: SCR * fit, lineHeight: 0.8, color: TL, textShadow: `${neon(0.45 + 0.4 * flash)}`, opacity: p, transform: `translateY(${(1 - p) * 10}px)`, display: "inline-block", paddingRight: 4 }}>{k.txt}</span>;
             const key = k.script && c.caps;
-            const size = c.big ? 92 : c.caps ? (key ? 70 : 46) : 62;
+            const size = (key ? BASE * 1.25 : BASE) * fit;
             return (
-              <span key={i} style={{ fontFamily: MONT, fontWeight: c.caps || c.big ? 900 : 800, fontSize: size, letterSpacing: c.caps ? 0.5 : -1.5, color: key ? T : W, textTransform: c.caps || c.big ? "uppercase" : "none", textShadow: key ? `${neon(0.45 + 0.35 * flash)}, ${SOFT}` : SOFT, opacity: p, transform: `translateY(${(1 - p) * 10}px) scale(${0.9 + 0.1 * p})`, display: "inline-block", lineHeight: 1.04 }}>{k.txt}</span>
+              <span key={i} style={{ fontFamily: SUB, fontWeight: 900, fontSize: size, letterSpacing: -0.02 * size, color: key ? T : W, textTransform: c.caps || c.big ? "uppercase" : "none", textShadow: key ? `${neon(0.45 + 0.35 * flash)}, ${SUBSHADOW}` : SUBSHADOW, opacity: p, transform: `translateY(${(1 - p) * 10}px) scale(${0.9 + 0.1 * p})`, display: "inline-block", lineHeight: 0.92 }}>{k.txt}</span>
             );
           })}
         </div>
@@ -164,7 +180,7 @@ export const BigTitle: React.FC<{ from: number; to: number; text: string; echo?:
     <div style={{ position: "absolute", inset: 0, opacity: o, pointerEvents: "none" }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 620, background: "linear-gradient(180deg, rgba(2,8,9,0.85), rgba(2,8,9,0.45) 55%, transparent)" }} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 110, textAlign: "center" }}>
-        <div style={{ fontFamily: MONT, fontWeight: 900, fontSize: 98, color: W, letterSpacing: 0, lineHeight: 1, textShadow: SOFT }}>
+        <div style={{ fontFamily: SUB, fontWeight: 900, fontSize: 92, color: W, letterSpacing: -1, lineHeight: 1, textShadow: SOFT }}>
           {letters.map((ch, i) => {
             const a = from + 0.03 * ((i * 7) % letters.length);
             const flick = t < a + 0.25 ? (Math.floor(t * 30 + i) % 3 === 0 ? 0.2 : 1) : 1;

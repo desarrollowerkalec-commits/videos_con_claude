@@ -43,15 +43,22 @@ Un solo acento fijo (no se usan los 5 colores por ángulo de DW salvo que Daniel
 
 Dos fuentes que se combinan dentro de la misma frase:
 
-1. **Base: Montserrat 800–900**, blanco, **sentence case**, letter-spacing apretado (≈ −2), 2 líneas
-   máximo, sombra suave para legibilidad. Ej.: "¿Seguís escribiendo / tus descripciones".
+1. **Base: Aktiv Grotesk Extended XBold** (fuente OFICIAL que pasó Daniela; Dalton Maag vía **Adobe Fonts**).
+   ⚠️ Licencia Adobe Fonts: se puede usar para renderizar, **NO se versiona** (EULA no permite redistribuir).
+   Vive en `editor-video-ia/assets/fonts-licenciadas/` (en `.gitignore`). **En una sesión nueva no está:**
+   pedirle a Daniela que suba `Aktiv_Grotesk_Ex_XBold.ttf` y copiarlo a `public/fonts/AktivGroteskEx-XBold.ttf`
+   del proyecto. Sin el archivo, el kit cae a Montserrat 900 (avisarle a Daniela antes de entregar).
+   **Grandes** (~98 px base, ~80 px en caps; se achican solos para no pasar ~964 px de ancho), blancos,
+   sentence case, **renglones PEGADOS** (line-height ~0.92 y −16 % entre líneas) y **sombra difusa oscura hacia
+   abajo** (`0 6px 18px rgba(0,0,0,.55), 0 3px 6px rgba(0,0,0,.45)`). Ref: `referencia/subs_*.jpg`
+   ("¿Seguís escribiendo / tus descripciones").
 2. **Palabra clave: script manuscrito en verde agua con GLOW neón** → **Vujahday Script** (fuente OFICIAL,
    la pasó Daniela; archivo local `editor-video-ia/assets/fonts/VujahdayScript-Regular.ttf`, licencia SIL OFL =
    uso comercial libre). Se carga con FontFace (ver `useLocalFonts` en `references/reels/mdi/kit.tsx`).
    Más grande que la base (~118 px vs 62 px), ligeramente inclinada. **Ya no usar Yellowtail.** Ej.: "*a mano?*", "*Facebook* y un mensaje de *WhatsApp*",
    "para *inversores.*", "dejás de *pelear*".
 
-Variante **MAYÚSCULAS** (momentos de énfasis / CTA): todo en **Montserrat 900 caps**, la palabra clave
+Variante **MAYÚSCULAS** (momentos de énfasis / CTA): todo en **Aktiv Grotesk Ex caps**, la palabra clave
 **más grande en verde agua con glow** y el resto blanco más chico, en 2 líneas.
 Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DANIELA** TE ESPERA / EN SU **MASTERCLASS**".
 
@@ -76,7 +83,7 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   **pantallas de interfaz realistas** (WhatsApp desbordado, agente IA conversando, CRM con el lead que pasa a
   "para atender", notificación en pantalla de bloqueo). Canva genera imágenes pero acá solo llega una miniatura
   de 150 px: no sirve para video.
-- Subtítulos del reel = Montserrat + Vujahday Script; **portada = Lato**. No mezclar.
+- Subtítulos del reel = Aktiv Grotesk Ex + Vujahday Script; **portada = Lato**. No mezclar.
 
 ## Portada (DEFINIDA — ejemplos de Daniela en `referencia/portada_ej1.jpg`, `portada_ej2.jpg`)
 
@@ -115,5 +122,4 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
 | Dato | Estado |
 |---|---|
 | Nombre del paraguas (Werkalec & Asociados u otro) | a definir |
-| Fuente base de subtítulos (hoy: Montserrat 800/900) | Daniela pasa la oficial |
 | Logo MDI en vector (texto del PDF es de baja resolución) | opcional |
