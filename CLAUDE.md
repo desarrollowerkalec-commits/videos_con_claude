@@ -13,6 +13,18 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 - `marcas/daniela-werkalec/estilo.md` → **la biblia de estilo** (colores, tipografías, subtítulos karaoke, remate en cascada, portadas, placa final, música, ángulos). **Leer SIEMPRE antes de editar.**
 - `edicion-*/` → carpetas por-video (gitignored, descartables). Cada reel vive en una.
 
+## Marcas (una carpeta por marca en `marcas/`)
+
+| Marca | Estilo |
+|---|---|
+| Daniela Werkalec (marca personal) | `marcas/daniela-werkalec/estilo.md` — **sistema base** |
+| Marketing Digital Inmobiliario (MDI) | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; verde agua `#6AD5B7`, presentadora **Clara (avatar IA, no es Daniela)** |
+
+Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
+estilo base y DESPUÉS el de la marca (que pisa colores, fuentes, subtítulos, logo, placa final).
+Código de referencia reutilizable: `editor-video-ia/references/reels/opinion-diversidad/` (cambiar solo
+las constantes de color/fuente de `kit.tsx` y los textos).
+
 ## Regla de oro: leer el estilo primero
 
 Antes de tocar un video, **leé `marcas/daniela-werkalec/estilo.md` completo.** Ahí está todo lo
@@ -46,6 +58,8 @@ editar `remotion/src/video.tsx` con el estilo (incluye **gráficos a pantalla co
 `render.sh` ya mete la pista de marca **Forward Momentum** (`editor-video-ia/assets/music/forward-momentum.mp3`)
 en TODOS los renders, con ducking bajo la voz, arrancando en el **2.º 10** (donde entra el beat).
 No hay que pasar nada. Para otra pista: 3er arg = ruta; `"none"` la saca. 5.º arg = segundo de inicio.
+**Reels de Marketing Digital Inmobiliario: anteponer `MARCA=mdi`** → usa `mdi-fondo.mp3` (desde el 2.º 17.5, vol 0.23).
+Ej.: `MARCA=mdi bash editor-video-ia/scripts/render.sh edicion-xxx "$PWD/edicion-xxx/Reel.mp4"`
 
 ## Marca de agua y placa final
 

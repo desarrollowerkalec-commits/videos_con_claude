@@ -400,9 +400,7 @@ const RWordC: React.FC<{ w: RWord }> = ({ w }) => {
   const glow = big ? `0 0 42px ${C.yellow}, 0 0 95px ${C.yellow}bb, 0 3px 14px rgba(0,0,0,.6)` : "0 0 16px rgba(255,255,255,.35), 0 3px 10px rgba(0,0,0,.6)";
   return (
     <span style={{ position: "relative", display: "inline-block", opacity: Math.min(1, p * 1.6), transform: `translate(${tx}px, ${ty}px) scale(${sc})` }}>
-      {big && (
-        <div style={{ position: "absolute", left: "-18%", right: "-18%", top: "8%", bottom: "8%", background: "radial-gradient(ellipse at center, rgba(0,0,0,.8) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,0) 72%)", filter: "blur(10px)", zIndex: 0 }} />
-      )}
+      {/* SIN sombra/overlay negro detrás (decisión de Daniela, ver estilo.md): solo glow + sombra de texto fina */}
       <span style={{ position: "relative", zIndex: 1, fontFamily: w.font ?? REMARK_SANS, fontSize: w.size ?? (big ? 175 : 72), fontStyle: w.italic ? "italic" : "normal", fontWeight: big ? 400 : 700, color, WebkitTextStroke: "5px #0E0D0B", paintOrder: "stroke fill", textShadow: glow, lineHeight: 1 }}>
         {w.t}
       </span>

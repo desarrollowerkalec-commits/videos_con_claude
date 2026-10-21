@@ -11,6 +11,17 @@ Spec para edición de reels (skill `editor-video-ia`). Capturado de los videos r
 - Usuario / marca de agua: `@danielawerkalec`.
 - Tono visual: cálido, natural, aspiracional. Nada chillón salvo el amarillo/dorado de énfasis.
 
+## Logo oficial (desde el PDF `DW_final.pdf`)
+
+Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, alta resolución):
+- `daniela-werkalec-logo.png` → logo completo a color (isotipo W con ondas + "Daniela Werkalec").
+- `daniela-werkalec-logo-blanco.png` → mismo logo en **blanco** (para fondos oscuros: placa final, portadas).
+- `daniela-werkalec-isotipo.png` → solo la **W con ondas** (marca de agua, sello chico, favicon de placa).
+
+Colores del logo: **violeta `#73308B`** (isotipo) y **gris `#4C4C4E`** (nombre). Sobre fondos oscuros usar
+siempre la versión **blanca** (el gris no se lee). El violeta del logo NO reemplaza al fucsia de ángulo
+`#CB6CE6`: son cosas distintas.
+
 ## Tipografías
 
 Archivos propios en `editor-video-ia/assets/fonts/`; el resto por Google Fonts.
@@ -38,7 +49,7 @@ Pendiente de archivos reales (cuando Daniela los suba, reemplazan a los similare
 Para destacar partes o textos (como el viral de traducción):
 
 - Frase **compuesta por palabras de distinta fuente, peso y tamaño**.
-- Palabra o número **grande en amarillo (True Fate) con GLOW** y **sombra detrás** (overlay central) para que quede "por encima".
+- Palabra o número **grande en amarillo (True Fate) con GLOW**. **SIN sombra negra ni overlay oscuro detrás** de la frase en cascada: las palabras van directo sobre el video (solo su glow y una sombra de texto fina para legibilidad).
 - El resto: combinación de Red Hat (bold/light), PT Serif itálica y Montserrat, en **blanco** con glow suave.
 - Cada palabra **entra con su propia animación** (desde el costado · hacia arriba · fade · pop) y se van
   acomodando hasta formar la frase; al final **salen todas juntas**. (Implementado en `RemarkPhrase`.)
@@ -63,8 +74,8 @@ Analizada de los primeros ~2 s del video de Daniela:
 
 ## Overlays de sombra
 
-- **Central (chico):** elipse oscura difuminada **detrás de la palabra principal** del remate, para destacarla.
-- **Separador (horizontal):** band de sombra **debajo de la línea ANTON** en las portadas, separa línea 1 de la 2 y la 3 de la 4.
+- ~~Central (chico): elipse oscura detrás de la palabra principal del remate~~ → **NO se usa en el remate en cascada** (decisión de Daniela). Las palabras animadas van sin overlay negro detrás.
+- **Separador (horizontal):** en portadas ya no va como banda suelta: la sombra la da el propio titular Anton, que cae sobre las líneas vecinas (ver Portadas).
 - Recreados como vectores (recolorables). Si se quieren los PNG exactos de Daniela, subirlos como archivo.
 
 ## Íconos por ángulo (SVG, color del ángulo)
@@ -82,6 +93,16 @@ Analizada de los primeros ~2 s del video de Daniela:
 - **Logos de apps** cuando se nombran (ChatGPT, Claude, WhatsApp, Gemini…): insignia tipo `ToolBadge`.
 - **Texto detrás de la persona** (palabras entre el fondo y el sujeto): requiere segmentación del sujeto por frame.
 - **Efectos / color grade por ángulo** (ver sección Efectos).
+
+## Zona segura de Instagram (OBLIGATORIA)
+
+- **Ningún texto, subtítulo ni panel con info debajo de y ≈ 1500** (los ~420 px de abajo los tapan el pie de
+  foto, el usuario y la música) ni **a la derecha de x ≈ 940** (botones me gusta / comentar / compartir).
+  Arriba, libre hasta y ≈ 250 salvo títulos centrados.
+- Consecuencia: los paneles de motion graphics van **entre el pecho y y ≈ 1500** (ej. `DOCK` top 1080 / alto 420),
+  no pegados abajo. El panel del reel "diversidad" (y 1318–1768) quedó fuera de zona: no repetir.
+- Marca de agua "✦ generado con IA" y @usuario: arriba a la izquierda (y ≈ 262), no abajo.
+- Chequeo antes de renderizar: stills con líneas guía en y=1500 y x=940.
 
 ## Estructura y ritmo
 
@@ -132,14 +153,27 @@ Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame 
 | 1 · "Hoy: <algo>" | **BREATHING** | ~104 px | "Hoy:" en color de ángulo, resto blanco |
 | 2 · Titular | **ANTON** | **~158 px**, **UNA sola línea** (nowrap), **al límite del ancho** (borde a borde) | mezcla color de ángulo + blanco; **2 sombras centradas** (entre script↔Anton y Anton↔Montserrat) + drop-shadow arriba/abajo → efecto **3D** |
 | 3b · Bajada corta | **Montserrat 800** | ~86 px, corta (ej. "la ventaja: el equipo") | reemplaza la bajada larga |
-| 3 · Bajada | **Montserrat 800** | 52 px, letter-spacing **−2** | blanco + palabra clave en color de ángulo |
+| 3 · Bajada | **Montserrat 800** | **52 px**, **UNA línea**, letter-spacing **−2**, minúscula y sin punto final | blanco + palabra clave en color de ángulo |
 | 4 · Caja | **Arimo** | 34 px | recuadro fino (1.5 px) centrado |
 | Ícono del ángulo | **PNG real** (`assets/iconos/`) | **163.8 × 134.1 px** | **posición fija: x 198.8, y 1289.8** (igual en todas) |
 | URL | **Arimo 400** (fina, sin bold) | 32 px | centrada, y ≈ 1500 |
 
 Bloque de texto: `top ≈ 720`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
 
-**Fondo:** foto con **exposición bajada ~22%** (`brightness(0.78) contrast(1.04)`), overlay base **suave** (la foto se ve) + **banda oscura gruesa detrás del texto** que sube arriba de "Hoy" y baja pasando el recuadro, fundida arriba y abajo (la foto se ve arriba y abajo). **Encuadrar la cara alta** (reframe/zoom del frame) para que ni la banda ni las palabras la tapen. **Ícono transparente** sobre la foto.
+**Interlineado: las líneas se TOCAN.** Script ↔ Anton ↔ bajada van pegadas (sin aire entre ellas; Anton con
+margen negativo ~−20 px y line-height ~1). Por eso la **sombra del titular Anton** es fuerte arriba y abajo y
+**cae sobre la línea de arriba y la de abajo**: eso da el efecto 3D. No separar las líneas con bandas sueltas.
+
+**Línea 3 (bajada) = UNA sola línea**, Montserrat 800 **52 px fijo** (no se agranda para llenar el ancho:
+la tipografía más grande es SIEMPRE Anton), letter-spacing −2, nowrap. **Todo en minúscula** (solo siglas como
+IA en mayúscula; ni siquiera la primera palabra) y **sin punto final**. Una palabra en color de ángulo.
+Ej.: "la IA **traduce** el idioma".
+
+**Exposición de la foto (NUEVO):** bajarle la exposición a la FOTO misma (`brightness` entre ~0.65 y 0.78; en el reel del Congreso: `brightness(0.78) contrast(1.04)`), no solo
+taparla con overlay. Así la banda oscura del medio puede ser más suave (~0.6–0.7 de opacidad) y **no se nota
+como un bloque negro** en el centro.
+
+**Fondo:** overlay base **suave** (la foto se ve) + **banda oscura gruesa detrás del texto** que sube arriba de "Hoy" y baja pasando el recuadro, fundida arriba y abajo (la foto se ve arriba y abajo). **Encuadrar la cara alta** (reframe/zoom del frame) para que ni la banda ni las palabras la tapen. **Ícono transparente** sobre la foto.
 
 ## Efectos y motion graphics (ref: reel VoiceStudio)
 
@@ -185,7 +219,14 @@ En vez de una placa plana negra, cerrar con **motion graphics** sobre la **ofici
 - Fondo = **recorte de la pared/oficina SIN su cuerpo**, desenfocado suave y con velo oscuro. En este caso: la **pared de ladrillo con el cartel WERKALEC** (zona bien iluminada, de marca). Clave: tomar una región donde NO esté su cuerpo (si se blurea el frame entero, su camisa/figura se ve como un borrón) — el `<Img>` va dentro de un `AbsoluteFill` para que no lo tape el fondo base.
 - **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
-- **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + **"Marketing digital e inteligencia artificial"** (blanco) + `www.danielawerkalec.com.ar`. Sin "Experta en" (adjetivo autoasignado; las credenciales como sustantivos pesan más). Nada del evento en la placa final. Evitar taglines genéricos ("…para inmobiliarias").
+- **Nombre** en True Fate + credencial en DOS líneas:
+  1. **"Corredora Inmobiliaria"** — Montserrat 800, color del ángulo.
+  2. Segunda credencial — ⚠️ **PENDIENTE DE CONFIRMAR CON DANIELA** (hay 3 versiones):
+     - 12/10 (spec anterior): **"+ Experta en Tecnología e IA para negocios"** (Montserrat 700, blanco, "+" en color del ángulo).
+     - 21/10 (propuesta de Daniela): "Experta en Marketing digital e inteligencia artificial".
+     - 21/10 (usada en el reel del Congreso, recomendación de Claude): "Marketing digital e inteligencia artificial", sin "Experta".
+     Hasta que confirme, preguntarle antes de renderizar la placa final.
+  Debajo, `@danielawerkalec` (en el Congreso se usó `www.danielawerkalec.com.ar`). Nada del evento en la placa final. No inventar otros taglines.
 - Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA), **arriba a la izquierda** (top 236, left 56) para que la interfaz de Instagram no la tape.
 
 ## Pipeline
