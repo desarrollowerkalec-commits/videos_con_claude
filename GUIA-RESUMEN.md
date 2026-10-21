@@ -14,7 +14,7 @@ Camaleones Digitales) usando el **estilo de marca de Daniela Werkalec**.
 ```
 marcas/daniela-werkalec/
   estilo.md     → spec de estilo sacada de tus videos reales (subtítulos, dorado, b-roll)
-  theme.ts      → tema listo para pegar en cada proyecto Remotion (dorado + blanco)
+  remotion/     → paquete de marca (tema, subtítulos, remates, gráficos, portada) para copiar en cada reel
 editor-video-ia/  → el kit (solo fuente; las dependencias se instalan con setup.sh)
 ```
 
@@ -44,7 +44,7 @@ Edita este video con la marca daniela-werkalec: /ruta/a/mi-video.mp4
 Pasale también `marcas/daniela-werkalec/estilo.md` como referencia de estilo. Claude:
 1. Transcribe.
 2. Propone los cortes y las escenas (vos aprobás).
-3. Aplica tu tema (`marcas/daniela-werkalec/theme.ts` → `remotion/src/theme.ts`).
+3. Copia el paquete de marca (`marcas/daniela-werkalec/remotion/src/*` → `remotion/src/`).
 4. Muestra **fotogramas** para aprobar antes de renderizar.
 5. Renderiza el MP4.
 

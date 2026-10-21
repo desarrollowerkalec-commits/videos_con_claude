@@ -139,7 +139,7 @@ Una portada por reel (1080×1920). Fondo: foto de Daniela **oscurecida** (frame 
 
 Bloque de texto: `top ≈ 720`, centrado. Fuentes ya instaladas: Anton, Montserrat, Arimo (Google) + **BREATHING** (`assets/fonts/Breathing.ttf`, *Personal Use Only* — para uso comercial conviene licencia).
 
-**Fondo:** overlay base **suave** (la foto se ve) + **banda oscura gruesa detrás del texto** que sube arriba de "Hoy" y baja pasando el recuadro, fundida arriba y abajo (la foto se ve arriba y abajo). **Encuadrar la cara alta** (reframe/zoom del frame) para que ni la banda ni las palabras la tapen. **Ícono transparente** sobre la foto.
+**Fondo:** foto con **exposición bajada ~22%** (`brightness(0.78) contrast(1.04)`), overlay base **suave** (la foto se ve) + **banda oscura gruesa detrás del texto** que sube arriba de "Hoy" y baja pasando el recuadro, fundida arriba y abajo (la foto se ve arriba y abajo). **Encuadrar la cara alta** (reframe/zoom del frame) para que ni la banda ni las palabras la tapen. **Ícono transparente** sobre la foto.
 
 ## Efectos y motion graphics (ref: reel VoiceStudio)
 
@@ -159,15 +159,37 @@ Límites honestos (no es magia de post):
 Recomendación de captura para Daniela: grabar con buena luz y **2 tomas** (una abierta, una cerrada) para
 que el reencuadre y los "cambios de ángulo" se sientan reales.
 
+### Gráficos a pantalla completa (cada tanto, en todos los reels)
+
+Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la cámara a pantalla completa**
+(la voz sigue). Le da ritmo y explica lo abstracto mejor que un b-roll de stock.
+
+- **Frecuencia:** ~1 cada 15–25 s → 3–5 en un reel de 1–2 min; 1–2 en uno de <45 s.
+- **Dónde:** en frases conceptuales (algoritmos, preguntas, comparaciones, listas, "antes/después").
+  NO en lo personal/emocional (ahí va la cara). Primeros 2 s siempre cara; un gancho visual corto (~2 s) justo después funciona.
+- **Duración:** 2–6 s (hasta ~10 s si es una lista que se va armando).
+- **Entrada:** círculo que se abre desde el centro + anillo del color del ángulo + whoosh. **Salida:** fade + leve escala.
+- **Estética:** fondo oscuro + glow del ángulo + red de puntos (NeuralBg); line-art del color del ángulo con glow;
+  kicker `● TEXTO` arriba; textos que entran **palabra por palabra sincronizados con la voz**; palabra clave en
+  **True Fate amarilla con glow**; lo "viejo/descartado" se **tacha en rojo**.
+- **Subtítulos ocultos** mientras dura el gráfico (el gráfico ya lleva el texto).
+- **Tipos probados:** diagrama (nodo ALGORITMO → personas ✓/✗), dos celulares (uno ve / otro bloqueado),
+  pregunta cinética con ícono line-art que se dibuja, checklist (tachado → ✓ ✓ ✓), burbujas de chat.
+- **Parcial (sin tapar la cara):** tarjeta abajo (y≈1275–1580), p. ej. una balanza que se equilibra.
+- **Código:** `marcas/daniela-werkalec/remotion/src/mg.tsx` (FullScreen, Kicker, Headline, PropertyCard, Person,
+  Line + los ejemplos). Uso completo en `marcas/daniela-werkalec/remotion/ejemplos/video-congreso.tsx`.
+
 ### Placa de cierre (motion graphics)
 
 En vez de una placa plana negra, cerrar con **motion graphics** sobre la **oficina de fondo** (NO negro, NO la figura de Daniela):
 - Fondo = **recorte de la pared/oficina SIN su cuerpo**, desenfocado suave y con velo oscuro. En este caso: la **pared de ladrillo con el cartel WERKALEC** (zona bien iluminada, de marca). Clave: tomar una región donde NO esté su cuerpo (si se blurea el frame entero, su camisa/figura se ve como un borrón) — el `<Img>` va dentro de un `AbsoluteFill` para que no lo tape el fondo base.
 - **Foto de Daniela** enmarcada (rounded) con **anillo del color del ángulo que se dibuja + glow**.
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
-- **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + `@danielawerkalec`. En su propia cuenta evitar taglines genéricos largos ("…para inmobiliarias").
-- Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA).
+- **Nombre** en True Fate + **"Corredora inmobiliaria"** (color del ángulo) + **"Marketing digital e inteligencia artificial"** (blanco) + `www.danielawerkalec.com.ar`. Sin "Experta en" (adjetivo autoasignado; las credenciales como sustantivos pesan más). Nada del evento en la placa final. Evitar taglines genéricos ("…para inmobiliarias").
+- Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA), **arriba a la izquierda** (top 236, left 56) para que la interfaz de Instagram no la tape.
 
 ## Pipeline
 
-`prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → editar `video.tsx` → `stills.sh` (revisar) → `render.sh` (final) → portada (cover).
+`prep.py` (transcribir) → `reel_prep.py` (cortar vertical) → **copiar el paquete de marca** (`marcas/daniela-werkalec/remotion/src/*` a `reels/<nombre>/remotion/src/`, sin pisar `words.ts`; fuentes de `editor-video-ia/assets/fonts/` a `public/fonts/`) → editar `video.tsx` (base: `ejemplos/`) → `stills.sh` (revisar) → `render.sh` (final) → portada (`Cover.tsx`).
+
+Si el video ya viene montado con música propia (p. ej. avatar IA editado): `reel_prep.py --segments "0-<dur>" --gap 999 --cam 1080:1920:0:0 --wide none` (sin jump cuts) y `render.sh … none` (sin sumar Forward Momentum).

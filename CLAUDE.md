@@ -21,7 +21,8 @@ decidido con Daniela. No reinventes criterios que ya están resueltos.
 ## Pipeline (resumen; detalle en `editor-video-ia/SKILL.md`)
 
 `setup.sh` (deps, 1 vez) → `prep.py` (transcribir) → `reel_prep.py` (cortar vertical) →
-editar `remotion/src/video.tsx` con el estilo → `stills.sh` (revisar fotogramas) →
+**copiar el paquete de marca** `marcas/daniela-werkalec/remotion/src/*` al reel (sin pisar `words.ts`) + fuentes →
+editar `remotion/src/video.tsx` con el estilo (incluye **gráficos a pantalla completa cada tanto**, ver estilo.md) → `stills.sh` (revisar fotogramas) →
 `render.sh` (MP4 final con música automática) → portada (`Cover.tsx`).
 
 **No inventes transcripción ni cortes.** Transcribí de verdad y proponé cortes leyendo el texto real.
