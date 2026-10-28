@@ -1,4 +1,4 @@
-// Piezas VERTICALES (1080x1920) para reels. Se combinan con las de lib.tsx (Card, Row, Stat, Meter,
+// Piezas VERTICALES (1080x1920) para reels. ZONA SEGURA de Daniela: textos entre x 60–940 e y ≤ 1500 (ver estilo.md). Se combinan con las de lib.tsx (Card, Row, Stat, Meter,
 // AgentTasks, PromptCard, Logo…) pasandoles `style` con posiciones verticales (ver ZONA_TARJETA).
 // Zonas seguras de Instagram: arriba ~220 px y abajo ~330 px los tapa la interfaz; a la derecha ~130 px
 // están los botones. Textos entre y=220 y y=1590.
@@ -169,7 +169,7 @@ export const SubsV: React.FC<{ keywords: string[]; hide: [number, number][]; yAt
   const kw = new Set(keywords.map((k) => k.toLowerCase()));
   const p = pop(t, ch.s, 0.25);
   return (
-    <div style={{ position: "absolute", bottom: 1920 - (yAt(t) + 50), left: 40, right: 40, display: "flex", justifyContent: "center" }}>
+    <div style={{ position: "absolute", bottom: 1920 - (yAt(t) + 50), left: 60, right: 140, display: "flex", justifyContent: "center" }}>
       <div
         style={{
           fontFamily: SUBS,
@@ -186,7 +186,7 @@ export const SubsV: React.FC<{ keywords: string[]; hide: [number, number][]; yAt
           alignItems: "baseline",
           justifyContent: "center",
           gap: "0 16px",
-          maxWidth: 1000,
+          maxWidth: 880,
         }}
       >
         {ch.words.map((w, i) => {
@@ -415,7 +415,7 @@ export const RemarkPhrase: React.FC<{ words: RWord[]; to: number; top?: number }
   const out = prog(t, to, 0.3); // salen todas juntas
   return (
     <AbsoluteFill style={{ opacity: 1 - out }}>
-      <div style={{ position: "absolute", top, left: 40, right: 40, display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "baseline", gap: "10px 20px", transform: `scale(${1 - 0.1 * out}) translateY(${out * -26}px)` }}>
+      <div style={{ position: "absolute", top, left: 60, right: 140, display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "baseline", gap: "10px 20px", transform: `scale(${1 - 0.1 * out}) translateY(${out * -26}px)` }}>
         {words.map((w, i) => <RWordC key={i} w={w} />)}
       </div>
     </AbsoluteFill>

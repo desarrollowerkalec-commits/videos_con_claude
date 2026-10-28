@@ -6,6 +6,9 @@ import { C, TITLE, BODY, TRUEFATE, REMARK_SERIF } from "./theme";
 import { useT, prog, pop } from "./lib";
 import { NeuralBgV } from "./reel";
 
+/** Zona segura de Instagram (estilo.md): contenido entre x 60–940 (centro 500) e y ≤ 1500. */
+export const SAFE = { left: 60, right: 940, cx: 500, bottom: 1500 };
+
 const RED = "#FF5A5F";
 const glow = (c: string, r = 10) => `drop-shadow(0 0 ${r}px ${c})`;
 const dash = (t: number, at: number, dur: number, len: number) => len * (1 - prog(t, at, dur));
@@ -37,7 +40,7 @@ export const Kicker: React.FC<{ at: number; text: string; top?: number }> = ({ a
   const t = useT();
   const p = prog(t, at, 0.4);
   return (
-    <div style={{ position: "absolute", top, left: 0, right: 0, textAlign: "center", opacity: p, transform: `translateY(${(1 - p) * 16}px)` }}>
+    <div style={{ position: "absolute", top, left: 60, right: 140, textAlign: "center", opacity: p, transform: `translateY(${(1 - p) * 16}px)` }}>
       <span style={{ fontFamily: BODY, fontWeight: 600, fontSize: 30, letterSpacing: 5, color: C.angle, textShadow: `0 0 14px ${C.angle}88` }}>● {text}</span>
     </div>
   );
@@ -58,7 +61,7 @@ const KWord: React.FC<{ w: KW }> = ({ w }) => {
   );
 };
 export const Headline: React.FC<{ lines: KW[][]; top: number; gap?: number }> = ({ lines, top, gap = 10 }) => (
-  <div style={{ position: "absolute", top, left: 50, right: 50, display: "flex", flexDirection: "column", alignItems: "center", gap }}>
+  <div style={{ position: "absolute", top, left: 60, right: 140, display: "flex", flexDirection: "column", alignItems: "center", gap }}>
     {lines.map((ln, i) => (
       <div key={i} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "baseline", gap: "0 18px", textAlign: "center" }}>
         {ln.map((w, j) => <KWord key={j} w={w} />)}

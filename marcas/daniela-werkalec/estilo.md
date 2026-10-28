@@ -199,6 +199,8 @@ Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la c
 (la voz sigue). Le da ritmo y explica lo abstracto mejor que un b-roll de stock.
 
 - **Frecuencia:** ~1 cada 15–25 s → 3–5 en un reel de 1–2 min; 1–2 en uno de <45 s.
+- **Si el video ya trae motions propios:** mapear primero dónde están (hoja de fotogramas cada 2 s con tiempo) y
+  poner los gráficos a pantalla completa SOLO en los huecos sin gráficos propios (no taparlos).
 - **Dónde:** en frases conceptuales (algoritmos, preguntas, comparaciones, listas, "antes/después").
   NO en lo personal/emocional (ahí va la cara). Primeros 2 s siempre cara; un gancho visual corto (~2 s) justo después funciona.
 - **Duración:** 2–6 s (hasta ~10 s si es una lista que se va armando).
@@ -209,6 +211,9 @@ Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la c
 - **Subtítulos ocultos** mientras dura el gráfico (el gráfico ya lleva el texto).
 - **Tipos probados:** diagrama (nodo ALGORITMO → personas ✓/✗), dos celulares (uno ve / otro bloqueado),
   pregunta cinética con ícono line-art que se dibuja, checklist (tachado → ✓ ✓ ✓), burbujas de chat.
+  Reel "90 minutos" (noticias): celular que **gira de vertical a horizontal** con contador 0:15 → 90:00,
+  **embudo de 2 etapas** (cortos atraen / largos muestran), **plataforma A → B con pila de costos** que se apila,
+  y una **encuesta parcial** (SÍ / NO) en la pregunta final para empujar comentarios.
 - **Parcial (sin tapar la cara):** tarjeta abajo (y≈1275–1580), p. ej. una balanza que se equilibra.
 - **Código:** `marcas/daniela-werkalec/remotion/src/mg.tsx` (FullScreen, Kicker, Headline, PropertyCard, Person,
   Line + los ejemplos). Uso completo en `marcas/daniela-werkalec/remotion/ejemplos/video-congreso.tsx`.
@@ -221,13 +226,10 @@ En vez de una placa plana negra, cerrar con **motion graphics** sobre la **ofici
 - **Waveform** line-art (barras del color del ángulo, animadas) debajo.
 - **Nombre** en True Fate + credencial en DOS líneas:
   1. **"Corredora Inmobiliaria"** — Montserrat 800, color del ángulo.
-  2. Segunda credencial — ⚠️ **PENDIENTE DE CONFIRMAR CON DANIELA** (hay 3 versiones):
-     - 12/10 (spec anterior): **"+ Experta en Tecnología e IA para negocios"** (Montserrat 700, blanco, "+" en color del ángulo).
-     - 21/10 (propuesta de Daniela): "Experta en Marketing digital e inteligencia artificial".
-     - 21/10 (usada en el reel del Congreso, recomendación de Claude): "Marketing digital e inteligencia artificial", sin "Experta".
-     Hasta que confirme, preguntarle antes de renderizar la placa final.
-  Debajo, `@danielawerkalec` (en el Congreso se usó `www.danielawerkalec.com.ar`). Nada del evento en la placa final. No inventar otros taglines.
-- Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA), **arriba a la izquierda** (top 236, left 56) para que la interfaz de Instagram no la tape.
+  2. **"Marketing digital e inteligencia artificial"** — blanco, sin "Experta" (decidido el 28/10: Daniela pidió
+     la recomendación y la aceptó; reemplaza a "+ Experta en Tecnología e IA para negocios").
+  Debajo, `www.danielawerkalec.com.ar`. Nada del evento en la placa final. No inventar otros taglines.
+- Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA), **arriba a la izquierda** (top 262, left 56) para que la interfaz de Instagram no la tape.
 
 ## Pipeline
 
