@@ -45,7 +45,7 @@ MDI habla como un colega que sabe del tema y que enseña: no como un consultor c
 |---|---|
 | Reels: subtítulos | **Aktiv Grotesk Extended XBold** (base, blanca) + **Vujahday Script** (palabra clave en verde agua con glow) |
 | Portadas | **Lato Bold** en todo |
-| Web, presentaciones y documentos | **Lato**: Black/Bold en titulares, Regular en cuerpo. ⚠️ Pendiente: confirmar si la web de MDI usa una segunda familia |
+| Web, presentaciones y documentos | **Lato** (única familia): Black/Bold en titulares, Regular en cuerpo |
 
 - Titulares en **sentence case**. Las MAYÚSCULAS son recurso de énfasis (palabra clave en portadas, CTA en video), nunca párrafos enteros.
 - Signos de exclamación: como máximo uno por pieza.
@@ -104,6 +104,8 @@ El logo MDI (isotipo **W con ondas** + "Marketing Digital Inmobiliario") es el a
 
 Tomada del código de www.drea.com.ar (29/10/2026). Tono: el de MDI, pero más **ambicioso, profesional y orientado a la transformación** (es la oferta premium).
 
+**Certificación:** el programa está aprobado por dos universidades, pero por ahora **la comunicación usa SOLO "UNR · Facultad de Ingeniería"** (Universidad Nacional de Rosario). No mencionar otras universidades en web, redes ni piezas hasta nuevo aviso.
+
 | Rol | Hex | Uso |
 |---|---|---|
 | Verde esmeralda (primario) | #03C980 | Color de marca DREA: destacados, íconos, bordes |
@@ -117,7 +119,7 @@ Tomada del código de www.drea.com.ar (29/10/2026). Tono: el de MDI, pero más *
 - **Diferencia con MDI:** MDI es verde agua suave (#6AD5B7, cercano). DREA es esmeralda saturado + azul marino + dorado (premium). Son de la misma familia de verdes, así que se leen como parientes, pero no se mezclan en una misma pieza.
 - **Tipografía DREA:** **Space Grotesk** (titulares) + **DM Sans** (cuerpo).
   - ⚠️ En la web actual las fuentes **no se cargan**: están declaradas en el CSS, pero ni el HTML, ni el CSS, ni el JS las descargan, así que se ven en la fuente genérica del dispositivo. Arreglo en Lovable: cargar Space Grotesk (500/700) y DM Sans (400/500/700) desde Google Fonts en `index.html`.
-- ⚠️ **Inconsistencia en la web:** el título de la página dice "Certificación **UNR**" y la descripción para redes (og:description) dice "certificación **UAI**". Definir cuál es la correcta y unificar.
+- ⚠️ **Corregir en la web:** el título ya dice "Certificación UNR", pero la descripción para redes (og:description y twitter:description) todavía dice "certificación UAI". Cambiarla a UNR · Facultad de Ingeniería.
 
 ---
 
@@ -125,6 +127,6 @@ Tomada del código de www.drea.com.ar (29/10/2026). Tono: el de MDI, pero más *
 
 | Dato | Estado |
 |---|---|
-| Fuentes de la web de MDI (¿solo Lato o Lato + otra?) | a confirmar (el dominio marketingdigitalinmobiliario.com.ar no resolvió al revisarlo) |
-| Certificación de DREA: UNR o UAI | a confirmar y unificar en la web |
+| Web DREA: descripción para redes dice UAI | corregir a UNR · Facultad de Ingeniería |
+| Web DREA: fuentes que no cargan | cargar Space Grotesk y DM Sans desde Google Fonts |
 | Logo de DREA (archivo) | a incorporar a `editor-video-ia/assets/logos/` |
