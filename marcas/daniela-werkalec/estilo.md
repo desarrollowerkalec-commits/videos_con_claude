@@ -199,6 +199,8 @@ Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la c
 (la voz sigue). Le da ritmo y explica lo abstracto mejor que un b-roll de stock.
 
 - **Frecuencia:** ~1 cada 15–25 s → 3–5 en un reel de 1–2 min; 1–2 en uno de <45 s.
+- **Si el video ya trae transiciones propias** (p. ej. calabaza de Halloween): mapear los tiempos y dejar esas ventanas libres (sin subtítulos ni gráficos encima).
+- **Subtítulos con planos distintos** (cuerpo entero vs sentada): la altura va por plano (parada ≈ 650, sentada ≈ 880), siempre a la altura del pecho, no fija en 1180.
 - **Si el video ya trae motions propios:** mapear primero dónde están (hoja de fotogramas cada 2 s con tiempo) y
   poner los gráficos a pantalla completa SOLO en los huecos sin gráficos propios (no taparlos).
 - **Dónde:** en frases conceptuales (algoritmos, preguntas, comparaciones, listas, "antes/después").
