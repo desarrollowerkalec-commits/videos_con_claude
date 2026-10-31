@@ -4,7 +4,7 @@
 // transiciones y la placa de cierre. Zona segura de Instagram: x 60–940, y ≤ 1500.
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Img, staticFile } from "remotion";
-import { C, TITLE, BODY, TRUEFATE, REMARK_SANS, REMARK_SERIF } from "./theme";
+import { C, TITLE, BODY, SUBS, TRUEFATE, REMARK_SANS, REMARK_SERIF } from "./theme";
 import { DURATION } from "./words";
 import { Sfx, Sounds, useT, prog, pop } from "./lib";
 import { CAM_FULL, CamKeyV, CamV, SubsV, RemarkPhrase, RWord } from "./reel";
@@ -22,8 +22,9 @@ const KEYWORDS = ["brujería", "escoba", "agentes", "pócima", "hechizos", "magi
 // ventanas (s)
 const G_NIGHT: [number, number] = [2.2, 4.55];
 const R_ESCOBA: [number, number] = [6.5, 9.05];
-const G_AGENTES: [number, number] = [13.6, 19.25];
+const G_AGENTES: [number, number] = [14.0, 16.98]; // termina antes de que aparezca la pócima real (≈17.0 s)
 const PUMPKIN_2: [number, number] = [19.3, 20.3]; // transición de calabaza propia del video
+const R_HABLEMOS: [number, number] = [27.5, 29.8];
 
 const SFX: Sfx[] = [
   { at: G_NIGHT[0], f: "whoosh", v: 0.5 },
@@ -35,8 +36,9 @@ const SFX: Sfx[] = [
   { at: 14.24, f: "click", v: 0.35 },
   { at: 14.86, f: "click", v: 0.35 },
   { at: 16.32, f: "click", v: 0.35 },
-  { at: 17.76, f: "pop", v: 0.35 },
-  { at: 18.62, f: "boom", v: 0.3 },
+  { at: 27.56, f: "whoosh", v: 0.35 },
+  { at: 28.2, f: "pop", v: 0.35 },
+  { at: 28.78, f: "boom", v: 0.35 },
   { at: DURATION, f: "whoosh", v: 0.5 },
   { at: DURATION + 0.5, f: "ding", v: 0.6 },
 ];
@@ -46,6 +48,14 @@ const REMATE: RWord[] = [
   { t: "pero hoy la", at: 6.54, font: REMARK_SANS, size: 58, anim: "left" },
   { t: "escoba", at: 7.76, font: REMARK_SERIF, italic: true, size: 104, anim: "up" },
   { t: "ya fue", at: 8.04, big: true, font: TRUEFATE, size: 200, anim: "pop" },
+];
+
+// ---------- remate final: "hablemos de inteligencia artificial" (una tipografía blanca distinta por palabra + True Fate amarilla) ----------
+const REMATE_FINAL: RWord[] = [
+  { t: "hablemos", at: 27.56, font: TITLE, size: 96, anim: "left" },
+  { t: "de", at: 27.98, font: REMARK_SERIF, italic: true, size: 72, anim: "fade" },
+  { t: "inteligencia", at: 28.2, font: SUBS, size: 118, anim: "up" },
+  { t: "artificial", at: 28.78, big: true, font: TRUEFATE, size: 170, anim: "pop" },
 ];
 
 const Watermark: React.FC = () => (
@@ -115,7 +125,7 @@ const MgNoche: React.FC = () => {
   );
 };
 
-// ================= 2 · Agentes de IA: responden, califican, hacen seguimiento — sin una gota de pócima (13.6–19.25) =================
+// ================= 2 · Agentes de IA: responden, califican, hacen seguimiento (14.0–16.98). La pócima real del video queda libre =================
 const TAREAS = [
   { at: 14.24, t: "Responden" },
   { at: 14.86, t: "Califican clientes" },
@@ -124,17 +134,14 @@ const TAREAS = [
 const MgAgentes: React.FC = () => {
   const t = useT();
   const ck = 40;
-  const fl = pop(t, 17.76, 0.5);
-  const x = prog(t, 18.62, 0.3);
-  const strike = prog(t, 18.95, 0.25);
   return (
     <>
-      <Kicker at={13.65} text="AGENTES DE INTELIGENCIA ARTIFICIAL" top={290} />
+      <Kicker at={14.05} text="AGENTES DE INTELIGENCIA ARTIFICIAL" top={360} />
       {TAREAS.map((r, i) => {
         if (t < r.at - 0.05) return null;
         const p = prog(t, r.at, 0.4);
         return (
-          <div key={i} style={{ position: "absolute", top: 400 + i * 165, left: 80, right: 140, opacity: p, transform: `translateX(${(1 - p) * -60}px)` }}>
+          <div key={i} style={{ position: "absolute", top: 520 + i * 185, left: 80, right: 140, opacity: p, transform: `translateX(${(1 - p) * -60}px)` }}>
             <div style={{ ...glassCard, display: "flex", alignItems: "center", gap: 26, padding: "24px 34px" }}>
               <svg width="62" height="62" viewBox="0 0 24 24" style={{ flexShrink: 0, filter: `drop-shadow(0 0 6px ${C.angle})` }}>
                 <circle cx="12" cy="12" r="10.5" fill="none" stroke={C.angle} strokeWidth="1.8" />
@@ -145,21 +152,6 @@ const MgAgentes: React.FC = () => {
           </div>
         );
       })}
-      {/* la pócima (frasco line-art) se tacha */}
-      <div style={{ position: "absolute", left: 500 - 95, top: 925, width: 190, height: 190, transform: `scale(${fl})` }}>
-        <svg width="190" height="190" viewBox="0 0 24 24" style={{ filter: `drop-shadow(0 0 10px ${x > 0 ? RED : C.angle})` }}>
-          <path d="M9.5 3h5M10 3v5.2L5 17.2A2.6 2.6 0 0 0 7.3 21h9.4a2.6 2.6 0 0 0 2.3-3.8L14 8.2V3" fill="none" stroke={x > 0 ? RED : C.angle} strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round" />
-          <path d="M7.2 15.5h9.6" stroke={x > 0 ? RED : C.angle} strokeWidth="1.1" strokeDasharray="1.6 1.6" />
-        </svg>
-        {x > 0 && (
-          <svg width="190" height="190" viewBox="0 0 24 24" style={{ position: "absolute", left: 0, top: 0, transform: `scale(${pop(t, 18.62, 0.35)})` }}>
-            <path d="M3.5 3.5L20.5 20.5M20.5 3.5L3.5 20.5" stroke={RED} strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-        )}
-      </div>
-      <Headline top={1160} lines={[[{ t: "sin una gota de", at: 17.76, size: 56 }], [{ t: "pócima", at: 18.62, font: TRUEFATE, size: 130, color: C.yellow, big: true }]]} />
-      {/* tachado sobre "pócima" */}
-      <div style={{ position: "absolute", top: 1275, left: 500 - 190, width: 380 * strike, height: 8, borderRadius: 4, background: RED, boxShadow: `0 0 14px ${RED}` }} />
     </>
   );
 };
@@ -206,13 +198,12 @@ const EndCard: React.FC = () => {
       {/* nombre + credencial */}
       <div style={{ position: "absolute", top: 990, left: 50, right: 50, textAlign: "center", opacity: txOp, transform: `translateY(${(1 - txOp) * 20}px)` }}>
         <div style={{ fontFamily: TRUEFATE, fontSize: 96, color: C.text, lineHeight: 1, textShadow: "0 3px 14px rgba(0,0,0,.6)" }}>Daniela Werkalec</div>
-        <div style={{ marginTop: 18, fontFamily: TITLE, fontWeight: 800, fontSize: 46, color: C.angle, letterSpacing: 1 }}>Corredora inmobiliaria</div>
+        <div style={{ marginTop: 20, fontFamily: TITLE, fontWeight: 800, fontSize: 37, color: C.angle, letterSpacing: 0.5 }}>Marketing digital e inteligencia artificial</div>
       </div>
-      {/* segunda credencial + web (sin datos del congreso) */}
-      <div style={{ position: "absolute", top: 1200, left: 60, right: 60, display: "flex", flexDirection: "column", alignItems: "center", gap: 30, opacity: evOp, transform: `translateY(${(1 - evOp) * 20}px)` }}>
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.text, textAlign: "center", lineHeight: 1.25, textShadow: "0 2px 10px rgba(0,0,0,.7)" }}>Marketing digital e inteligencia artificial</div>
+      {/* web (sin "Corredora inmobiliaria" en este reel, pedido de Daniela) */}
+      <div style={{ position: "absolute", top: 1170, left: 60, right: 60, display: "flex", flexDirection: "column", alignItems: "center", gap: 26, opacity: evOp, transform: `translateY(${(1 - evOp) * 20}px)` }}>
         <div style={{ width: 120, height: 3, borderRadius: 2, background: C.angle, boxShadow: `0 0 12px ${C.angle}` }} />
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 32, color: "rgba(255,255,255,.85)", letterSpacing: 1.5 }}>www.danielawerkalec.com.ar</div>
+        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 34, color: "rgba(255,255,255,.9)", letterSpacing: 1.5 }}>www.danielawerkalec.com.ar</div>
       </div>
     </AbsoluteFill>
   );
@@ -221,8 +212,9 @@ const EndCard: React.FC = () => {
 export const Main: React.FC = () => (
   <AbsoluteFill style={{ background: C.bg }}>
     <CamV keys={CAM} until={DURATION} />
-    <SubsV keywords={KEYWORDS} hide={[G_NIGHT, R_ESCOBA, G_AGENTES, PUMPKIN_2, [DURATION - 0.1, 999]]} yAt={subsAt} />
+    <SubsV keywords={KEYWORDS} hide={[G_NIGHT, R_ESCOBA, G_AGENTES, PUMPKIN_2, R_HABLEMOS, [DURATION - 0.1, 999]]} yAt={subsAt} />
     <RemarkPhrase words={REMATE} to={9.0} top={760} />
+    <RemarkPhrase words={REMATE_FINAL} to={29.72} top={690} />
     <FullScreen from={G_NIGHT[0]} to={G_NIGHT[1]}><MgNoche /></FullScreen>
     <FullScreen from={G_AGENTES[0]} to={G_AGENTES[1]}><MgAgentes /></FullScreen>
     <Watermark />

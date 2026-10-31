@@ -199,6 +199,8 @@ Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la c
 (la voz sigue). Le da ritmo y explica lo abstracto mejor que un b-roll de stock.
 
 - **Frecuencia:** ~1 cada 15–25 s → 3–5 en un reel de 1–2 min; 1–2 en uno de <45 s.
+- **No tapar lo que Daniela quiere mostrar:** si en el video hay un objeto o gesto protagonista (p. ej. la pócima en la mano), el gráfico a pantalla completa termina ANTES de que aparezca. Revisar fotogramas cada 0.3 s en el tramo antes de fijar la ventana.
+- **Cierre del reel (frase final / CTA hablado):** se destaca con el remate en cascada: una tipografía BLANCA distinta por palabra (sans bold, serif itálica, Playfair…) y la palabra clave en True Fate amarilla con glow. Ej.: "hablemos de inteligencia **artificial**".
 - **Si el video ya trae transiciones propias** (p. ej. calabaza de Halloween): mapear los tiempos y dejar esas ventanas libres (sin subtítulos ni gráficos encima).
 - **Subtítulos con planos distintos** (cuerpo entero vs sentada): la altura va por plano (parada ≈ 650, sentada ≈ 880), siempre a la altura del pecho, no fija en 1180.
 - **Si el video ya trae motions propios:** mapear primero dónde están (hoja de fotogramas cada 2 s con tiempo) y
@@ -230,7 +232,7 @@ En vez de una placa plana negra, cerrar con **motion graphics** sobre la **ofici
   1. **"Corredora Inmobiliaria"** — Montserrat 800, color del ángulo.
   2. **"Marketing digital e inteligencia artificial"** — blanco, sin "Experta" (decidido el 28/10: Daniela pidió
      la recomendación y la aceptó; reemplaza a "+ Experta en Tecnología e IA para negocios").
-  Debajo, `www.danielawerkalec.com.ar`. Nada del evento en la placa final. No inventar otros taglines.
+  Debajo, `www.danielawerkalec.com.ar`. Nada del evento en la placa final. No inventar otros taglines. **Excepción por reel:** si Daniela pide "sin Corredora inmobiliaria" (p. ej. reel Halloween de IA/marketing), la credencial pasa a una sola línea en color del ángulo: "Marketing digital e inteligencia artificial".
 - Marca de agua **"✦ generado con IA"** (persistente en los reels con avatar IA), **arriba a la izquierda** (top 262, left 56) para que la interfaz de Instagram no la tape.
 
 ## Pipeline
