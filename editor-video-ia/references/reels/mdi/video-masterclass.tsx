@@ -1,5 +1,5 @@
 // Reel MDI — "Masterclass online gratuita: El Sistema Inmobiliario 2026 en 60 días" (Clara, avatar IA).
-// Martes 10 de noviembre, 19 hs. Daniela Werkalec da la masterclass.
+// Martes 10 de noviembre, 18 hs. Daniela Werkalec da la masterclass.
 // Lenguaje visual MDI (ver marcas/marketing-digital-inmobiliario/estilo.md): subtítulos palabra por palabra a la
 // izquierda (Aktiv Grotesk Ex + Vujahday Script verde agua con glow), b-roll en tarjetas inclinadas con borde verde agua,
 // PiP abajo, captura blanca sobre el pecho, títulos con eco script. SIN paneles oscuros line-art (eso es de Daniela).
@@ -33,7 +33,7 @@ const CAPS: Cap[] = [
   { from: 8.64, to: 9.7, text: "*conectado.*" },
   { from: 9.72, to: 11.1, text: "Soy *Clara,*|directora" },
   { from: 11.12, to: 12.2, text: "de *MDI,*" },
-  { from: 12.26, to: 14.3, text: "*10 de noviembre*|a las *19 hs*", caps: true },
+  { from: 12.26, to: 14.3, text: "*10 de noviembre*|a las *18 hs*", caps: true },
   { from: 14.32, to: 15.06, text: "*Daniela Werkalec*" },
   { from: 15.08, to: 16.26, text: "va a dar una|*masterclass*" },
   { from: 16.28, to: 17.34, text: "*online gratuita*" },
@@ -174,7 +174,7 @@ const Invite: React.FC = () => {
         <div style={{ fontFamily: MONT, fontWeight: 900, fontSize: 34, color: ink, opacity: prog(t, 11.0, 0.3) }}>Masterclass online gratuita</div>
         <div style={{ fontFamily: MONT, fontWeight: 600, fontSize: 22, color: "#0b7a5f", marginBottom: 8, opacity: prog(t, 11.3, 0.3) }}>El Sistema Inmobiliario 2026 en 60 días</div>
         {row(12.28, "Cuándo", <>10 de noviembre</>)}
-        {row(13.5, "Hora", <>19 hs</>)}
+        {row(13.5, "Hora", <>18 hs</>)}
         {row(14.32, "Con", <>Daniela Werkalec</>)}
       </div>
     </div>
@@ -413,7 +413,7 @@ const EndPlate: React.FC = () => {
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 1130, textAlign: "center" }}>
         <In at={s + 0.5}><div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 48, color: W }}>@mktdginmobiliario</div></In>
-        <In at={s + 0.8}><div style={{ fontFamily: SCRIPT, fontSize: 84, color: TL, textShadow: neon(0.5), marginTop: 24 }}>10 de noviembre · 19 hs</div></In>
+        <In at={s + 0.8}><div style={{ fontFamily: SCRIPT, fontSize: 84, color: TL, textShadow: neon(0.5), marginTop: 24 }}>10 de noviembre · 18 hs</div></In>
         <In at={s + 1.0}><div style={{ fontFamily: MONT, fontWeight: 800, fontSize: 30, color: W, letterSpacing: 4, marginTop: 6 }}>MASTERCLASS ONLINE GRATUITA</div></In>
       </div>
     </AbsoluteFill>
@@ -466,7 +466,7 @@ export const Main: React.FC = () => {
       <ShotCard from={INVITE[0]} to={INVITE[1]} top={880} width={780}><Invite /></ShotCard>
       <BigTitle from={14.3} to={INVITE[1]} text="MASTERCLASS" echo="online gratuita" />
       <ShotCard from={56.4} to={SRC_DUR} top={900} width={780}><WaShot /></ShotCard>
-      <BigTitle from={52.94} to={SRC_DUR} text="10 DE NOVIEMBRE" echo="19 hs" />
+      <BigTitle from={52.94} to={SRC_DUR} text="10 DE NOVIEMBRE" echo="18 hs" />
       {/* cortes a b-roll de pantalla completa */}
       <TiltCard from={FULL.dias[0]} to={FULL.dias[1]}><ScrDias /></TiltCard>
       <TiltCard from={FULL.mapa[0]} to={FULL.mapa[1]} swing={-1}><ScrMapa /></TiltCard>
