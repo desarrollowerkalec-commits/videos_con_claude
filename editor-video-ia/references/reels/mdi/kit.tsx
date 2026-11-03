@@ -171,7 +171,7 @@ export const ShotCard: React.FC<{ from: number; to: number; top?: number; width?
 };
 
 // ---------- título grande en caps + eco script contorneado (arriba, con velo oscuro) ----------
-export const BigTitle: React.FC<{ from: number; to: number; text: string; echo?: string }> = ({ from, to, text, echo }) => {
+export const BigTitle: React.FC<{ from: number; to: number; text: string; echo?: string; size?: number }> = ({ from, to, text, echo, size }) => {
   const t = useT();
   const o = win(t, from, to, 0.3, 0.3);
   if (o <= 0) return null;
@@ -180,7 +180,7 @@ export const BigTitle: React.FC<{ from: number; to: number; text: string; echo?:
     <div style={{ position: "absolute", inset: 0, opacity: o, pointerEvents: "none" }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 620, background: "linear-gradient(180deg, rgba(2,8,9,0.85), rgba(2,8,9,0.45) 55%, transparent)" }} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 110, textAlign: "center" }}>
-        <div style={{ fontFamily: SUB, fontWeight: 900, fontSize: 92, color: W, letterSpacing: -1, lineHeight: 1, textShadow: SOFT }}>
+        <div style={{ fontFamily: SUB, fontWeight: 900, fontSize: size ?? (text.length > 12 ? 74 : 92), color: W, letterSpacing: -1, lineHeight: 1, textShadow: SOFT }}>
           {letters.map((ch, i) => {
             const a = from + 0.03 * ((i * 7) % letters.length);
             const flick = t < a + 0.25 ? (Math.floor(t * 30 + i) % 3 === 0 ? 0.2 : 1) : 1;

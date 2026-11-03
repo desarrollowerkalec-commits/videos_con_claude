@@ -83,6 +83,18 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   de 150 px: no sirve para video.
 - Subtítulos del reel = Aktiv Grotesk Ex + Vujahday Script; **portada = Lato**. No mezclar.
 
+## Si el video de origen trae subtítulos quemados o transcripción dudosa
+
+- **Subtítulos quemados** (p. ej. HeyGen, abajo y con errores como "estarecado"): pedir SIEMPRE la versión sin subtítulos.
+  Si no hay, taparlos con un **degradé a negro verdoso** desde y≈1300 hasta abajo (`HideBurned` en
+  `references/reels/mdi/video-masterclass.tsx`: ≈0,9 de opacidad a y≈1540–1620). El difuminado solo se nota como mancha.
+- **Datos que salen escritos en pantalla** (fecha, hora, nombres, título del evento): si Whisper los entiende mal
+  ("a Sargentina", "Huercalek"), NO adivinar: preguntarle a Daniela antes de renderizar. Corregir en `words.json`
+  repartiendo los tiempos de las palabras reemplazadas.
+- **Promo de evento:** ShotCard blanca con Cuándo / Hora / Con (solo lo que dice el audio) + BigTitle "MASTERCLASS / online gratuita"
+  + placa final con logo MDI, fecha en script y "MASTERCLASS ONLINE GRATUITA". Código: `references/reels/mdi/video-masterclass.tsx`.
+- **Portada:** cara arriba (plano más abierto que el primer plano) y texto sobre el torso, como `referencia/portada_ej1.jpg`.
+
 ## Portada (DEFINIDA — ejemplos de Daniela en `referencia/portada_ej1.jpg`, `portada_ej2.jpg`)
 
 **Distinta a la de DW** (no hereda la portada centrada con Anton/BREATHING). Plantilla lista:
