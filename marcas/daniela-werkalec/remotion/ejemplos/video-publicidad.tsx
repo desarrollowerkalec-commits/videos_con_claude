@@ -23,23 +23,21 @@ const subsAt = (t: number) => {
 const KEYWORDS = ["prompts", "publicidad", "chatgpt", "storyboard", "cinematográfico", "google", "flow", "profesional", "equipo"];
 
 // ventanas (s)
-const G1: [number, number] = [18.35, 23.5];
 const G2: [number, number] = [26.2, 31.35];
 const GRID: [number, number] = [31.4, 37.2]; // grilla de storyboard del propio video
-const G3: [number, number] = [37.35, 44.95];
+const G3: [number, number] = [38.45, 41.1];
 const R_RES: [number, number] = [46.4, 49.5];
-const G4: [number, number] = [50.05, 56.95];
+const G4: [number, number] = [50.05, 53.95];
 const CTA: [number, number] = [57.25, 59.6];
 const HOOK: [number, number] = [0.0, 5.15];
 const FLASH: [number, number] = [17.5, 18.3];
 
 const SFX: Sfx[] = [
   { at: 0.0, f: "whoosh", v: 0.35 }, { at: 1.9, f: "pop", v: 0.35 }, { at: 3.84, f: "pop", v: 0.3 },
-  { at: G1[0], f: "whoosh", v: 0.45 }, { at: 19.3, f: "pop", v: 0.3 }, { at: 21.0, f: "click", v: 0.3 }, { at: 22.55, f: "click", v: 0.3 },
   { at: G2[0], f: "whoosh", v: 0.45 }, { at: 27.48, f: "pop", v: 0.35 }, { at: 29.78, f: "click", v: 0.3 },
-  { at: G3[0], f: "whoosh", v: 0.45 }, { at: 38.82, f: "pop", v: 0.3 }, { at: 42.0, f: "pop", v: 0.35 },
+  { at: G3[0], f: "whoosh", v: 0.45 }, { at: 39.0, f: "pop", v: 0.3 },
   { at: 47.62, f: "boom", v: 0.35 },
-  { at: G4[0], f: "whoosh", v: 0.45 }, { at: 51.06, f: "click", v: 0.3 }, { at: 52.18, f: "click", v: 0.3 }, { at: 53.36, f: "click", v: 0.3 }, { at: 56.4, f: "boom", v: 0.3 },
+  { at: G4[0], f: "whoosh", v: 0.45 }, { at: 51.06, f: "click", v: 0.3 }, { at: 52.18, f: "click", v: 0.3 }, { at: 53.36, f: "click", v: 0.3 },
   { at: CTA[0], f: "pop", v: 0.4 },
   { at: DURATION, f: "whoosh", v: 0.5 }, { at: DURATION + 0.5, f: "ding", v: 0.6 },
 ];
@@ -92,40 +90,6 @@ const Ico: React.FC<{ kind: "chat" | "persona" | "bolso" | "flow" | "foto" | "to
   </svg>
 );
 
-// ================= 1 · PASO 1 — ChatGPT: subís 2 fotos (18.35–23.5) =================
-const MgPaso1: React.FC = () => {
-  const t = useT();
-  const pill = pop(t, 19.3, 0.5);
-  const tile = (at: number, x: number, kind: "persona" | "bolso", label: string) => {
-    const p = pop(t, at, 0.5);
-    const up = prog(t, at + 0.1, 0.5);
-    return (
-      <div style={{ position: "absolute", left: x, top: 660, width: 410, height: 360, transform: `scale(${p})`, ...glassCard, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 22 }}>
-        <div style={{ transform: `translateY(${(1 - up) * -26}px)`, opacity: up }}><Ico kind={kind} size={150} /></div>
-        <div style={{ fontFamily: TITLE, fontWeight: 900, fontSize: 40, color: C.text, letterSpacing: 1 }}>{label}</div>
-        <div style={{ position: "absolute", right: 18, top: 16, width: 44, height: 44, borderRadius: 22, background: C.angle, display: "flex", alignItems: "center", justifyContent: "center", opacity: up }}>
-          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#0B0A10" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </div>
-      </div>
-    );
-  };
-  return (
-    <>
-      <Kicker at={18.4} text="PASO 1 · CHATGPT" top={330} />
-      <div style={{ position: "absolute", top: 430, left: 60, right: 140, display: "flex", justifyContent: "center" }}>
-        <div style={{ transform: `scale(${pill})`, display: "flex", alignItems: "center", gap: 20, padding: "20px 44px", borderRadius: 60, background: C.angle, color: "#0B0A10" }}>
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0B0A10" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-7l-5 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" /><path d="M7 10.5h10M7 13.5h6" /></svg>
-          <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: 64 }}>ChatGPT</span>
-        </div>
-      </div>
-      {tile(20.9, 60, "persona", "UNA PERSONA")}
-      {tile(22.5, 530, "bolso", "UN PRODUCTO")}
-      <div style={{ position: "absolute", left: 470, top: 790, width: 60, textAlign: "center", fontFamily: TITLE, fontWeight: 900, fontSize: 64, color: C.angle, opacity: prog(t, 22.4, 0.3) }}>+</div>
-      <Headline top={1120} lines={[[{ t: "subís", at: 20.54, size: 60 }, { t: "las 2 fotos", at: 20.88, size: 60 }], [{ t: "persona + producto", at: 21.42, font: TRUEFATE, size: 86, color: C.yellow, big: true }]]} />
-    </>
-  );
-};
-
 // ================= 2 · Storyboard: 1 imagen por cada segundo (26.2–31.35) =================
 const MgStoryboard: React.FC = () => {
   const t = useT();
@@ -158,16 +122,15 @@ const MgStoryboard: React.FC = () => {
   );
 };
 
-// ================= 3 · PASO 2 — Google Flow (37.35–44.95) =================
+// ================= 3 · PASO 2 — Google Flow (38.45–41.1, corto: el resto se ve en el video) =================
 const MgPaso2: React.FC = () => {
   const t = useT();
-  const a = pop(t, 37.7, 0.5);
-  const arrow = prog(t, 38.4, 0.5);
-  const b = pop(t, 38.82, 0.5);
-  const scan = interpolate(t, [43.66, 44.9], [0, 9.99], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const a = pop(t, 38.55, 0.5);
+  const arrow = prog(t, 38.8, 0.4);
+  const b = pop(t, 39.0, 0.5);
   return (
     <>
-      <Kicker at={37.4} text="PASO 2 · GOOGLE FLOW" top={330} />
+      <Kicker at={38.5} text="PASO 2 · GOOGLE FLOW" top={330} />
       <div style={{ position: "absolute", left: 70, top: 440, width: 330, height: 330, transform: `scale(${a})`, ...glassCard, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, padding: 22 }}>
         {Array.from({ length: 9 }).map((_, i) => <div key={i} style={{ borderRadius: 8, background: `${C.angle}${i % 2 ? "55" : "99"}` }} />)}
       </div>
@@ -179,14 +142,6 @@ const MgPaso2: React.FC = () => {
         <Ico kind="flow" size={130} />
         <div style={{ fontFamily: TITLE, fontWeight: 900, fontSize: 48, color: C.text }}>Google Flow</div>
       </div>
-      <Headline top={850} gap={6} lines={[[{ t: "le pedís que la transforme", at: 40.44, size: 50 }], [{ t: "publicidad", at: 42.0, font: TRUEFATE, size: 128, color: C.yellow, big: true }], [{ t: "cinematográfica", at: 42.52, size: 66 }]]} />
-      <div style={{ position: "absolute", left: 60, top: 1270, width: 880, display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gap: 8, opacity: prog(t, 43.5, 0.3) }}>
-        {Array.from({ length: 10 }).map((_, i) => {
-          const on = Math.floor(scan) === i;
-          return <div key={i} style={{ height: 74, borderRadius: 8, background: on ? C.angle : `${C.angle}44`, boxShadow: on ? `0 0 22px ${C.angle}` : "none", transform: `scale(${on ? 1.12 : 1})` }} />;
-        })}
-      </div>
-      <div style={{ position: "absolute", left: 60, right: 140, top: 1370, textAlign: "center", fontFamily: BODY, fontWeight: 600, fontSize: 34, color: "rgba(255,255,255,.9)", opacity: prog(t, 43.66, 0.3) }}>siguiendo esa secuencia</div>
     </>
   );
 };
@@ -199,7 +154,6 @@ const MgDos: React.FC = () => {
     { at: 52.02, label: "HERRAMIENTAS", kind: "tools" },
     { at: 53.18, label: "PROMPTS", kind: "prompt" },
   ];
-  const strike = prog(t, 56.4, 0.25);
   return (
     <>
       <Kicker at={50.1} text="PARTIENDO DE SOLAMENTE" top={330} />
@@ -213,14 +167,6 @@ const MgDos: React.FC = () => {
           </div>
         );
       })}
-      <div style={{ position: "absolute", left: 60, right: 140, top: 1110, display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: prog(t, 54.4, 0.4) }}>
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: "rgba(255,255,255,.9)" }}>una producción que antes necesitaba</div>
-        <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 22, opacity: prog(t, 55.98, 0.3) }}>
-          <Ico kind="equipo" size={120} color={strike > 0 ? RED : C.angle} />
-          <span style={{ fontFamily: TRUEFATE, fontSize: 104, color: C.text, textShadow: "0 3px 12px rgba(0,0,0,.6)" }}>todo un equipo</span>
-          <div style={{ position: "absolute", left: 0, top: "52%", height: 8, width: `${strike * 100}%`, borderRadius: 4, background: RED, boxShadow: `0 0 14px ${RED}` }} />
-        </div>
-      </div>
     </>
   );
 };
@@ -286,13 +232,12 @@ const EndCard: React.FC = () => {
       {/* nombre + credencial */}
       <div style={{ position: "absolute", top: 990, left: 50, right: 50, textAlign: "center", opacity: txOp, transform: `translateY(${(1 - txOp) * 20}px)` }}>
         <div style={{ fontFamily: TRUEFATE, fontSize: 96, color: C.text, lineHeight: 1, textShadow: "0 3px 14px rgba(0,0,0,.6)" }}>Daniela Werkalec</div>
-        <div style={{ marginTop: 18, fontFamily: TITLE, fontWeight: 800, fontSize: 46, color: C.angle, letterSpacing: 1 }}>Corredora inmobiliaria</div>
+        <div style={{ marginTop: 20, fontFamily: TITLE, fontWeight: 800, fontSize: 37, color: C.angle, letterSpacing: 0.5 }}>Marketing digital e inteligencia artificial</div>
       </div>
-      {/* segunda credencial + web (sin datos del congreso) */}
-      <div style={{ position: "absolute", top: 1200, left: 60, right: 60, display: "flex", flexDirection: "column", alignItems: "center", gap: 30, opacity: evOp, transform: `translateY(${(1 - evOp) * 20}px)` }}>
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.text, textAlign: "center", lineHeight: 1.25, textShadow: "0 2px 10px rgba(0,0,0,.7)" }}>Marketing digital e inteligencia artificial</div>
+      {/* web (sin "Corredora inmobiliaria", pedido de Daniela) */}
+      <div style={{ position: "absolute", top: 1170, left: 60, right: 60, display: "flex", flexDirection: "column", alignItems: "center", gap: 26, opacity: evOp, transform: `translateY(${(1 - evOp) * 20}px)` }}>
         <div style={{ width: 120, height: 3, borderRadius: 2, background: C.angle, boxShadow: `0 0 12px ${C.angle}` }} />
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 32, color: "rgba(255,255,255,.85)", letterSpacing: 1.5 }}>www.danielawerkalec.com.ar</div>
+        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 34, color: "rgba(255,255,255,.9)", letterSpacing: 1.5 }}>www.danielawerkalec.com.ar</div>
       </div>
     </AbsoluteFill>
   );
@@ -301,13 +246,12 @@ const EndCard: React.FC = () => {
 export const Main: React.FC = () => (
   <AbsoluteFill style={{ background: C.bg }}>
     <CamV keys={CAM} until={DURATION} />
-    <SubsV keywords={KEYWORDS} hide={[HOOK, [5.15, 15.7], FLASH, G1, G2, GRID, G3, R_RES, G4, CTA, [DURATION - 0.1, 999]]} yAt={subsAt} />
-    <RemarkPhrase words={REMATE_HOOK} to={5.0} top={730} />
+    <SubsV keywords={KEYWORDS} hide={[HOOK, [5.15, 15.7], FLASH, G2, GRID, G3, R_RES, G4, CTA, [DURATION - 0.1, 999]]} yAt={subsAt} />
+    <RemarkPhrase words={REMATE_HOOK} to={5.0} top={980} />
     <RemarkPhrase words={REMATE_RES} to={49.3} top={760} />
-    <FullScreen from={G1[0]} to={G1[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(130px)" }}><MgPaso1 /></div></FullScreen>
-    <FullScreen from={G2[0]} to={G2[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(120px)" }}><MgStoryboard /></div></FullScreen>
-    <FullScreen from={G3[0]} to={G3[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(70px)" }}><MgPaso2 /></div></FullScreen>
-    <FullScreen from={G4[0]} to={G4[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(110px)" }}><MgDos /></div></FullScreen>
+        <FullScreen from={G2[0]} to={G2[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(120px)" }}><MgStoryboard /></div></FullScreen>
+    <FullScreen from={G3[0]} to={G3[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(300px)" }}><MgPaso2 /></div></FullScreen>
+    <FullScreen from={G4[0]} to={G4[1]}><div style={{ position: "absolute", inset: 0, transform: "translateY(200px)" }}><MgDos /></div></FullScreen>
     <CtaCard />
     <Watermark />
     <EndCard />
