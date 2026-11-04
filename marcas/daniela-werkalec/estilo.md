@@ -199,6 +199,7 @@ Aprobado por Daniela en el reel del Congreso. **Cada tanto un gráfico tapa la c
 (la voz sigue). Le da ritmo y explica lo abstracto mejor que un b-roll de stock.
 
 - **Frecuencia:** ~1 cada 15–25 s → 3–5 en un reel de 1–2 min; 1–2 en uno de <45 s.
+- **Ángulo prompts/guías (amarillo):** los gráficos a pantalla completa siguen los PASOS (kicker `● PASO 1 · HERRAMIENTA`) con tarjetas de acción y la palabra clave en True Fate amarilla. Contenido centrado verticalmente dentro de la zona segura (bajarlo ~70–130 px: arriba pesa de más). El CTA "Comentá PALABRA" va como tarjeta PARCIAL sobre el pecho, no a pantalla completa. Ícono de portada: globo de diálogo con 3 puntos (SVG, color del ángulo).
 - **No tapar lo que Daniela quiere mostrar:** si en el video hay un objeto o gesto protagonista (p. ej. la pócima en la mano), el gráfico a pantalla completa termina ANTES de que aparezca. Revisar fotogramas cada 0.3 s en el tramo antes de fijar la ventana.
 - **Cierre del reel (frase final / CTA hablado):** se destaca con el remate en cascada: una tipografía BLANCA distinta por palabra (sans bold, serif itálica, Playfair…) y la palabra clave en True Fate amarilla con glow. Ej.: "hablemos de inteligencia **artificial**".
 - **Si el video ya trae transiciones propias** (p. ej. calabaza de Halloween): mapear los tiempos y dejar esas ventanas libres (sin subtítulos ni gráficos encima).

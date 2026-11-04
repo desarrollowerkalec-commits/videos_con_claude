@@ -19,6 +19,7 @@ mkdir -p $R/public/fonts && cp editor-video-ia/assets/fonts/{NeatoSerif-Regular.
 | `ejemplos/video-congreso.tsx` | reel completo: remates, tarjetas, 5 gráficos a pantalla completa, balanza, placa final con oficina |
 | `ejemplos/video-saludo.tsx` | reel corto: subtítulos + marca de agua IA + placa final |
 | `ejemplos/video-halloween.tsx` | reel de opinión (fucsia) sobre un video con **transiciones propias** (calabaza): gráficos que las esquivan, chat de WhatsApp nocturno, checklist con ítem tachado, subtítulos que cambian de altura según el plano |
+| `ejemplos/video-publicidad.tsx` | tutorial de prompts (amarillo): pasos ChatGPT → Google Flow, storyboard de 10 celdas, "2 · 2 · 2", CTA parcial "Comentá STORYBOARD", remate de apertura en cascada |
 | `ejemplos/video-noventa.tsx` | reel de noticias (rojo) sobre un video que YA trae motions y música: gráficos solo en los huecos, encuesta final |
 
 **Zona segura:** todo el texto va entre x 60–940 (centro 500) e y ≤ 1500. `SubsV`, `RemarkPhrase`, `Kicker` y `Headline` ya la respetan; `SAFE` en `mg.tsx`.
