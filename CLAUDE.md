@@ -53,6 +53,11 @@ editar `remotion/src/video.tsx` con el estilo (incluye **gráficos a pantalla co
 - **HuggingFace / fuentes**: si da 403, es la política de red del entorno (no un bug). Se arregla en
   la config del entorno con sesión nueva; dominios: `*.hf.co`, `huggingface.co`, `fonts.g*`.
 
+## Reglas de oro de posición (Daniela, siempre)
+
+- **Subtítulos y remates a la altura del PECHO/busto de la persona, no del cuello**: medir por plano con regla en fotogramas (cuerpo entero ≈ y 900, medio ≈ 1000, primer plano ≈ 1050–1100). Detalle en estilo.md → Subtítulos.
+- **Nunca tapar texto quemado del video con degradé oscuro/blur** ("zona negra esfumada"): se deja a la vista y no se duplica con remates propios.
+
 ## Música (automática)
 
 `render.sh` ya mete la pista de marca **Forward Momentum** (`editor-video-ia/assets/music/forward-momentum.mp3`)

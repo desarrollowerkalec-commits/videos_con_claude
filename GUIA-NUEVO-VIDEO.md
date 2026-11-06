@@ -48,7 +48,7 @@ Escribí algo así (podés copiar y pegar):
 ### 4. Lo que Claude va a hacer (y dónde opinás vos)
 1. **Transcribe** el audio (texto real, con tiempos).
 2. **Propone los cortes** en una tabla → vos aprobás o ajustás.
-3. **Edita** con tu estilo (subtítulos al pecho, remate en cascada, color del ángulo).
+3. **Edita** con tu estilo (subtítulos al PECHO, no al cuello, remate en cascada, color del ángulo).
 4. **Música** automática (Forward Momentum, ya puesta).
 5. **Fotogramas** para revisar antes de renderizar → vos aprobás.
 6. **Render** del MP4 final + **portada** del reel.

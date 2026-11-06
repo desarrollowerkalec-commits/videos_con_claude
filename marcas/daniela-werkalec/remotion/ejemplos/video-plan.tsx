@@ -14,7 +14,7 @@ export const CTA_SECONDS = 3.4;
 const CAM: CamKeyV[] = [{ at: 0, box: CAM_FULL, zoom: 1.0, fy: 40 }];
 
 // Subtítulos a la altura del pecho según el plano
-const SUBS_Y: [number, number][] = [[0, 650], [25.86, 780], [33.6, 650], [41.2, 720], [55.9, 860], [58.0, 980]];
+const SUBS_Y: [number, number][] = [[0, 900], [25.86, 900], [33.6, 900], [41.2, 1000], [55.9, 1050], [58.0, 1100]];
 const subsAt = (t: number) => {
   let y = SUBS_Y[0][1];
   for (const [a, v] of SUBS_Y) if (t >= a) y = v;
@@ -78,21 +78,8 @@ const Watermark: React.FC = () => (
   </div>
 );
 
-// tapa el texto quemado del video (0–12 s: "¿TU INMOBILIARIA EN 2027?" abajo y "MUCHO POR HACER. POCO TIEMPO." más arriba,
-// los dos dentro de la zona que tapa Instagram) con un degradé suave a oscuro + desenfoque que crece hacia abajo.
-// Los parches rectangulares se leían como barras de censura.
-const HideBurned: React.FC = () => {
-  const t = useT();
-  const o = 1 - prog(t, 12.0, 0.3);
-  if (o <= 0.01) return null;
-  const mask = "linear-gradient(180deg, transparent 0%, black 20%, black 100%)";
-  return (
-    <>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 1000, bottom: 0, opacity: o, backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(36px)", WebkitMaskImage: mask, maskImage: mask }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 1000, bottom: 0, opacity: o, background: "linear-gradient(180deg, rgba(11,10,16,0) 0%, rgba(11,10,16,0.78) 24%, rgba(11,10,16,0.9) 45%, rgba(11,10,16,0.93) 100%)" }} />
-    </>
-  );
-};
+// El texto quemado del video (0–12 s) se deja a la vista: tapar con degradé oscuro/blur se leía como una zona negra.
+// Por eso no hay remate propio en 7.95–10 s (repetiría "Mucho por hacer. Poco tiempo." que ya trae el video).
 
 // ---------- tarjeta base ----------
 const glass: React.CSSProperties = {
@@ -290,10 +277,8 @@ const EndCard: React.FC = () => {
 export const Main: React.FC = () => (
   <AbsoluteFill style={{ background: C.bg }}>
     <CamV keys={CAM} until={DURATION} />
-    <HideBurned />
-    <SubsV keywords={KEYWORDS} hide={[HOOK, [R_POCO[0], R_POCO[1]], R_RECETA, G_PASO, G_PREG, R_GRATIS, CTA, [5.4, 6.05], [12.1, 12.7], [17.85, 18.6], [33.25, 33.7], [40.8, 41.2], [DURATION - 0.1, 999]]} yAt={subsAt} />
+    <SubsV keywords={KEYWORDS} hide={[HOOK, [R_POCO[0], R_POCO[1]], R_RECETA, CHIPS, G_PASO, G_PREG, R_GRATIS, CTA, [5.4, 6.05], [12.1, 12.7], [17.85, 18.6], [33.25, 33.7], [40.8, 41.2], [DURATION - 0.1, 999]]} yAt={subsAt} />
     <RemarkPhrase words={REMATE_HOOK} to={5.3} top={720} />
-    <RemarkPhrase words={REMATE_POCO} to={9.95} top={720} />
     <RemarkPhrase words={REMATE_RECETA} to={25.15} top={700} />
     <RemarkPhrase words={REMATE_GRATIS} to={60.6} top={960} />
     <InfoPill from={PILL_1[0]} to={PILL_1[1]} top={1150} kicker="MASTERCLASS GRATUITA" title="10 de noviembre" />
