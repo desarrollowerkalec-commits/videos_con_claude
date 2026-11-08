@@ -10,7 +10,9 @@ Tono: didáctico, claro y movilizador (formación para el sector inmobiliario). 
 
 ## Presentadora: CLARA (avatar IA)
 
-- La cara de MDI es **Clara**, un **avatar IA** (rubia, blazer camel, camisa floreada, oficina luminosa).
+- La cara de MDI es **Clara**, un **avatar IA** (rubia, pelo por los hombros, oficina luminosa con cartel WERKALEC).
+  **Cambia de vestuario entre videos** y es siempre la misma avatar: blazer camel + camisa floreada · camisa blanca
+  + jeans · camisa rosa satinada + pantalón crema. **No marcar un cambio de ropa como "otra presentadora".**
   **No es Daniela.** Nunca rotular a Clara como "Daniela Werkalec".
 - Por ser avatar: marca de agua **"✦ generado con IA"** persistente, siempre.
 - Daniela aparece como **nombre/autoridad** (ej. "DANIELA te espera en su MASTERCLASS"), no como cara.
@@ -120,7 +122,8 @@ Ej.: "**SUENA** HUMANO, / NO COMO UN ROBOT." · "SI QUERÉS **DEJAR**" · "**DAN
   "Trimmed Intro", 2:56, ~122 BPM). Entra **sola** si se renderiza con `MARCA=mdi`:
   `MARCA=mdi bash editor-video-ia/scripts/render.sh <carpeta> "$PWD/<carpeta>/Reel.mp4"`
   → arranca en el **2.º 17.5** (ahí entra el groove completo; 1–16 s es intro con bajo, 16–17.5 s un corte),
-  volumen **0.20** con ducking (bajada un poco a pedido de Daniela) (la pista es ~5 dB más fuerte que Forward Momentum). Hay un cambio de sección más
+  volumen **0.14** con ducking firme (ratio 4) — bajada a pedido de Daniela (nov-2026: "que la música no esté tan fuerte").
+  En la **placa final** la música baja ~5 dB extra (sin voz, el ducking soltaba y la música quedaba al frente). (la pista es ~5 dB más fuerte que Forward Momentum). Hay un cambio de sección más
   intenso en el 2.º 64 de la pista (≈ 46 s de reel): en reels largos, revisar que no pise la voz.
   **Nunca** usar Forward Momentum en MDI (es la de Daniela Werkalec).
 

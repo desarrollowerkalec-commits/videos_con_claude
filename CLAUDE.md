@@ -18,7 +18,7 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 | Marca | Estilo |
 |---|---|
 | Daniela Werkalec (marca personal) | `marcas/daniela-werkalec/estilo.md` — **sistema base** |
-| Marketing Digital Inmobiliario (MDI) | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; verde agua `#6AD5B7`, presentadora **Clara (avatar IA, no es Daniela)** |
+| Marketing Digital Inmobiliario (MDI) | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; verde agua `#6AD5B7`, presentadora **Clara (avatar IA, no es Daniela; cambia de vestuario entre videos)** |
 
 Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
 estilo base y DESPUÉS el de la marca (que pisa colores, fuentes, subtítulos, logo, placa final).
@@ -57,7 +57,9 @@ editar `remotion/src/video.tsx` con el estilo → `stills.sh` (revisar fotograma
 `render.sh` ya mete la pista de marca **Forward Momentum** (`editor-video-ia/assets/music/forward-momentum.mp3`)
 en TODOS los renders, con ducking bajo la voz, arrancando en el **2.º 10** (donde entra el beat).
 No hay que pasar nada. Para otra pista: 3er arg = ruta; `"none"` la saca. 5.º arg = segundo de inicio.
-**Reels de Marketing Digital Inmobiliario: anteponer `MARCA=mdi`** → usa `mdi-fondo.mp3` (desde el 2.º 17.5, vol 0.23).
+**Reels de Marketing Digital Inmobiliario: anteponer `MARCA=mdi`** → usa `mdi-fondo.mp3` (desde el 2.º 17.5, vol 0.14).
+En la placa final (últimos 3.5 s) la música baja ~5 dB sola (`END_AT`/`END_GAIN` para ajustar). Para rehacer
+solo la mezcla sin re-renderizar el video: `SKIP_RENDER=1`.
 Ej.: `MARCA=mdi bash editor-video-ia/scripts/render.sh edicion-xxx "$PWD/edicion-xxx/Reel.mp4"`
 
 ## Marca de agua y placa final
