@@ -42,7 +42,7 @@ editar `remotion/src/video.tsx` con el estilo → `stills.sh` (revisar fotograma
 
 - **Render Remotion** necesita Chromium ya instalado y saltear el cert del proxy:
   ```bash
-  export REMOTION_BROWSER_EXECUTABLE=$(find /opt/pw-browsers -name headless_shell | head -1)
+  export REMOTION_BROWSER_EXECUTABLE=$(find /opt/pw-browsers -type f \( -name headless_shell -o -name chrome-headless-shell \) | head -1)
   export REMOTION_IGNORE_CERT=1
   ```
 - **`render.sh` necesita ruta de salida ABSOLUTA** (hace `cd` interno). Ej:
