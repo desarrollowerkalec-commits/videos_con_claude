@@ -68,6 +68,18 @@ Ej.: `MARCA=mdi bash editor-video-ia/scripts/render.sh edicion-xxx "$PWD/edicion
 - Placa final = motion graphics con **foto enmarcada + anillo del color del ángulo + waveform + nombre**.
   Fondo = recorte de **oficina SIN la figura de Daniela** (nunca negro, nunca su cuerpo blureado).
 
+## Publicación en redes (Metricool) — reglas de Daniela
+
+- **Copy adaptado por red, SIEMPRE.** No pegar el mismo texto en todas: Instagram/Facebook/TikTok (cercano, emojis
+  con criterio, CTA de comentar), **LinkedIn (más profesional: sin emojis de relleno, tono de negocio, foco en
+  procesos/resultados, CTA sobrio)**, Threads (hilo de varios posteos ≤500 caracteres c/u), YouTube (título claro +
+  descripción), Google Business (texto ≤1500, informativo), Pinterest (título + descripción corta, imagen = portada).
+- **Pasarle a Daniela TODOS los copys para aprobar ANTES de programar/publicar.** Nada sale sin su OK explícito.
+- Cuentas en Metricool: `danielawerkalec` (2968232), `Werkalec & Asociados` (5731375), `marketingdigitalinmobiliario`
+  (5757092: sin LinkedIn ni Google Business), FIRA (6065587).
+- Subir el video: rama temporal `publicacion-temp` del repo → URL raw → Metricool se queda con su copia. El proxy no
+  deja borrar ramas: pedirle a Daniela que la borre en GitHub (Branches → tacho).
+
 ## Cómo hablarle a Daniela
 
 En español rioplatense, directo, con criterio estratégico (es experta en marketing/IA/inmobiliaria).
