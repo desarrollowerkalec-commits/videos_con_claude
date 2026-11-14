@@ -22,6 +22,7 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 
 Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
 estilo base y DESPUÉS el de la marca (que pisa colores, fuentes, subtítulos, logo, placa final).
+VSL 16:9 con recorte de fondo por IA (sin pantalla verde): `editor-video-ia/references/vsl/taller-dia1/README.md`.
 Código de referencia reutilizable: `editor-video-ia/references/reels/opinion-diversidad/` (cambiar solo
 las constantes de color/fuente de `kit.tsx` y los textos).
 
