@@ -141,9 +141,16 @@ Grade general: cálido/oscuro, viñeta, fondos bajos.
 
 ## Código de referencia
 
-`editor-video-ia/references/reels/werkalec-crm-arm/` → reel de prueba CRM→ARM: `cut.py` (une clips de Nicolás,
-saca silencios con silencedetect y alterna zoom 1.0/1.35 en cada corte para tapar saltos del avatar) +
-`video.tsx` (hook apilado, subs 1–2 palabras, b-roll de tareas, CRM→ARM, chat de WhatsApp con agente + CRM, placa final).
+`editor-video-ia/references/reels/werkalec-crm-arm/` → reel CRM→ARM (v2, el que sí tiene el lenguaje de la ref.):
+- `cut2.py`: une los clips de Nicolás y saca silencios (silencedetect; umbral −28 dB si hay ruido de fondo).
+- `matte.py`: **recorta a Nicolás del fondo** con MODNet (HF `Xenova/modnet`, Apache-2.0, apto comercial) →
+  WebM VP9 con alfa para poner **texto DETRÁS de él**. ⚠️ No usar `briaai/RMBG` (licencia no comercial).
+- `video.tsx`: zoom distinto en cada corte + golpes de zoom, glitch wireframe (ffmpeg `edgedetect`), light leaks,
+  primer plano editorial con líneas, mosaico rojo + polaroid, íconos 3D (simple-icons), palabras dispersas con
+  fondo desaturado + marco de esquinas, teléfono 3D, collage giratorio, bokeh + serif itálica, lente viñeta,
+  "texto detrás" en negro (rojo para dolor, naranja para la solución), subs 1–2 palabras que entran desenfocados.
+- ⚠️ Error ya cometido (v1): tarjetas planas sobre fondo azul = lenguaje de MDI. **En Werkalec no.** El movimiento lo
+  ponen la cámara, las transiciones y el texto en el espacio, no las tarjetas.
 
 **Nicolás (visto en los clips):** avatar IA, morocho, barba corta, anteojos, saco azul oscuro + remera negra,
 oficinas luminosas con ventanales; planos generales caminando. Ojo: el hombre de la portada de referencia es otro.
