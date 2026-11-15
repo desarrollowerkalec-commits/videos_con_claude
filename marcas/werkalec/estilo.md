@@ -21,7 +21,7 @@ negocio: no va en reels ni placas salvo pedido explícito.
 - Daniela puede aparecer como **nombre/autoridad** ("el equipo de Daniela Werkalec"), no como cara.
 - ⚠️ Pendiente: descripción visual fija de Nicolás (pelo, ropa, escenario) para continuidad entre escenas.
 
-## Logo oficial (desde `referencia/logo-oficial-vertical.png`, PNG transparente 2000 px que pasó Daniela)
+## Logo oficial (desde `referencia/logo-oficial-horizontal.png` y `logo-oficial-vertical.png`, PNG transparentes 2000 px que pasó Daniela)
 
 Isotipo **W con ondas** en **dorado `#C6A37B`** (mismo sistema de marcas hermanas que DW y MDI) +
 "Werkalec" en sans condensada bold **gris `#4C4C4E`** + "y Asociados" en dorado.
@@ -29,9 +29,10 @@ Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, derivados del of
 
 | Archivo | Qué es | Dónde va |
 |---|---|---|
-| `werkalec-logo-oscuro.png` | horizontal: W dorada + "Werkalec" **blanco** | **reels, placas, portadas** (fondos oscuros / video) |
+| `werkalec-logo-oscuro.png` | horizontal oficial SIN "y Asociados": W dorada + "Werkalec" **blanco** | **reels, placas, portadas** (fondos oscuros / video) |
 | `werkalec-logo.png` | horizontal: W dorada + "Werkalec" gris | solo fondos claros |
 | `werkalec-logo-blanco.png` | horizontal todo blanco | sobre fotos o fondos de color |
+| `werkalec-logo-horizontal-completo(-oscuro/-blanco).png` | horizontal oficial **con "y Asociados"** (light, dorado) | solo si Daniela pide el nombre completo |
 | `werkalec-logo-vertical(-oscuro/-blanco).png` | vertical completo **con "y Asociados"** | solo si Daniela pide el nombre completo |
 | `werkalec-isotipo.png` / `-blanco.png` | solo la W | sello chico, marca de agua de cuenta |
 
