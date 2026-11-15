@@ -21,18 +21,23 @@ negocio: no va en reels ni placas salvo pedido explícito.
 - Daniela puede aparecer como **nombre/autoridad** ("el equipo de Daniela Werkalec"), no como cara.
 - ⚠️ Pendiente: descripción visual fija de Nicolás (pelo, ropa, escenario) para continuidad entre escenas.
 
-## Logo
+## Logo oficial (desde `referencia/logo-oficial-vertical.png`, PNG transparente 2000 px que pasó Daniela)
 
-Isotipo **W con ondas** (el mismo sistema de marcas hermanas que DW y MDI), en **dorado**.
-Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, alta resolución):
-- `werkalec-logo-oscuro.png` → W dorada + "Werkalec" **blanco** → **la que va en reels, placas y portadas**.
-- `werkalec-logo.png` → W dorada + "Werkalec" **negro** (solo fondos claros).
-- `werkalec-logo-blanco.png` → todo blanco (sobre fotos o fondos de color).
-- `werkalec-isotipo.png` / `werkalec-isotipo-blanco.png` → solo la W (sello chico, marca de agua de cuenta).
+Isotipo **W con ondas** en **dorado `#C6A37B`** (mismo sistema de marcas hermanas que DW y MDI) +
+"Werkalec" en sans condensada bold **gris `#4C4C4E`** + "y Asociados" en dorado.
+Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, derivados del oficial sin redibujar):
 
-Origen: el isotipo de DW recoloreado a `#C6A37B` + "Werkalec" en **Cormorant Garamond Bold** (como en las
-gráficas de redes). El logo web original (`referencia/logo-original-web.webp`, "Werkalec y Asociados" en sans
-gris, 570 px con fondo blanco) **no sirve para video**. Si aparece el vector oficial, reemplaza a estos.
+| Archivo | Qué es | Dónde va |
+|---|---|---|
+| `werkalec-logo-oscuro.png` | horizontal: W dorada + "Werkalec" **blanco** | **reels, placas, portadas** (fondos oscuros / video) |
+| `werkalec-logo.png` | horizontal: W dorada + "Werkalec" gris | solo fondos claros |
+| `werkalec-logo-blanco.png` | horizontal todo blanco | sobre fotos o fondos de color |
+| `werkalec-logo-vertical(-oscuro/-blanco).png` | vertical completo **con "y Asociados"** | solo si Daniela pide el nombre completo |
+| `werkalec-isotipo.png` / `-blanco.png` | solo la W | sello chico, marca de agua de cuenta |
+
+- La versión horizontal **no lleva "y Asociados"**: en redes se firma "Werkalec".
+- **Nunca** el gris `#4C4C4E` sobre fondo oscuro (no se lee): usar la versión `-oscuro`.
+- La tipografía del logo (sans condensada) es **solo del logo**: no usarla en subtítulos ni titulares.
 
 ## Color
 
@@ -100,5 +105,4 @@ Montserrat, pill naranja con flecha. Titular dentro de la zona segura.
 | Usuario de Instagram (y demás redes) de Werkalec | a confirmar |
 | Descripción visual de Nicolás + frames de referencia | a pasar |
 | Pista de música propia (`werkalec-fondo.mp3`) | a definir |
-| Logo oficial en vector | opcional (los PNG actuales son reconstrucción) |
 | Validar subtítulos / motion / portada con el primer reel | pendiente |
