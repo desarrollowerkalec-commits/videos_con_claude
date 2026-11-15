@@ -98,7 +98,11 @@ fondo azul noche, foto desaturada + un único acento naranja luminoso** (el dest
   pegado a la última palabra. Siempre los dos.
 - **Palabra fantasma opcional** detrás del bloque (ej. "preguntas") en script, marrón apenas más claro que el
   fondo (`≈ #4A2E1A`), muy baja opacidad. Textura, no texto a leer.
-- **Logo abajo al centro:** `werkalec-isotipo.png` (o logo oscuro chico), dentro de la zona segura de la grilla.
+- **Logo abajo al centro:** **`werkalec-logo-horizontal-completo-oscuro.png`** (W dorada + "Werkalec" blanco +
+  "y Asociados" dorado; ref. `referencia/portada-ejemplo-logo.png`). Ancho ≈ 50–55 % de la portada.
+  **Única excepción** a "se firma Werkalec a secas": en portada va el horizontal completo.
+- ⚠️ **Recorte de la grilla de Instagram (3:4 → 1080×1440 centrado):** la grilla corta ≈ 240 px arriba y abajo.
+  El logo y el titular tienen que quedar **entre y ≈ 260 y y ≈ 1660** del 1080×1920, o desaparecen en el perfil.
 - Reglas de Daniela en la grilla: el titular se lee en < 2 s → **máximo ~6 palabras**.
 - ⚠️ **Nunca cortar palabras con guion** ("seguimien-to" en la ref.): ajustar tamaño o renglones. Se lee como error,
   no como recurso.
@@ -119,5 +123,4 @@ fondo azul noche, foto desaturada + un único acento naranja luminoso** (el dest
 | Descripción visual de Nicolás + frames de referencia | a pasar |
 | Pista de música propia (`werkalec-fondo.mp3`) | a crear |
 | Estilo de video de referencia (lo pasa Daniela) | a recibir |
-| Portada completa (captura entera, ver logo abajo) | a recibir |
 | Validar subtítulos / motion / portada con el primer reel | pendiente |
