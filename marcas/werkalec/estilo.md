@@ -139,6 +139,15 @@ Grade general: cálido/oscuro, viñeta, fondos bajos.
   `editor-video-ia/assets/music/werkalec-fondo.mp3` y **frena con error** si no existe (para que nunca salga
   con Forward Momentum, que es de DW). Mientras tanto: pasar una ruta como 3.er argumento o `"none"`.
 
+## Código de referencia
+
+`editor-video-ia/references/reels/werkalec-crm-arm/` → reel de prueba CRM→ARM: `cut.py` (une clips de Nicolás,
+saca silencios con silencedetect y alterna zoom 1.0/1.35 en cada corte para tapar saltos del avatar) +
+`video.tsx` (hook apilado, subs 1–2 palabras, b-roll de tareas, CRM→ARM, chat de WhatsApp con agente + CRM, placa final).
+
+**Nicolás (visto en los clips):** avatar IA, morocho, barba corta, anteojos, saco azul oscuro + remera negra,
+oficinas luminosas con ventanales; planos generales caminando. Ojo: el hombre de la portada de referencia es otro.
+
 ## ⚠️ Pendiente
 
 | Dato | Estado |
