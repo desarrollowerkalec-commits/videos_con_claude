@@ -93,7 +93,8 @@ Montserrat, pill naranja con flecha. Titular dentro de la zona segura.
 
 ## Cuenta, placa final y música
 
-- **Placa final:** `werkalec-logo-oscuro.png` + cuenta de Instagram + `werkalec.com.ar`, anillo dorado,
+- **Instagram:** `@werkalec` (instagram.com/werkalec) → marca de agua de cuenta y placa final.
+- **Placa final:** `werkalec-logo-oscuro.png` + `@werkalec` + `werkalec.com.ar`, anillo dorado,
   fondo azul noche o recorte de escenario **sin Nicolás**.
 - **Música:** todavía sin pista propia. `MARCA=werkalec bash editor-video-ia/scripts/render.sh …` busca
   `editor-video-ia/assets/music/werkalec-fondo.mp3` y **frena con error** si no existe (para que nunca salga
@@ -103,7 +104,7 @@ Montserrat, pill naranja con flecha. Titular dentro de la zona segura.
 
 | Dato | Estado |
 |---|---|
-| Usuario de Instagram (y demás redes) de Werkalec | a confirmar |
 | Descripción visual de Nicolás + frames de referencia | a pasar |
-| Pista de música propia (`werkalec-fondo.mp3`) | a definir |
+| Pista de música propia (`werkalec-fondo.mp3`) | a crear |
+| Estilo de video de referencia (lo pasa Daniela) | a recibir |
 | Validar subtítulos / motion / portada con el primer reel | pendiente |
