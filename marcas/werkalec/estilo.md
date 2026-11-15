@@ -85,11 +85,23 @@ fondo azul noche, foto desaturada + un único acento naranja luminoso** (el dest
   lead que cambia de etapa). Más producto, menos cabeza parlante: el ángulo opinión ya lo cubre DW.
 - Flecha / botón naranja como CTA visual (pill naranja con flecha, como la gráfica).
 
-## Portada (propuesta inicial)
+## Portada (DEFINIDA por Daniela — ref. `referencia/portada-ejemplo-recorte.webp`)
 
-Basada en la gráfica: "Werkalec" en Cormorant dorado arriba al centro (o logo oscuro), foto desaturada
-con degradé a `#1E2532` abajo, titular blanco grande con **una** palabra en naranja, bajada corta en
-Montserrat, pill naranja con flecha. Titular dentro de la zona segura.
+- **Fondo:** foto de Nicolás (plano medio-corto, mirando a cámara) con **degradé marrón oscuro** que esfuma
+  la mitad de abajo: transparente arriba → `#3A210E` ≈ 55 % → `#301805` sólido abajo. **Marrón, no el azul
+  noche** (el azul queda para placas/motion).
+- **Pregunta**, en dos registros dentro de la misma frase, alineada a la izquierda (x ≈ 30 % del ancho):
+  - Arranque en **Cormorant Garamond** (regular/medium), **blanco**, grande (ej. "Tenés").
+  - Resto en **Montserrat Bold/ExtraBold**, **naranja `#FEB050`** (en la ref. mide `#FDBB5B`), renglones pegados.
+- **Signos de pregunta:** el **"¿" de apertura GIGANTE** (≈ 2.5–3× el titular) en **Cormorant blanco**, a la
+  izquierda, ocupando la altura de todo el bloque. El **"?" de cierre** grande en **Montserrat Bold naranja**,
+  pegado a la última palabra. Siempre los dos.
+- **Palabra fantasma opcional** detrás del bloque (ej. "preguntas") en script, marrón apenas más claro que el
+  fondo (`≈ #4A2E1A`), muy baja opacidad. Textura, no texto a leer.
+- **Logo abajo al centro:** `werkalec-isotipo.png` (o logo oscuro chico), dentro de la zona segura de la grilla.
+- Reglas de Daniela en la grilla: el titular se lee en < 2 s → **máximo ~6 palabras**.
+- ⚠️ **Nunca cortar palabras con guion** ("seguimien-to" en la ref.): ajustar tamaño o renglones. Se lee como error,
+  no como recurso.
 
 ## Cuenta, placa final y música
 
@@ -107,4 +119,5 @@ Montserrat, pill naranja con flecha. Titular dentro de la zona segura.
 | Descripción visual de Nicolás + frames de referencia | a pasar |
 | Pista de música propia (`werkalec-fondo.mp3`) | a crear |
 | Estilo de video de referencia (lo pasa Daniela) | a recibir |
+| Portada completa (captura entera, ver logo abajo) | a recibir |
 | Validar subtítulos / motion / portada con el primer reel | pendiente |
