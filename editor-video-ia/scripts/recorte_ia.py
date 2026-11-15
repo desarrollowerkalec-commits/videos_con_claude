@@ -11,7 +11,8 @@ import mediapipe as mp
 from mediapipe.tasks.python import vision, BaseOptions
 
 MODEL = os.environ.get("SEG_MODEL", os.path.join(os.path.dirname(__file__), "..", "assets", "models", "selfie_multiclass_256x256.tflite"))
-W, H = 1920, 1080
+W, H = 1920, 1080  # se recalcula según el video de entrada
+EDGE_FADE_LEFT = int(os.environ.get("EDGE_FADE_LEFT", "0"))  # px a desvanecer a la izq. (objetos en el borde)
 
 
 def make_seg():
@@ -45,11 +46,14 @@ class Proc:
         face = cm[3]; body = cm[2]
         g = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255.0
         # matte: guided filter a media resolución (rápido) para pegarse al pelo
-        gs = cv2.resize(g, (960, 540)); ps = cv2.resize(person, (960, 540))
-        a = guided(gs, ps, 9, 1e-3)
+        hh, ww = g.shape
+        sw, sh = (ww // 2, hh // 2) if ww * hh > 1.2e6 else (ww, hh)
+        gs = cv2.resize(g, (sw, sh)); ps = cv2.resize(person, (sw, sh))
+        a = guided(gs, ps, 9 if sw > 700 else 5, 1e-3)
         a = cv2.resize(a, (bgr.shape[1], bgr.shape[0]), interpolation=cv2.INTER_LINEAR)
         a = np.clip((a - 0.22) / 0.66, 0, 1)
-        a[:, :140] *= np.linspace(0, 1, 140, dtype=np.float32)[None, :] ** 2  # adorno colgante del borde izq.
+        if EDGE_FADE_LEFT:
+            a[:, :EDGE_FADE_LEFT] *= np.linspace(0, 1, EDGE_FADE_LEFT, dtype=np.float32)[None, :] ** 2
         # estabilidad temporal (menos parpadeo en bordes)
         if self.prev_alpha is not None:
             a = 0.65 * a + 0.35 * self.prev_alpha
@@ -57,7 +61,7 @@ class Proc:
         # piel: suavizado bilateral solo en piel (cara + cuerpo), mezcla parcial para no "plastificar"
         skin = np.clip(face + 0.7 * body, 0, 1)
         skin = cv2.GaussianBlur(skin, (0, 0), 6)
-        small = cv2.resize(bgr, (960, 540))
+        small = cv2.resize(bgr, (sw, sh))
         sm = cv2.bilateralFilter(small, 9, 34, 8)
         sm = cv2.bilateralFilter(sm, 9, 28, 6)
         sm = cv2.resize(sm, (bgr.shape[1], bgr.shape[0]), interpolation=cv2.INTER_CUBIC)
@@ -95,6 +99,8 @@ def test(inp, outdir):
 
 
 def video(inp, outp):
+    global W, H
+    W, H = [int(v) for v in subprocess.check_output(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', inp]).decode().strip().split(',')]
     dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", inp, "-vf", "fps=30", "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
                            stdout=subprocess.PIPE)
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}", "-r", "30", "-i", "-",

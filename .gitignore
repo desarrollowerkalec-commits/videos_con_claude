@@ -17,3 +17,6 @@ Reels - */
 __pycache__/
 *.pyc
 
+
+# Modelos descargables (ver references/vsl/taller-dia1/README.md)
+editor-video-ia/assets/models/
