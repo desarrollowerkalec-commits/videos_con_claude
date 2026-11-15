@@ -13,8 +13,16 @@ WORK="$(cd "$1" && pwd)"; OUT="$2"; MUSIC="${3:-}"; MVOL="${4:-}"; MSTART="${5:-
 #   MARCA=dw  (default) → Forward Momentum, desde el 2.º 10 (ahí entra el beat), volumen 0.42
 #   MARCA=mdi           → mdi-fondo.mp3 (Marketing Digital Inmobiliario), desde el 2.º 17.5 (groove completo),
 #                         volumen 0.20 (la pista es ~5 dB más fuerte que Forward Momentum; bajada un poco a pedido de Daniela)
+#   MARCA=werkalec      → werkalec-fondo.mp3 (agencia). Si todavía no existe, FRENA: nunca usar la pista de DW.
 if [ -z "$MUSIC" ]; then
-  if [ "${MARCA:-dw}" = "mdi" ]; then
+  if [ "${MARCA:-dw}" = "werkalec" ]; then
+    MUSIC="$SKILL/assets/music/werkalec-fondo.mp3"
+    if [ ! -f "$MUSIC" ]; then
+      echo "Werkalec todavía no tiene pista propia (assets/music/werkalec-fondo.mp3)." >&2
+      echo "Pasá una ruta como 3.er argumento o \"none\". No se usa Forward Momentum (es de Daniela Werkalec)." >&2
+      exit 1
+    fi
+  elif [ "${MARCA:-dw}" = "mdi" ]; then
     MUSIC="$SKILL/assets/music/mdi-fondo.mp3"; [ -z "$MSTART" ] && MSTART=17.5; [ -z "$MVOL" ] && MVOL=0.20
   elif [ -f "$SKILL/assets/music/forward-momentum.mp3" ]; then
     MUSIC="$SKILL/assets/music/forward-momentum.mp3"; [ -z "$MSTART" ] && MSTART=10

@@ -19,6 +19,7 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 |---|---|
 | Daniela Werkalec (marca personal) | `marcas/daniela-werkalec/estilo.md` — **sistema base** |
 | Marketing Digital Inmobiliario (MDI) | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; verde agua `#6AD5B7`, presentadora **Clara (avatar IA, no es Daniela)** |
+| Werkalec (agencia) | `marcas/werkalec/estilo.md` — hereda solo pipeline/reglas técnicas; dorado `#C6A37B` + naranja `#FEB050`, Cormorant Garamond + Montserrat, presentador **Nicolás (avatar IA)**. Render: `MARCA=werkalec` |
 
 Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
 estilo base y DESPUÉS el de la marca (que pisa colores, fuentes, subtítulos, logo, placa final).
