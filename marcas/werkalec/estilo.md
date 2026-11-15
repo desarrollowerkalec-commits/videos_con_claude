@@ -50,9 +50,9 @@ Archivos en `editor-video-ia/assets/logos/` (PNG transparentes, derivados del of
 | **Fondo** | **`#1E2532`** azul noche | placas, portadas, fondos de motion. **No es negro** |
 | Texto | `#FFFFFF` sobre video/oscuro · `#000000` sobre claro | base de subtítulos y titulares |
 | Secundario | `#848484` | cargos, URL, textos chicos. Nunca algo que deba leerse en 2 s |
-| ~~Rojo `#BB0925`~~ | — | **fuera de la paleta** (decisión de Daniela: el highlight es el naranja) |
+| **Rojo dato** | **`#BB0925`** (+ glow) | **solo** números/datos de impacto o dolor en placa negra ("ENTRE 5 Y 7 OPERACIONES"). Máx. 1–2 veces por reel |
 
-**Regla clave: el dorado FIRMA, el naranja SEÑALA.** Son vecinos de temperatura: nunca los dos en la misma
+**Regla clave: el dorado FIRMA, el naranja SEÑALA, el rojo GOLPEA (dato).** Son vecinos de temperatura: nunca los dos en la misma
 palabra, frase destacada o bloque. El dorado tiene poco contraste: **no usarlo para subtítulos** ni texto largo.
 
 ## Tipografías
@@ -61,6 +61,7 @@ palabra, frase destacada o bloque. El dorado tiene poco contraste: **no usarlo p
 |---|---|---|
 | **Titulares, remates, portada, nombre de marca** | **Cormorant Garamond** (600/700, itálica para énfasis) | `@remotion/google-fonts/CormorantGaramond` |
 | **Subtítulos y textos** | **Montserrat** (500/700/800) | `@remotion/google-fonts/Montserrat` |
+| **Caps condensadas** (datos, golpes, "CONTACTA") | **IBM Plex Sans Condensed Bold** | **es la fuente del logo** (verificado): no suma una familia nueva. `@remotion/google-fonts/IBMPlexSansCondensed` |
 
 Las dos vienen de Google Fonts (ya incluidas en el paquete del engine; no hay que instalar nada).
 Ojo: la gráfica de referencia usa Playfair / Raleway / Poppins. **Ese sistema queda descartado**: el oficial
@@ -75,15 +76,37 @@ es Cormorant Garamond + Montserrat. No mezclar.
 - Posición: tercio medio (y ≈ 1150), centrados. Zona segura de Instagram obligatoria (heredada: nada debajo
   de y ≈ 1500 ni a la derecha de x ≈ 940).
 
-## Motion graphics (propuesta inicial)
+## Lenguaje de video (DEFINIDO — ref. de Daniela en `referencia/video-ref/`, reel de 61 s)
 
-Estética de la gráfica de referencia (`referencia/grafica-whatsapp-caos.webp`): **cinematográfica, sobria,
-fondo azul noche, foto desaturada + un único acento naranja luminoso** (el destello / asterisco con glow).
-- Placas: fondo `#1E2532` con viñeta, titular Cormorant blanco + palabra naranja.
-- Elemento firma: **destello naranja con glow** (como el de la gráfica) para marcar el punto clave.
-- B-roll ideal de agencia: **demos reales** (WhatsApp desordenado → CRM ordenado, agente IA conversando,
-  lead que cambia de etapa). Más producto, menos cabeza parlante: el ángulo opinión ya lo cubre DW.
-- Flecha / botón naranja como CTA visual (pill naranja con flecha, como la gráfica).
+Edición **densa**: un evento visual cada **1–2 s**. Ideal para avatar IA (Nicolás casi no se mueve: la edición
+pone el movimiento). Recursos, traducidos a Werkalec:
+
+1. **Hook apilado arriba** (primeros 3–4 s): frase en cascada mezclando **Plex Condensed caps** (blanco) +
+   **Cormorant itálica** (naranja) + caps chicas naranja. Ej. "LAS INMOBILIARIAS / *que más venden* / NO ATIENDEN / A UN SOLO CLIENTE".
+2. **Subtítulos de 1–2 palabras** al centro (pecho), **Montserrat Bold blanca**, tamaño **variable**: palabra
+   clave más grande; a veces **naranja con glow**. Sin caja.
+3. **Pop-in de íconos/logos de herramientas** (ManyChat, WhatsApp, CRM) junto a la mano de Nicolás, con leve 3D y rebote.
+4. **Placa roja de dato:** fondo negro, **punch-in** sobre la cara (zoom, desaturado), número en **Plex Condensed
+   caps rojo `#BB0925` con glow**, segunda línea en contorno rojo. Ej. "ENTRE 5 Y 7 / OPERACIONES".
+5. **Pantalla blanca con capturas** (posts de Instagram, chats) que entran escalonadas + texto chico negro
+   ("como este, este o este"). Pruebas reales, no ilustración.
+6. **B-roll cinematográfico** (macro, bokeh, manos, personas trabajando) con **texto serif itálico grande**
+   (**Cormorant itálica**, blanco/dorado) en cascada palabra a palabra. Ej. "*para que no / se pierdan / conversiones,*".
+7. **Collage giratorio de casos de éxito** (tarjetas en 3D girando, motion blur) → prueba social.
+8. **Pantalla destacada:** fondo desaturado, la pantalla (laptop/celular) a color con **marco de selección de
+   esquinas** (tipo bounding box, handles naranja); palabras sueltas alrededor + golpe en caps naranja ("CONTACTA",
+   "PRE / FILTRA" combinando Cormorant + caps contorneadas).
+9. **Números cinéticos** con líneas finas ("en los últimos / **6** / a cerrar").
+10. **Cierre** en plano de Nicolás con CTA en subtítulos ("Comentá X") → placa final.
+
+**Qué NO copiar de la ref.:** usa ~6 tipografías y 4 acentos (amarillo, rojo, verde, azul) → en Werkalec
+**3 familias** (Cormorant, Montserrat, Plex Condensed) y **3 acentos con rol fijo** (dorado firma, naranja
+señala, rojo dato). Nada de verde ni azul.
+
+**B-roll — de dónde sale:** (a) motion graphics hechos en Remotion (capturas, UI, números, íconos, marcos):
+**siempre posibles**; (b) capturas/fotos reales que pase Daniela (casos, chats, CRM); (c) b-roll
+cinematográfico generado con IA (Higgsfield) o de stock — revisar cada clip, sin caras deformes ni texto falso.
+Grade general: cálido/oscuro, viñeta, fondos bajos.
 
 ## Portada (DEFINIDA por Daniela — ref. `referencia/portada-ejemplo-recorte.webp`)
 
