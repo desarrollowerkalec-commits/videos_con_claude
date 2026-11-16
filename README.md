@@ -1,1 +1,1 @@
-Rama temporal: medios para programar el reel 01 de CROCHETES en Metricool. Se borra al publicar.
+Rama temporal ya usada. Medios eliminados. Se puede borrar esta rama desde GitHub.
