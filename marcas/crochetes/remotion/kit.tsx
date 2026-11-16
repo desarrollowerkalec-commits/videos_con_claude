@@ -1,7 +1,7 @@
 // ───────────────────────────────────────────────────────────────────────────
-// KIT DE MOTION · CROCHETES by María  (reutilizable entre reels; no editar por video)
-// Gramática del reel de referencia (ver marcas/crochetes/estilo.md → tabla de 15 recursos),
-// con la paleta y las fuentes de la web. Canvas 1080x1920.
+// KIT DE MOTION · CROCHETES by María  — v2 (reconstruido cuadro a cuadro desde la referencia a 30 fps)
+// Cada componente = un recurso del reel de referencia (ver marcas/crochetes/estilo.md).
+// Paleta y fuentes de la web. Canvas 1080x1920. Tiempos en segundos.
 // ───────────────────────────────────────────────────────────────────────────
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, OffthreadVideo, Sequence, interpolate, staticFile, useVideoConfig } from "remotion";
@@ -9,19 +9,19 @@ import { C, TITLE, BODY, HAND, SHADOW, MARCA } from "./theme";
 import { WORDS } from "./words";
 import { useT } from "./lib";
 
-// ---------- tiempo ----------
-const easeOut = Easing.bezier(0.22, 1, 0.36, 1);
-export const prog = (t: number, a: number, d = 0.35) =>
-  interpolate(t, [a, a + d], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: easeOut });
-/** scale-pop 0.6 → 1.05 → 1 (recurso #5) */
-export const popScale = (t: number, a: number, d = 0.32) =>
-  interpolate(t, [a, a + d * 0.65, a + d], [0.6, 1.06, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: easeOut });
-const fadeOut = (t: number, to: number, d = 0.18) => interpolate(t, [to - d, to], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+// ───────── tiempo ─────────
+const OUT = Easing.bezier(0.22, 1, 0.36, 1);
+const BACK = Easing.out(Easing.back(2.2));
+const cl = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+export const prog = (t: number, a: number, d = 0.3, e = OUT) => interpolate(t, [a, a + d], [0, 1], { ...cl, easing: e });
+const fadeOut = (t: number, to: number, d = 0.12) => interpolate(t, [to - d, to], [1, 0], cl);
 const vis = (t: number, from: number, to: number) => t >= from && t < to;
+/** caracteres tipeados (máquina de escribir) */
+const typed = (t: number, at: number, n: number, cps: number) => Math.max(0, Math.min(n, Math.floor((t - at) * cps)));
+const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
-// ---------- cámara ----------
+// ───────── cámara ─────────
 export type CamKey = { at: number; zoom: number; fy?: number };
-/** Cámara completa. Cambios de zoom = corte seco (disimulan los jump cuts). Audio con fade al final. */
 export const Cam: React.FC<{ keys: CamKey[]; until: number }> = ({ keys, until }) => {
   const t = useT();
   const { fps } = useVideoConfig();
@@ -31,19 +31,13 @@ export const Cam: React.FC<{ keys: CamKey[]; until: number }> = ({ keys, until }
   const endF = Math.ceil(until * fps);
   return (
     <Sequence durationInFrames={endF}>
-      <OffthreadVideo
-        src={staticFile("cam.mp4")}
-        volume={(f) => interpolate(f, [endF - 4, endF], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
-        style={{
-          position: "absolute", width: 1080, height: 1920, objectFit: "cover",
-          transform: `scale(${k.zoom * drift})`, transformOrigin: `50% ${k.fy ?? 22}%`,
-        }}
-      />
+      <OffthreadVideo src={staticFile("cam.mp4")} volume={(f) => interpolate(f, [endF - 4, endF], [1, 0], cl)}
+        style={{ position: "absolute", width: 1080, height: 1920, objectFit: "cover", transform: `scale(${k.zoom * drift})`, transformOrigin: `50% ${k.fy ?? 18}%` }} />
     </Sequence>
   );
 };
 
-// ---------- subtítulos karaoke (estilo.md: Work Sans 600, sin caja, sombra grafito, palabra activa azul) ----------
+// ───────── karaoke (estilo.md) ─────────
 type W = { w: string; s: number; e: number };
 const buildChunks = (words: W[], max = 4) => {
   const out: { s: number; e: number; words: W[] }[] = [];
@@ -59,21 +53,285 @@ const buildChunks = (words: W[], max = 4) => {
   return out;
 };
 const CHUNKS = buildChunks(WORDS);
-export const Karaoke: React.FC<{ hide: [number, number][]; y?: number }> = ({ hide, y = 1480 }) => {
+export const Karaoke: React.FC<{ hide: [number, number][]; y?: number }> = ({ hide, y = 1490 }) => {
   const t = useT();
   if (hide.some(([a, b]) => t >= a && t < b)) return null;
   const ch = CHUNKS.find((c) => t >= c.s && t < c.e);
   if (!ch) return null;
-  const a = prog(t, ch.s, 0.15);
+  const a = prog(t, ch.s, 0.12);
   return (
-    <div style={{ position: "absolute", top: y - 50, left: 108, right: 108, display: "flex", justifyContent: "center", opacity: a, transform: `translateY(${(1 - a) * 10}px)` }}>
-      <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 58, lineHeight: 1.25, color: C.white, textAlign: "center", textShadow: SHADOW.sub, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 16px", maxWidth: 864 }}>
+    <div style={{ position: "absolute", top: y - 45, left: 108, right: 108, display: "flex", justifyContent: "center", opacity: a, transform: `translateY(${(1 - a) * 10}px)` }}>
+      <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 54, lineHeight: 1.25, color: C.white, textAlign: "center", textShadow: SHADOW.sub, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 14px", maxWidth: 864 }}>
         {ch.words.map((w, i) => {
           const on = t >= w.s && t < w.e + 0.04;
+          return <span key={i} style={{ color: on ? C.azul : C.white, fontWeight: on ? 700 : 600 }}>{w.w.replace(/[.,]$/, "")}</span>;
+        })}
+      </div>
+    </div>
+  );
+};
+
+// ───────── piezas de apoyo ─────────
+const Center: React.FC<{ y: number; x?: number; children: React.ReactNode; style?: React.CSSProperties }> = ({ y, x = 540, children, style }) => (
+  <div style={{ position: "absolute", left: x, top: y, transform: "translate(-50%, 0)", whiteSpace: "pre", ...style }}>{children}</div>
+);
+/** destello ✦ de 4 puntas */
+const Spark: React.FC<{ size: number; color?: string; style?: React.CSSProperties }> = ({ size, color = C.white, style }) => (
+  <svg width={size * 2} height={size * 2} viewBox="-1 -1 2 2" style={{ position: "absolute", overflow: "visible", ...style }}>
+    <path d="M0 -1 Q .12 -.12 1 0 Q .12 .12 0 1 Q -.12 .12 -1 0 Q -.12 -.12 0 -1Z" fill={color} />
+  </svg>
+);
+const starPts = (r: number) => Array.from({ length: 10 }, (_, i) => { const a = (Math.PI / 5) * i - Math.PI / 2; const rr = i % 2 ? r * 0.45 : r; return `${Math.cos(a) * rr},${Math.sin(a) * rr}`; }).join(" ");
+type StickerKind = "star" | "spark" | "flower" | "heart" | "yarn";
+const StickerSvg: React.FC<{ kind: StickerKind; size: number; color: string }> = ({ kind, size: s, color }) => (
+  <svg width={s * 2} height={s * 2} viewBox={`${-s} ${-s} ${s * 2} ${s * 2}`} style={{ overflow: "visible", filter: "drop-shadow(0 3px 6px rgba(0,0,0,.25))" }}>
+    {kind === "star" && <polygon points={starPts(s * 0.95)} fill={color} stroke={C.white} strokeWidth={3} strokeLinejoin="round" />}
+    {kind === "spark" && <path d={`M0 ${-s} Q ${s * .12} ${-s * .12} ${s} 0 Q ${s * .12} ${s * .12} 0 ${s} Q ${-s * .12} ${s * .12} ${-s} 0 Q ${-s * .12} ${-s * .12} 0 ${-s}Z`} fill={color} />}
+    {kind === "flower" && <g>{[0, 72, 144, 216, 288].map((a) => <ellipse key={a} cy={-s * .45} rx={s * .32} ry={s * .48} fill={color} stroke={C.white} strokeWidth={2.5} transform={`rotate(${a})`} />)}<circle r={s * .26} fill={C.lino} /></g>}
+    {kind === "heart" && <path d={`M0 ${s * .8} C ${-s} 0 ${-s * .6} ${-s * .85} 0 ${-s * .3} C ${s * .6} ${-s * .85} ${s} 0 0 ${s * .8}Z`} fill={color} stroke={C.white} strokeWidth={3} />}
+    {kind === "yarn" && <g><circle r={s * .8} fill={color} stroke={C.white} strokeWidth={3} />{[-.5, -.15, .2, .55].map((k, j) => <path key={j} d={`M ${-s * .75} ${k * s} Q 0 ${(k - .35) * s} ${s * .75} ${k * s}`} stroke={C.lino} strokeWidth={4} fill="none" />)}</g>}
+  </svg>
+);
+
+// ═════════ RECURSO 1 · script que se escribe + destellos que titilan ═════════
+export const ScriptWrite: React.FC<{ from: number; to: number; text: string; y: number; x?: number; size?: number; color?: string; rot?: number; dur?: number; sparks?: boolean }> = ({ from, to, text, y, x = 540, size = 96, color = C.lino, rot = -4, dur = 0.5, sparks = true }) => {
+  const t = useT();
+  if (!vis(t, from, to)) return null;
+  const r = prog(t, from, dur, Easing.inOut(Easing.quad));
+  const w = text.length * size * 0.4;
+  const sp = [[-w / 2 - 40, -10, 22], [w / 2 + 30, -30, 16], [-w / 2 + 30, size * .95, 14], [w / 2 - 10, size * .85, 24], [w * .1, -45, 12]];
+  return (
+    <Center y={y} x={x} style={{ opacity: fadeOut(t, to) }}>
+      <span style={{ display: "inline-block", fontFamily: HAND, fontWeight: 700, fontSize: size, color, lineHeight: 1.05, textShadow: SHADOW.soft, transform: `rotate(${rot}deg)`, clipPath: `inset(-30% ${100 - r * 100}% -30% -5%)` }}>{text}</span>
+      {sparks && sp.map(([dx, dy, s], i) => {
+        const a = prog(t, from + 0.06 * i, 0.2, BACK);
+        const tw = 0.6 + 0.4 * Math.abs(Math.sin((t - from) * 7 + i * 1.7));
+        return <Spark key={i} size={s} style={{ left: `calc(50% + ${dx}px)`, top: dy, transform: `translate(-50%,-50%) scale(${a * tw})` }} />;
+      })}
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 5/14 · palabra con ECO gigante que se cierra sobre ella ═════════
+export const GhostZoom: React.FC<{ at: number; to: number; text: string; y: number; size?: number; color?: string; shadow3d?: boolean }> = ({ at, to, text, y, size = 160, color = C.lino, shadow3d = true }) => {
+  const t = useT();
+  if (!vis(t, at, to)) return null;
+  const g = prog(t, at, 0.2, Easing.out(Easing.cubic));
+  const s = interpolate(t, [at, at + 0.12, at + 0.24], [0.8, 1.06, 1], cl);
+  const style: React.CSSProperties = { fontFamily: TITLE, fontWeight: 900, fontSize: size, lineHeight: 0.95, letterSpacing: "-0.01em" };
+  return (
+    <Center y={y} style={{ opacity: fadeOut(t, to) }}>
+      {g < 1 && <span style={{ ...style, position: "absolute", left: 0, top: 0, color, opacity: 0.45 * (1 - g), transform: `scale(${3.2 - 2.2 * g})`, transformOrigin: "50% 50%" }}>{text}</span>}
+      <span style={{ ...style, display: "inline-block", color, opacity: prog(t, at, 0.06), transform: `scale(${s})`, textShadow: shadow3d ? `${SHADOW.pop3d}, 0 10px 30px rgba(0,0,0,.25)` : SHADOW.soft }}>{text}</span>
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 3 · dos palabras que caen desde lados distintos y se balancean (subibaja) + se desarman ═════════
+export const BounceDuo: React.FC<{ to: number; y: number; a: { text: string; at: number }; b: { text: string; at: number }; size?: number }> = ({ to, y, a, b, size = 112 }) => {
+  const t = useT();
+  if (!vis(t, a.at, to)) return null;
+  const word = (w: { text: string; at: number }, from: [number, number], phase: number, idx: number) => {
+    if (t < w.at) return <span key={idx} style={{ opacity: 0 }}>{w.text}</span>;
+    const p = prog(t, w.at, 0.28, BACK);
+    const lt = t - w.at;
+    const bob = 16 * Math.sin(lt * 13 + phase) * Math.exp(-lt * 2.6);
+    const dis = prog(t, to - 0.22, 0.2);
+    return (
+      <span key={idx} style={{ display: "inline-block", transform: `translate(${from[0] * (1 - p)}px, ${from[1] * (1 - p) + bob}px) rotate(${(1 - p) * from[0] * 0.05}deg)` }}>
+        {w.text.split("").map((ch, i) => (
+          <span key={i} style={{ display: "inline-block", opacity: 1 - dis * (0.6 + 0.4 * rnd(i + idx * 9)), transform: `translate(${(rnd(i + 3) - 0.5) * 90 * dis}px, ${(rnd(i + 7) - 0.5) * 70 * dis}px) scale(${1 - 0.4 * dis})`, filter: `blur(${dis * 6}px)` }}>{ch}</span>
+        ))}
+      </span>
+    );
+  };
+  return (
+    <Center y={y}>
+      <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: size, color: C.white, textShadow: SHADOW.soft, display: "flex", gap: 26, lineHeight: 1 }}>
+        {word(a, [-260, -220], 0, 0)}
+        {word(b, [240, -260], Math.PI, 1)}
+      </div>
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 2 · globo de diálogo con texto SELECCIONADO que se tipea ═════════
+export const BubbleSelect: React.FC<{ from: number; to: number; text: string; y: number; cps?: number; strikeAt?: number; size?: number }> = ({ from, to, text, y, cps = 26, strikeAt, size = 54 }) => {
+  const t = useT();
+  if (!vis(t, from, to)) return null;
+  const n = typed(t, from + 0.06, text.length, cps);
+  const pp = prog(t, from, 0.18, BACK);
+  const st = strikeAt !== undefined ? prog(t, strikeAt, 0.22) : 0;
+  return (
+    <Center y={y} style={{ opacity: fadeOut(t, to), transform: `translate(-50%,0) scale(${pp})`, transformOrigin: "15% 100%" }}>
+      <div style={{ position: "relative", background: C.white, borderRadius: 18, padding: "16px 26px", boxShadow: "0 12px 30px rgba(0,0,0,.22)" }}>
+        <div style={{ position: "absolute", left: 38, bottom: -20, width: 0, height: 0, borderLeft: "16px solid transparent", borderRight: "16px solid transparent", borderTop: `22px solid ${C.white}` }} />
+        <span style={{ position: "relative", fontFamily: BODY, fontWeight: 500, fontSize: size, color: C.grafito }}>
+          <span style={{ position: "absolute", inset: "-2px -6px", background: "rgba(27,151,200,.25)", borderRadius: 3 }} />
+          <span style={{ position: "relative" }}>{text.slice(0, n)}</span>
+          <span style={{ visibility: "hidden" }}>{text.slice(n)}</span>
+          {/* handles */}
+          <span style={{ position: "absolute", left: -8, top: -6, width: 4, height: size * 1.25, background: C.azul }}><span style={{ position: "absolute", left: -8, top: -16, width: 20, height: 20, borderRadius: 10, background: C.azul }} /></span>
+          <span style={{ position: "absolute", right: -8, top: -6, width: 4, height: size * 1.25, background: C.azul }}><span style={{ position: "absolute", left: -8, bottom: -16, width: 20, height: 20, borderRadius: 10, background: C.azul }} /></span>
+          {st > 0 && (
+            <svg style={{ position: "absolute", left: -14, top: "18%", overflow: "visible" }} width="100%" height={size * 0.7} viewBox="0 0 100 20" preserveAspectRatio="none">
+              <path d="M0 12 Q 25 4 50 11 T 100 8" stroke={C.terracota} strokeWidth={4} fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" strokeDasharray={120} strokeDashoffset={120 * (1 - st)} style={{ strokeWidth: 9 }} />
+            </svg>
+          )}
+        </span>
+      </div>
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 8 · MÁQUINA DE ESCRIBIR en tiras blancas (cada renglón su tira, crece con el texto) ═════════
+export type TypeLine = { text: string; at: number; cps?: number };
+export const TypeStrips: React.FC<{ from: number; to: number; y: number; lines: TypeLine[]; size?: number; gap?: number }> = ({ from, to, y, lines, size = 50, gap = 10 }) => {
+  const t = useT();
+  if (!vis(t, from, to)) return null;
+  return (
+    <div style={{ position: "absolute", left: 0, right: 0, top: y, display: "flex", flexDirection: "column", alignItems: "center", gap, opacity: fadeOut(t, to) }}>
+      {lines.map((l, i) => {
+        const n = typed(t, l.at, l.text.length, l.cps ?? 30);
+        return (
+          // la caja final ocupa su lugar (renglones centrados); la tira blanca crece desde la izquierda
+          <div key={i} style={{ position: "relative", fontFamily: BODY, fontWeight: 500, fontSize: size, lineHeight: 1.18, whiteSpace: "pre" }}>
+            <span style={{ visibility: "hidden", padding: "0 14px" }}>{l.text}</span>
+            {n > 0 && (
+              <span style={{ position: "absolute", left: 0, top: 0, background: C.white, color: C.grafito, padding: "0 14px", boxShadow: "0 4px 12px rgba(0,0,0,.15)" }}>{l.text.slice(0, n)}</span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ═════════ RECURSO 9 · palabra que llega GIRANDO en órbita (anillo + papelitos) y estalla en fuegos artificiales ═════════
+export const OrbitSpin: React.FC<{ at: number; to: number; text: string; y: number; size?: number; color?: string }> = ({ at, to, text, y, size = 140, color = C.lino }) => {
+  const t = useT();
+  if (!vis(t, at, to)) return null;
+  const D = 0.36;
+  const p = prog(t, at, D, Easing.inOut(Easing.cubic));
+  const settle = at + D;
+  const x = 140 * (1 - p) * (1 - p) + 60 * Math.sin(p * Math.PI) * (1 - p);
+  const yy = -170 * (1 - p) * (1 - p);
+  const rot = 72 * (1 - p);
+  const sc = 0.32 + 0.68 * p + (t > settle ? 0.06 * Math.exp(-(t - settle) * 14) * Math.sin((t - settle) * 40) : 0);
+  const ring = t < settle + 0.05;
+  const burst = prog(t, settle + 0.02, 0.42, Easing.out(Easing.quad));
+  return (
+    <Center y={y} style={{ opacity: fadeOut(t, to) }}>
+      <div style={{ position: "relative", transform: `translate(${x}px, ${yy}px) rotate(${rot}deg) scale(${sc})` }}>
+        {ring && (
+          <svg width={600} height={600} viewBox="-300 -300 600 600" style={{ position: "absolute", left: "50%", top: "50%", transform: `translate(-50%,-50%) rotate(${(t - at) * 900}deg)`, overflow: "visible" }}>
+            <circle r={230 - 80 * p} fill="none" stroke={C.white} strokeWidth={9} strokeLinecap="round" strokeDasharray={`${(230 - 80 * p) * 4} 2000`} opacity={1 - prog(t, settle - 0.05, 0.1)} />
+          </svg>
+        )}
+        <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 30px rgba(0,0,0,.25)` }}>{text}</span>
+      </div>
+      {/* papelitos durante el viaje */}
+      {t < settle + 0.25 && Array.from({ length: 9 }).map((_, i) => {
+        const a = rnd(i) * Math.PI * 2, d = 120 + 260 * prog(t, at + 0.03 * i, 0.5);
+        const col = [C.azul, C.arena, C.terracota][i % 3];
+        return <div key={i} style={{ position: "absolute", left: "50%", top: "50%", width: 18, height: 10, background: col, opacity: 1 - prog(t, settle, 0.25), transform: `translate(${Math.cos(a) * d}px, ${Math.sin(a) * d * 0.7 - 60}px) rotate(${(t - at) * 600 + i * 40}deg)` }} />;
+      })}
+      {/* fuegos artificiales al asentarse */}
+      {t > settle && burst < 1 && (
+        <svg width={1000} height={600} viewBox="-500 -300 1000 600" style={{ position: "absolute", left: "50%", top: size * 0.45, transform: "translate(-50%,-50%)", overflow: "visible" }}>
+          {Array.from({ length: 16 }).map((_, i) => {
+            const a = (i / 16) * Math.PI * 2 + 0.2;
+            const r0 = 130 + 260 * burst, r1 = r0 + (i % 2 ? 90 : 50) * (1 - burst);
+            return <line key={i} x1={Math.cos(a) * r0 * 1.5} y1={Math.sin(a) * r0 * 0.75} x2={Math.cos(a) * r1 * 1.5} y2={Math.sin(a) * r1 * 0.75} stroke={i % 2 ? C.white : C.azul} strokeWidth={i % 2 ? 4 : 11} strokeLinecap="round" opacity={1 - burst} />;
+          })}
+          {Array.from({ length: 10 }).map((_, i) => { const a = rnd(i + 20) * Math.PI * 2, r = 180 + 300 * burst; return <circle key={"d" + i} cx={Math.cos(a) * r} cy={Math.sin(a) * r * 0.6} r={6} fill={C.white} opacity={1 - burst} />; })}
+        </svg>
+      )}
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 12 · sticker manuscrito con rayitos + flecha que se dibuja ═════════
+export const StickerArrow: React.FC<{ at: number; to: number; x: number; y: number; text: string; bg?: string; fg?: string; arrow?: boolean }> = ({ at, to, x, y, text, bg = C.azul, fg = C.marino, arrow = true }) => {
+  const t = useT();
+  if (!vis(t, at, to)) return null;
+  const s = prog(t, at, 0.22, BACK);
+  const ln = prog(t, at + 0.08, 0.15);
+  const ar = prog(t, at + 0.14, 0.3);
+  return (
+    <div style={{ position: "absolute", left: x, top: y, opacity: fadeOut(t, to) }}>
+      <div style={{ transform: `rotate(-6deg) scale(${s})`, transformOrigin: "0 100%", display: "inline-block", position: "relative" }}>
+        <span style={{ fontFamily: HAND, fontWeight: 700, fontSize: 66, color: fg, background: bg, padding: "0 20px 4px", borderRadius: 10, display: "inline-block", boxShadow: "0 8px 20px rgba(0,0,0,.2)" }}>{text}</span>
+        <svg width={60} height={60} viewBox="0 0 60 60" style={{ position: "absolute", right: -46, top: -40, overflow: "visible" }}>
+          {[[10, 40, 18, 18], [28, 36, 44, 16], [36, 50, 56, 44]].map(([x1, y1, x2, y2], i) => <line key={i} x1={x1} y1={y1} x2={x1 + (x2 - x1) * ln} y2={y1 + (y2 - y1) * ln} stroke={C.terracota} strokeWidth={6} strokeLinecap="round" />)}
+        </svg>
+      </div>
+      {arrow && (
+        <svg width={120} height={150} viewBox="0 0 120 150" style={{ position: "absolute", left: 18, top: 84, overflow: "visible" }}>
+          <path d="M20 0 C 0 50, 10 100, 70 120" stroke={C.terracota} strokeWidth={8} fill="none" strokeLinecap="round" strokeDasharray={200} strokeDashoffset={200 * (1 - ar)} />
+          {ar > 0.9 && <path d="M50 100 L 72 121 L 46 136" stroke={C.terracota} strokeWidth={8} fill="none" strokeLinecap="round" strokeLinejoin="round" />}
+        </svg>
+      )}
+    </div>
+  );
+};
+
+// ═════════ RECURSO 12 · palabra gigante que se arma LETRA POR LETRA desde abajo con rebote (+ salida en caída) ═════════
+export const LetterDrop: React.FC<{ at: number; to: number; text: string; y: number; x?: number; size?: number; step?: number; color?: string; exitAt?: number }> = ({ at, to, text, y, x = 540, size = 160, step = 0.075, color = C.lino, exitAt }) => {
+  const t = useT();
+  if (!vis(t, at, to)) return null;
+  const letters = text.split("");
+  return (
+    <Center y={y} x={x}>
+      <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` }}>
+        {letters.map((l, i) => {
+          const a = at + i * step;
+          const sc = interpolate(t, [a, a + 0.1, a + 0.2], [0.3, 1.12, 1], cl);
+          const dy = interpolate(t, [a, a + 0.14], [90, 0], { ...cl, easing: OUT });
+          const ex = exitAt !== undefined ? prog(t, exitAt + i * 0.025, 0.14, Easing.in(Easing.quad)) : 0;
+          return <span key={i} style={{ display: "inline-block", opacity: (t >= a ? Math.min(1, (t - a) * 14) : 0) * (1 - ex), transform: `translateY(${dy + ex * 160}px) scale(${sc}) rotate(${ex * (i % 2 ? 20 : -20)}deg)`, transformOrigin: "50% 100%" }}>{l === " " ? " " : l}</span>;
+        })}
+      </span>
+    </Center>
+  );
+};
+
+// ═════════ etiqueta que se TIPEA (ME DEBE DINERO) ═════════
+export const TypeTag: React.FC<{ at: number; to: number; text: string; y: number; x?: number; cps?: number; bg?: string; fg?: string; size?: number; rot?: number }> = ({ at, to, text, y, x = 540, cps = 24, bg = C.terracota, fg = C.white, size = 54, rot = -2 }) => {
+  const t = useT();
+  if (!vis(t, at, to)) return null;
+  const n = typed(t, at, text.length, cps);
+  if (n === 0) return null;
+  return (
+    <Center y={y} x={x} style={{ opacity: fadeOut(t, to), transform: `translate(-50%,0) rotate(${rot}deg)` }}>
+      <span style={{ position: "relative", fontFamily: TITLE, fontWeight: 800, fontSize: size, letterSpacing: "0.03em" }}>
+        <span style={{ visibility: "hidden", padding: "4px 20px" }}>{text}</span>
+        <span style={{ position: "absolute", left: 0, top: 0, background: bg, color: fg, padding: "4px 20px", borderRadius: 8, boxShadow: "0 8px 18px rgba(0,0,0,.2)" }}>{text.slice(0, n)}</span>
+      </span>
+    </Center>
+  );
+};
+
+// ═════════ RECURSO 10 · nota de papel: entra deslizando, marcador que se tipea, resaltador que barre por delante ═════════
+export type NoteLine = { text: string; at: number; cps?: number };
+export const PaperNote: React.FC<{ from: number; to: number; x: number; y: number; w: number; lines: NoteLine[]; mark?: { line: number; at: number; dur?: number } }> = ({ from, to, x, y, w, lines, mark }) => {
+  const t = useT();
+  if (!vis(t, from, to)) return null;
+  const sIn = prog(t, from, 0.22, BACK);
+  const rot = -6 + 2 * prog(t, from, to - from, Easing.linear);
+  const drift = 14 * prog(t, from, to - from, Easing.linear);
+  const m = mark ? prog(t, mark.at, mark.dur ?? 0.4, Easing.inOut(Easing.quad)) : 0;
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, opacity: fadeOut(t, to), transform: `translate(${(1 - sIn) * 500 + drift}px, ${-drift * 0.5}px) rotate(${rot}deg)`, transformOrigin: "20% 50%" }}>
+      <div style={{ position: "relative", background: C.white, padding: "28px 34px 30px 58px", boxShadow: "0 16px 34px rgba(0,0,0,.28)", backgroundImage: `repeating-linear-gradient(${C.white} 0 62px, rgba(27,151,200,.35) 62px 64px)`, backgroundPosition: "0 22px" }}>
+        <div style={{ position: "absolute", left: 38, top: 0, bottom: 0, width: 3, background: C.terracota, opacity: 0.8 }} />
+        {lines.map((l, i) => {
+          const n = typed(t, l.at, l.text.length, l.cps ?? 22);
           return (
-            <span key={i} style={{ color: on ? C.azul : C.white, fontWeight: on ? 700 : 600, display: "inline-block", transform: on ? "scale(1.04)" : "none" }}>
-              {w.w.replace(/[.,]$/, "")}
-            </span>
+            <div key={i} style={{ position: "relative", fontFamily: HAND, fontWeight: 700, fontSize: 62, lineHeight: "64px", color: C.grafito, letterSpacing: "0.04em", whiteSpace: "pre" }}>
+              {mark && mark.line === i && <span style={{ position: "absolute", left: -6, top: 26, height: 30, width: "96%", background: "rgba(27,151,200,.42)", transform: `scaleX(${m}) rotate(-1deg)`, transformOrigin: "left", borderRadius: 6 }} />}
+              <span style={{ position: "relative" }}>{l.text.slice(0, n)}</span>
+            </div>
           );
         })}
       </div>
@@ -81,288 +339,165 @@ export const Karaoke: React.FC<{ hide: [number, number][]; y?: number }> = ({ hi
   );
 };
 
-// ---------- texto ----------
-type Pos = { x?: number; y: number; w?: number; align?: "center" | "left" | "right" };
-const box = (p: Pos): React.CSSProperties => ({ position: "absolute", top: p.y, left: p.x ?? 0, width: p.w ?? 1080, textAlign: p.align ?? "center" });
-
-/** #1 · script/manuscrita que se escribe izq→der */
-export const ScriptReveal: React.FC<Pos & { from: number; to: number; text: string; dur?: number; size?: number; color?: string; rot?: number }> = ({ from, to, text, dur = 0.5, size = 92, color = C.lino, rot = -4, ...p }) => {
+// ═════════ RECURSO 7 · explosión de stickers + palabra que se arma de DERECHA A IZQUIERDA con estrella-cursor + arco que crece ═════════
+export const StickerBurstBuild: React.FC<{ at: number; to: number; text: string; y: number; size?: number; chip?: { text: string; at: number } }> = ({ at, to, text, y, size = 120, chip }) => {
   const t = useT();
-  if (!vis(t, from, to)) return null;
-  const r = prog(t, from, dur);
-  return (
-    <div style={{ ...box(p), opacity: fadeOut(t, to) }}>
-      <span style={{ display: "inline-block", fontFamily: HAND, fontWeight: 700, fontSize: size, color, textShadow: SHADOW.soft, transform: `rotate(${rot}deg)`, clipPath: `inset(-20% ${100 - r * 100}% -20% -5%)`, lineHeight: 1.05, whiteSpace: "pre" }}>{text}</span>
-    </div>
-  );
-};
-
-/** #5 / #9 · palabra GIGANTE con pop; spin = entra girando con rayos (#9) */
-export const BigWord: React.FC<Pos & { from: number; to: number; text: string; size?: number; color?: string; shadow3d?: boolean; spin?: boolean; stagger?: boolean }> = ({ from, to, text, size = 150, color = C.lino, shadow3d = true, spin = false, stagger = false, ...p }) => {
-  const t = useT();
-  if (!vis(t, from, to)) return null;
-  const s = spin ? interpolate(t, [from, from + 0.2, from + 0.3], [0.4, 1.1, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: easeOut }) : popScale(t, from);
-  const rot = spin ? interpolate(t, [from, from + 0.28], [-90, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: easeOut }) : 0;
+  if (!vis(t, chip ? Math.min(chip.at, at) : at, to)) return null;
   const letters = text.split("");
+  const step = 0.045;
+  const nVis = Math.max(0, Math.min(letters.length, Math.floor((t - at) / step) + 1));
+  const building = t >= at && nVis < letters.length;
+  const exit = prog(t, to - 0.16, 0.16, Easing.in(Easing.quad));
+  const arc = prog(t, at - 0.05, 0.55, Easing.inOut(Easing.quad));
+  const W = letters.length * size * 0.72;
+  const stickers: { k: StickerKind; dx: number; dy: number; s: number; c: string; d: number; spin?: boolean }[] = [
+    { k: "spark", dx: -W / 2 - 60, dy: 30, s: 46, c: C.azul, d: 0.0, spin: true },
+    { k: "flower", dx: -W / 2 + 20, dy: -110, s: 34, c: C.azul, d: 0.08 },
+    { k: "heart", dx: W / 2 + 40, dy: -60, s: 32, c: C.terracota, d: 0.12 },
+    { k: "star", dx: W / 2 + 70, dy: 70, s: 40, c: C.terracota, d: 0.05, spin: true },
+    { k: "spark", dx: W / 2 - 40, dy: 160, s: 30, c: C.white, d: 0.18 },
+    { k: "yarn", dx: -W / 2 - 20, dy: 170, s: 30, c: C.arena, d: 0.22 },
+    { k: "spark", dx: 0, dy: -150, s: 20, c: C.white, d: 0.26 },
+  ];
   return (
-    <div style={{ ...box(p), opacity: fadeOut(t, to) }}>
-      <div style={{ display: "inline-block", position: "relative", transform: `scale(${stagger ? 1 : s}) rotate(${rot}deg)` }}>
-        {spin && <Rays t={t} at={from + 0.22} />}
-        <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, letterSpacing: "-0.01em", lineHeight: 0.95, textShadow: shadow3d ? `${SHADOW.pop3d}, 0 10px 30px rgba(0,0,0,.25)` : SHADOW.soft, whiteSpace: "pre" }}>
-          {stagger
-            ? letters.map((l, i) => {
-                const a = prog(t, from + i * 0.045, 0.22);
-                return <span key={i} style={{ display: "inline-block", opacity: a, transform: `translateY(${(1 - a) * 60}px)` }}>{l}</span>;
-              })
-            : text}
-        </span>
-      </div>
-    </div>
-  );
-};
-
-/** rayitos que salen de una palabra (#9) */
-const Rays: React.FC<{ t: number; at: number; color?: string }> = ({ t, at, color = C.azul }) => {
-  const r = prog(t, at, 0.35);
-  if (t < at || r >= 1) return null;
-  return (
-    <svg width={900} height={500} viewBox="-450 -250 900 500" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", overflow: "visible" }}>
-      {Array.from({ length: 12 }).map((_, i) => {
-        const a = (i / 12) * Math.PI * 2;
-        const r0 = 200 + r * 120, r1 = r0 + 60 * (1 - r);
-        return <line key={i} x1={Math.cos(a) * r0 * 1.5} y1={Math.sin(a) * r0 * 0.8} x2={Math.cos(a) * r1 * 1.5} y2={Math.sin(a) * r1 * 0.8} stroke={color} strokeWidth={10} strokeLinecap="round" opacity={1 - r} />;
-      })}
-    </svg>
-  );
-};
-
-/** #4 · texto que entra con tracking abierto que se cierra */
-export const TrackIn: React.FC<Pos & { from: number; to: number; text: string; size?: number; weight?: number; color?: string; font?: string }> = ({ from, to, text, size = 54, weight = 500, color = C.white, font = BODY, ...p }) => {
-  const t = useT();
-  if (!vis(t, from, to)) return null;
-  const a = prog(t, from, 0.32);
-  return (
-    <div style={{ ...box(p), opacity: Math.min(a * 1.5, fadeOut(t, to)) }}>
-      <span style={{ fontFamily: font, fontWeight: weight, fontSize: size, color, letterSpacing: `${(1 - a) * 0.5}em`, textShadow: SHADOW.soft, whiteSpace: "pre" }}>{text}</span>
-    </div>
-  );
-};
-
-/** #2 · selección de texto estilo UI (caja blanca, tipeo, handles azules) + tachado terracota opcional */
-export const SelectBox: React.FC<Pos & { from: number; to: number; text: string; typeDur?: number; strikeAt?: number; selectAt?: number }> = ({ from, to, text, typeDur = 0.7, strikeAt, selectAt, ...p }) => {
-  const t = useT();
-  if (!vis(t, from, to)) return null;
-  const n = Math.round(text.length * prog(t, from, typeDur));
-  const sel = selectAt !== undefined ? prog(t, selectAt, 0.25) : 0;
-  const st = strikeAt !== undefined ? prog(t, strikeAt, 0.3) : 0;
-  const pp = prog(t, from, 0.2);
-  return (
-    <div style={{ ...box(p), opacity: Math.min(pp, fadeOut(t, to)) }}>
-      <div style={{ display: "inline-block", position: "relative", background: C.white, borderRadius: 14, padding: "18px 30px", boxShadow: "0 12px 34px rgba(0,0,0,.22)", transform: `scale(${0.9 + 0.1 * pp})` }}>
-        <span style={{ position: "relative", fontFamily: BODY, fontWeight: 500, fontSize: 50, color: C.grafito, whiteSpace: "pre" }}>
-          <span style={{ position: "absolute", inset: "-4px -6px", background: `rgba(27,151,200,${0.28 * sel})`, borderRadius: 4 }} />
-          {text.slice(0, n)}
-          <span style={{ opacity: n < text.length ? 1 : 0, color: C.azul }}>|</span>
-          {st > 0 && <span style={{ position: "absolute", left: -8, top: "52%", height: 7, width: `calc(${st * 100}% + 16px)`, background: C.terracota, borderRadius: 4, transform: "rotate(-2deg)" }} />}
-        </span>
-        {sel > 0 && (
-          <>
-            <Handle left={20} top={10} o={sel} />
-            <Handle right={20} bottom={10} o={sel} flip />
-          </>
+    <Center y={y} style={{ transform: `translate(-50%,0) scale(${1 - exit})`, opacity: 1 - exit }}>
+      {chip && t >= chip.at && (
+        <div style={{ position: "absolute", left: "50%", top: -size * 0.62, transform: `translateX(-50%) scale(${prog(t, chip.at, 0.2, BACK)})` }}>
+          <span style={{ fontFamily: TITLE, fontWeight: 700, fontSize: 46, color: C.white, background: C.terracota, padding: "2px 16px 4px", borderRadius: 6 }}>{chip.text}</span>
+        </div>
+      )}
+      {/* arco de 3 bandas (versión de marca del arcoíris) */}
+      <svg width={W + 200} height={300} viewBox={`${-(W + 200) / 2} -260 ${W + 200} 300`} style={{ position: "absolute", left: "50%", top: -size * 0.15, transform: "translate(-50%,-100%)", overflow: "visible", opacity: t >= at - 0.05 ? 1 : 0 }}>
+        {[C.azul, C.lino, C.terracota].map((c, i) => {
+          const r = W / 2 + 40 - i * 22;
+          const L = Math.PI * r * 0.75;
+          return <path key={i} d={`M ${-r} 20 A ${r} ${r * 0.34} 0 0 1 ${r} 20`} stroke={c} strokeWidth={20} fill="none" strokeLinecap="round" strokeDasharray={L} strokeDashoffset={L * (1 - arc)} opacity={0.92} />;
+        })}
+      </svg>
+      <span style={{ position: "relative", fontFamily: TITLE, fontWeight: 900, fontSize: size, color: C.lino, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` }}>
+        {letters.map((l, i) => {
+          const order = letters.length - 1 - i; // derecha → izquierda
+          const shown = t >= at && order < nVis;
+          const a = at + order * step;
+          return <span key={i} style={{ display: "inline-block", opacity: shown ? 1 : 0, transform: `scale(${interpolate(t, [a, a + 0.08, a + 0.16], [1.6, 0.94, 1], cl)})` }}>{l}</span>;
+        })}
+        {building && (
+          <span style={{ position: "absolute", top: "10%", left: `${((letters.length - nVis) / letters.length) * 100}%`, transform: `translate(-50%,0) rotate(${(t - at) * 720}deg)` }}>
+            <StickerSvg kind="star" size={36} color={C.arena} />
+          </span>
         )}
-      </div>
-    </div>
-  );
-};
-const Handle: React.FC<{ left?: number; right?: number; top?: number; bottom?: number; o: number; flip?: boolean }> = ({ o, flip, ...pos }) => (
-  <div style={{ position: "absolute", ...pos, width: 4, height: 62, background: C.azul, opacity: o }}>
-    <div style={{ position: "absolute", left: -9, [flip ? "bottom" : "top"]: -18, width: 22, height: 22, borderRadius: 11, background: C.azul } as React.CSSProperties} />
-  </div>
-);
-
-/** #8 · tira blanca con texto que aparece palabra por palabra (words = [texto, segundo]) */
-export const Strip: React.FC<Pos & { from: number; to: number; words: [string, number][]; size?: number; tag?: string; tagColor?: string; rot?: number }> = ({ from, to, words, size = 54, tag, tagColor = C.terracota, rot = 0, ...p }) => {
-  const t = useT();
-  if (!vis(t, from, to)) return null;
-  const a = prog(t, from, 0.2);
-  return (
-    <div style={{ ...box(p), opacity: fadeOut(t, to) }}>
-      <div style={{ display: "inline-flex", alignItems: "center", gap: 16, background: C.white, padding: "10px 26px", transform: `scaleX(${a}) rotate(${rot}deg)`, transformOrigin: "left center", boxShadow: "0 8px 22px rgba(0,0,0,.18)" }}>
-        {tag && <span style={{ fontFamily: TITLE, fontWeight: 800, fontSize: size * 0.62, color: C.white, background: tagColor, padding: "2px 12px", borderRadius: 6 }}>{tag}</span>}
-        <span style={{ fontFamily: BODY, fontWeight: 600, fontSize: size, color: C.grafito, whiteSpace: "pre" }}>
-          {words.map(([w, s], i) => (
-            <span key={i} style={{ opacity: t >= s ? 1 : 0 }}>{(i ? " " : "") + w}</span>
-          ))}
-        </span>
-      </div>
-    </div>
+      </span>
+      {stickers.map((st, i) => {
+        const p = prog(t, at + st.d, 0.24, BACK);
+        const tw = st.k === "spark" ? 0.8 + 0.2 * Math.sin((t - at) * 10 + i) : 1 + 0.05 * Math.sin((t - at) * 6 + i);
+        return <div key={i} style={{ position: "absolute", left: `calc(50% + ${st.dx}px)`, top: size * 0.45 + st.dy, transform: `translate(-50%,-50%) scale(${p * tw}) rotate(${st.spin ? (t - at) * 120 : 0}deg)` }}><StickerSvg kind={st.k} size={st.s} color={st.c} /></div>;
+      })}
+    </Center>
   );
 };
 
-/** #10 · nota de papel inclinada con manuscrita y resaltador */
-export const PaperNote: React.FC<{ from: number; to: number; x: number; y: number; w?: number; lines: [string, number][][]; markAt?: number; markLine?: number; markWord?: string; rot?: number }> = ({ from, to, x, y, w = 520, lines, markAt, markLine = 0, markWord, rot = -7 }) => {
+// ═════════ RECURSO 13 · fichas por palabra (PERO · LA) con estrellas que giran ═════════
+export const WordChips: React.FC<{ to: number; y: number; words: { text: string; at: number }[]; bg?: string; fg?: string; size?: number; stars?: boolean }> = ({ to, y, words, bg = C.terracota, fg = C.white, size = 52, stars = true }) => {
   const t = useT();
-  if (!vis(t, from, to)) return null;
-  const s = popScale(t, from, 0.3);
-  const m = markAt !== undefined ? prog(t, markAt, 0.35) : 0;
+  if (!vis(t, words[0].at, to)) return null;
   return (
-    <div style={{ position: "absolute", left: x, top: y, width: w, opacity: fadeOut(t, to), transform: `rotate(${rot}deg) scale(${s})`, transformOrigin: "30% 50%" }}>
-      <div style={{ background: C.lino, padding: "26px 30px 22px 46px", borderLeft: `5px solid ${C.terracota}`, boxShadow: "0 14px 30px rgba(0,0,0,.28)", backgroundImage: `repeating-linear-gradient(${C.lino} 0 57px, ${C.arena} 57px 59px)`, backgroundPosition: "0 18px" }}>
-        {lines.map((ln, li) => (
-          <div key={li} style={{ fontFamily: HAND, fontWeight: 700, fontSize: 54, lineHeight: "58px", color: C.grafito, whiteSpace: "pre" }}>
-            {ln.map(([word, at], wi) => {
-              const isMark = li === markLine && word === markWord;
-              return (
-                <span key={wi} style={{ opacity: t >= at ? 1 : 0, position: "relative" }}>
-                  {wi ? " " : ""}
-                  {isMark && <span style={{ position: "absolute", left: 6, right: -6, top: "38%", height: "48%", background: "rgba(27,151,200,.38)", transform: `scaleX(${m})`, transformOrigin: "left", borderRadius: 4 }} />}
-                  <span style={{ position: "relative" }}>{word}</span>
-                </span>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    </div>
+    <Center y={y} style={{ opacity: fadeOut(t, to), display: "flex", gap: 10, alignItems: "center" }}>
+      {stars && <span style={{ display: "inline-block", transform: `scale(${prog(t, words[0].at, 0.2, BACK)}) rotate(${(t - words[0].at) * 140}deg)`, marginRight: 6 }}><StickerSvg kind="star" size={30} color={C.arena} /></span>}
+      {words.map((w, i) => (
+        <span key={i} style={{ display: "inline-block", fontFamily: TITLE, fontWeight: 800, fontSize: size, color: fg, background: bg, padding: "2px 16px 4px", borderRadius: 6, transform: `scale(${prog(t, w.at, 0.2, BACK)})`, opacity: t >= w.at ? 1 : 0 }}>{w.text}</span>
+      ))}
+    </Center>
   );
 };
 
-/** #7 / #12 · chip/etiqueta que salta con rotación */
-export const Chip: React.FC<{ at: number; to: number; x: number; y: number; text: string; bg?: string; fg?: string; size?: number; rot?: number; anchor?: "left" | "center" | "right" }> = ({ at, to, x, y, text, bg = C.azul, fg = C.marino, size = 64, rot = -3, anchor = "left" }) => {
+// ═════════ RECURSO 14 · NUBE: puf que nace, crece hasta tapar la palabra y estalla en nubes de contorno ═════════
+const CLOUD = "M14 58 C2 58 0 44 10 40 C6 26 22 18 32 24 C36 8 58 4 66 18 C76 8 96 14 94 30 C108 30 110 50 98 56 C96 62 20 62 14 58 Z";
+export const CloudPop: React.FC<{ at: number; y: number; w?: number }> = ({ at, y, w = 820 }) => {
   const t = useT();
-  if (!vis(t, at, to)) return null;
-  const s = popScale(t, at, 0.3);
-  const tx = anchor === "center" ? "-50%" : anchor === "right" ? "-100%" : "0";
+  if (t < at || t > at + 0.95) return null;
+  const p1 = prog(t, at, 0.12, BACK); // puf central
+  const p2 = prog(t, at + 0.1, 0.18, OUT); // cúmulo que tapa
+  const p3 = prog(t, at + 0.28, 0.6, Easing.out(Easing.quad)); // estallido a contorno
+  const puffs = [[0, 0, 1.25], [-0.32, 0.08, 1], [0.32, 0.06, 1.05], [-0.18, -0.2, 0.85], [0.2, -0.18, 0.9], [-0.42, -0.06, 0.7], [0.44, -0.08, 0.75]];
   return (
-    <div style={{ position: "absolute", left: x, top: y, opacity: fadeOut(t, to), transform: `translateX(${tx}) rotate(${rot}deg) scale(${s})` }}>
-      <span style={{ display: "inline-block", fontFamily: TITLE, fontWeight: 800, fontSize: size, letterSpacing: "0.04em", color: fg, background: bg, padding: "8px 26px 10px", borderRadius: 8, boxShadow: "0 10px 24px rgba(0,0,0,.22)", whiteSpace: "pre" }}>{text}</span>
-    </div>
-  );
-};
-
-// ---------- stickers ----------
-const star = (r: number) => {
-  const pts: string[] = [];
-  for (let i = 0; i < 10; i++) { const a = (Math.PI / 5) * i - Math.PI / 2; const rr = i % 2 ? r * 0.45 : r; pts.push(`${Math.cos(a) * rr},${Math.sin(a) * rr}`); }
-  return pts.join(" ");
-};
-export type StickerT = { kind: "star" | "spark" | "flower" | "yarn" | "heart"; x: number; y: number; at: number; size?: number; color?: string; spin?: boolean };
-/** estrellas, destellos ✦, flores, ovillos y corazones con pop escalonado y twinkle */
-export const Stickers: React.FC<{ to: number; items: StickerT[] }> = ({ to, items }) => {
-  const t = useT();
-  return (
-    <>
-      {items.map((it, i) => {
-        if (!vis(t, it.at, to)) return null;
-        const s = popScale(t, it.at, 0.28);
-        const sz = it.size ?? 60;
-        const tw = it.kind === "spark" ? 0.75 + 0.25 * Math.sin((t - it.at) * 9 + i) : 1;
-        const rot = it.spin ? (t - it.at) * 90 : 0;
-        const col = it.color ?? C.terracota;
+    <div style={{ position: "absolute", left: 540, top: y, width: 0, height: 0 }}>
+      {puffs.map(([dx, dy, s], i) => {
+        const grow = i === 0 ? p1 : p2;
+        const filled = 1 - p3;
+        const side = dx === 0 ? (i % 2 ? 1 : -1) : Math.sign(dx);
+        const out = p3 * (260 + 120 * Math.abs(dx));
+        const size = 230 * s * (0.4 + 0.6 * grow) * (1 + 0.25 * p3);
         return (
-          <svg key={i} width={sz * 2} height={sz * 2} viewBox={`${-sz} ${-sz} ${sz * 2} ${sz * 2}`} style={{ position: "absolute", left: it.x - sz, top: it.y - sz, opacity: fadeOut(t, to), transform: `scale(${s * tw}) rotate(${rot}deg)`, overflow: "visible", filter: "drop-shadow(0 4px 8px rgba(0,0,0,.22))" }}>
-            {it.kind === "star" && <polygon points={star(sz * 0.9)} fill={col} stroke={C.white} strokeWidth={3} strokeLinejoin="round" />}
-            {it.kind === "spark" && <path d={`M0 ${-sz} Q ${sz * 0.12} ${-sz * 0.12} ${sz} 0 Q ${sz * 0.12} ${sz * 0.12} 0 ${sz} Q ${-sz * 0.12} ${sz * 0.12} ${-sz} 0 Q ${-sz * 0.12} ${-sz * 0.12} 0 ${-sz} Z`} fill={col} />}
-            {it.kind === "flower" && (
-              <g>{[0, 72, 144, 216, 288].map((a) => <ellipse key={a} cx={0} cy={-sz * 0.45} rx={sz * 0.3} ry={sz * 0.45} fill={col} transform={`rotate(${a})`} stroke={C.white} strokeWidth={2} />)}<circle r={sz * 0.25} fill={C.lino} /></g>
-            )}
-            {it.kind === "heart" && <path d={`M0 ${sz * 0.75} C ${-sz} 0 ${-sz * 0.6} ${-sz * 0.8} 0 ${-sz * 0.3} C ${sz * 0.6} ${-sz * 0.8} ${sz} 0 0 ${sz * 0.75} Z`} fill={col} stroke={C.white} strokeWidth={3} />}
-            {it.kind === "yarn" && (
-              <g>
-                <circle r={sz * 0.8} fill={col} stroke={C.white} strokeWidth={3} />
-                {[-0.5, -0.15, 0.2, 0.55].map((k, j) => <path key={j} d={`M ${-sz * 0.75} ${k * sz} Q 0 ${(k - 0.35) * sz} ${sz * 0.75} ${k * sz}`} stroke={C.lino} strokeWidth={4} fill="none" opacity={0.85} />)}
-                <path d={`M ${sz * 0.7} ${sz * 0.3} q ${sz * 0.5} ${sz * 0.2} ${sz * 0.3} ${sz * 0.7}`} stroke={col} strokeWidth={5} fill="none" />
-              </g>
-            )}
+          <svg key={i} width={size} height={size * 0.6} viewBox="0 0 110 64" style={{ position: "absolute", left: dx * w * (0.5 + 0.5 * grow) + side * out - size / 2, top: dy * 260 - size * 0.3 - p3 * 30, overflow: "visible", opacity: grow * (1 - p3 * 0.95) }}>
+            <path d={CLOUD} fill={C.white} opacity={filled} />
+            <path d={CLOUD} fill="none" stroke={C.white} strokeWidth={3.2} opacity={p3 > 0 ? 1 : 0} />
           </svg>
         );
       })}
-    </>
+    </div>
   );
 };
 
-/** #12 · flecha dibujada a mano (stroke-dashoffset) */
-export const DrawnArrow: React.FC<{ at: number; to: number; x: number; y: number; w?: number; color?: string; flip?: boolean }> = ({ at, to, x, y, w = 160, color = C.terracota, flip }) => {
-  const t = useT();
-  if (!vis(t, at, to)) return null;
-  const r = prog(t, at, 0.35);
-  const L = 400;
-  return (
-    <svg width={w} height={w} viewBox="0 0 160 160" style={{ position: "absolute", left: x, top: y, opacity: fadeOut(t, to), transform: flip ? "scaleX(-1)" : "none", overflow: "visible" }}>
-      <path d="M20 20 C 40 90, 80 120, 130 125" stroke={color} strokeWidth={9} fill="none" strokeLinecap="round" strokeDasharray={L} strokeDashoffset={L * (1 - r)} />
-      <path d="M104 106 L 132 126 L 102 144" stroke={color} strokeWidth={9} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={r > 0.85 ? 1 : 0} />
-    </svg>
-  );
-};
-
-/** #14 · flash lino de 2–3 frames en los cortes de locación */
+// ───────── flash / marca de agua ─────────
 export const Flash: React.FC<{ at: number[] }> = ({ at }) => {
   const t = useT();
-  const o = Math.max(0, ...at.map((a) => interpolate(t, [a - 0.04, a, a + 0.1], [0, 0.85, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
+  const o = Math.max(0, ...at.map((a) => interpolate(t, [a - 0.03, a, a + 0.1], [0, 0.85, 0], cl)));
   return o > 0 ? <AbsoluteFill style={{ background: C.lino, opacity: o }} /> : null;
 };
-
-/** marca de agua obligatoria con avatar IA */
 export const AiMark: React.FC = () => (
-  <div style={{ position: "absolute", top: 236, right: 44, fontFamily: BODY, fontWeight: 600, fontSize: 26, color: C.white, textShadow: "0 1px 4px rgba(0,0,0,.55)", letterSpacing: "0.02em" }}>{MARCA.aiWatermark}</div>
+  <div style={{ position: "absolute", top: 236, right: 44, fontFamily: BODY, fontWeight: 600, fontSize: 26, color: C.white, textShadow: "0 1px 4px rgba(0,0,0,.55)" }}>{MARCA.aiWatermark}</div>
 );
 
-// ---------- sonido ----------
-export type SfxName = "whoosh" | "pop" | "ding" | "click" | "boom" | "tick" | "paper" | "sparkle";
-export const Sfx: React.FC<{ list: { at: number; f: SfxName; v?: number }[] }> = ({ list }) => {
+// ───────── sonido ─────────
+export type SfxName = "whoosh" | "pop" | "ding" | "click" | "boom" | "tick" | "paper" | "sparkle" | "type" | "poof";
+export type SfxItem = { at: number; f: SfxName; v?: number };
+export const Sfx: React.FC<{ list: SfxItem[] }> = ({ list }) => {
   const { fps } = useVideoConfig();
-  return (
-    <>
-      {list.map((s, i) => (
-        <Sequence key={i} from={Math.max(0, Math.round(s.at * fps))} durationInFrames={fps}>
-          <Audio src={staticFile(`sfx/${s.f}.wav`)} volume={(s.v ?? 1) * 0.3} />
-        </Sequence>
-      ))}
-    </>
-  );
+  return <>{list.map((s, i) => <Sequence key={i} from={Math.max(0, Math.round(s.at * fps))} durationInFrames={fps}><Audio src={staticFile(`sfx/${s.f}.wav`)} volume={(s.v ?? 1) * 0.3} /></Sequence>)}</>;
 };
+/** tecleo sincronizado con un texto tipeado (1 golpe cada 2 caracteres) */
+export const typeSfx = (at: number, text: string, cps = 30, v = 0.5): SfxItem[] =>
+  Array.from({ length: Math.ceil(text.replace(/ /g, "").length / 2) }, (_, i) => ({ at: at + (i * 2) / cps, f: "type" as const, v }));
 
-// ---------- placa final ----------
-/** Panel lino que sube (#14) con logo, lista con checks y CTA. Fondo = último cuadro desenfocado (no negro). */
+// ───────── placa final ─────────
 export const EndCard: React.FC<{ from: number; kicker: string; title: string; items: string[]; cta: string; url: string }> = ({ from, kicker, title, items, cta, url }) => {
   const t = useT();
   if (t < from) return null;
-  const up = prog(t, from, 0.45);
-  const lt = t - from;
+  const up = prog(t, from, 0.32);
   return (
-    <AbsoluteFill>
-      <AbsoluteFill style={{ background: C.lino, transform: `translateY(${(1 - up) * 1920}px)` }}>
-        <svg width={1080} height={1920} style={{ position: "absolute", opacity: 0.5 }}>
+    <AbsoluteFill style={{ transform: `translateY(${(1 - up) * 1920}px)` }}>
+      <AbsoluteFill style={{ background: C.lino }}>
+        <svg width={1080} height={1920} style={{ position: "absolute", opacity: 0.55 }}>
           <path d="M -20 300 Q 270 250 540 300 T 1100 300" stroke={C.arena} strokeWidth={3} fill="none" strokeDasharray="14 12" />
           <path d="M -20 1650 Q 270 1600 540 1650 T 1100 1650" stroke={C.arena} strokeWidth={3} fill="none" strokeDasharray="14 12" />
         </svg>
-        <div style={{ position: "absolute", top: 360, width: 1080, textAlign: "center", opacity: prog(t, from + 0.3, 0.3) }}>
+        <div style={{ position: "absolute", top: 360, width: 1080, textAlign: "center", transform: `scale(${prog(t, from + 0.25, 0.25, BACK)})` }}>
           <Img src={staticFile("logos/crochetes-logo-horizontal-color.png")} style={{ width: 420 }} />
         </div>
-        <div style={{ position: "absolute", top: 600, width: 1080, textAlign: "center" }}>
-          <div style={{ fontFamily: HAND, fontWeight: 700, fontSize: 64, color: C.terracota, opacity: prog(t, from + 0.45, 0.3), transform: "rotate(-3deg)" }}>{kicker}</div>
-          <div style={{ fontFamily: TITLE, fontWeight: 900, fontSize: 92, color: C.grafito, lineHeight: 1, marginTop: 10, transform: `scale(${popScale(t, from + 0.55)})`, opacity: prog(t, from + 0.55, 0.15) }}>{title}</div>
-        </div>
-        <div style={{ position: "absolute", top: 860, left: 200, width: 700 }}>
-          {items.map((it, i) => {
-            const a = prog(t, from + 0.85 + i * 0.16, 0.22);
-            return (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 22, marginBottom: 20, opacity: a, transform: `translateX(${(1 - a) * -40}px)` }}>
-                <span style={{ width: 54, height: 54, borderRadius: 27, background: C.azul, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width={30} height={30} viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke={C.marino} strokeWidth={3.4} fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </span>
-                <span style={{ fontFamily: BODY, fontWeight: 600, fontSize: 50, color: C.grafito }}>{it}</span>
-              </div>
-            );
-          })}
-        </div>
-        <div style={{ position: "absolute", top: 1290, width: 1080, textAlign: "center", transform: `scale(${popScale(t, from + 1.8)})`, opacity: prog(t, from + 1.8, 0.12) }}>
-          <span style={{ display: "inline-block", background: C.marino, color: C.white, fontFamily: TITLE, fontWeight: 800, fontSize: 50, padding: "18px 40px", borderRadius: 12, letterSpacing: "0.02em" }}>{cta}</span>
-          <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.chocolate, marginTop: 22 }}>{url}</div>
-        </div>
       </AbsoluteFill>
-      {lt < 0.6 && <AbsoluteFill style={{ background: C.lino, opacity: interpolate(lt, [0, 0.05, 0.25], [0, 0.6, 0], { extrapolateRight: "clamp" }) }} />}
+      <ScriptWrite from={from + 0.4} to={99} text={kicker} y={590} size={64} color={C.terracota} rot={-3} sparks={false} />
+      <LetterDrop at={from + 0.55} to={99} text={title} y={680} size={96} color={C.grafito} step={0.04} />
+      <div style={{ position: "absolute", top: 860, left: 210, width: 700 }}>
+        {items.map((it, i) => {
+          const at = from + 1.0 + i * 0.2;
+          const n = typed(t, at, it.length, 40);
+          return (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 22, marginBottom: 18, height: 64 }}>
+              <span style={{ width: 54, height: 54, borderRadius: 27, background: C.azul, display: "inline-flex", alignItems: "center", justifyContent: "center", transform: `scale(${prog(t, at, 0.18, BACK)})` }}>
+                <svg width={30} height={30} viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke={C.marino} strokeWidth={3.4} fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray={30} strokeDashoffset={30 * (1 - prog(t, at + 0.08, 0.15))} /></svg>
+              </span>
+              {n > 0 && <span style={{ fontFamily: BODY, fontWeight: 600, fontSize: 50, color: C.grafito, background: C.white, padding: "0 12px" }}>{it.slice(0, n)}</span>}
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ position: "absolute", top: 1300, width: 1080, textAlign: "center" }}>
+        <div style={{ display: "inline-block", transform: `scale(${prog(t, from + 2.2, 0.25, BACK)})` }}>
+          <span style={{ display: "inline-block", background: C.marino, color: C.white, fontFamily: TITLE, fontWeight: 800, fontSize: 50, padding: "18px 40px", borderRadius: 12 }}>{cta}</span>
+        </div>
+        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.chocolate, marginTop: 22, opacity: prog(t, from + 2.4, 0.2) }}>{url}</div>
+      </div>
+      <StickerArrow at={from + 2.5} to={99} x={700} y={1010} text="¡guardalo!" bg={C.terracota} fg={C.white} arrow={false} />
     </AbsoluteFill>
   );
 };

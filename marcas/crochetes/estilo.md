@@ -131,6 +131,30 @@ se guarda (es de terceros). Timings medidos a 10 fps (±1 frame); el easing es r
 | 14 | 16,8–17,3 | **Transición flash + nubes dibujadas** | flash de 2–3 frames + corte de locación; nubes de trazo | flash **lino** (no blanco puro) + nubes/puntadas de línea arena |
 | 15 | 17,3–19,8 | **Script fino bajo la palabra gigante** + mini-chip final | reveal de trazo + pop del chip | Caveat lino + chip terracota |
 
+### Regla de posición (aprendida en el reel 01 — Daniela rechazó la v1 por tapar la cara)
+En la referencia la cara está ABAJO del cuadro y el texto vive arriba. **En los clips de María la cara está ARRIBA**
+(mentón y ≈ 360–490 según la toma): copiar las posiciones de la referencia la tapa. Todo gráfico va **debajo del
+mentón + 80 px** (pecho/cintura, y ≈ 560–1000); karaoke en y ≈ 1490 (mesa). Medir el mentón en cada toma con un
+fotograma con grilla ANTES de ubicar nada, y revisar fotogramas a MITAD de cada animación (lo que entra deslizando
+puede cruzar la cara aunque termine bien ubicado).
+
+### Física de cada recurso (medida a 30 fps) → componente del kit
+| Recurso | Física | Componente |
+|---|---|---|
+| Script + destellos | máscara izq→der ~0,5 s; ✦ aparecen escalonados (60 ms) y titilan | `ScriptWrite` |
+| Eco gigante | copia translúcida (45 %) a escala ×3,2 se cierra sobre la palabra en ~6 frames | `GhostZoom` |
+| Subibaja | dos palabras caen desde arriba-izq / arriba-der con rebote y se balancean en contrafase; salen desarmándose letra por letra con blur | `BounceDuo` |
+| Selección en globo | globo con colita, resaltado celeste de entrada, handles en los extremos, texto tipeado | `BubbleSelect` |
+| Máquina de escribir | ~2 caracteres por frame; cada renglón su tira blanca que crece con el texto | `TypeStrips` |
+| Órbita + fuegos | palabra chica a ~72° viaja en arco y gira a 0° (~11 frames) con anillo blanco que orbita y papelitos; al asentarse, estallido de rayos | `OrbitSpin` |
+| Sticker + flecha | sticker manuscrito con 3 rayitos + flecha curva que se dibuja | `StickerArrow` |
+| Letras que suben | una letra cada ~2–3 frames, desde abajo con overshoot; salida en caída | `LetterDrop` |
+| Etiqueta tipeada | la caja crece con cada letra | `TypeTag` |
+| Nota de papel | entra deslizando, deriva y gira lento; marcador tipeado; resaltador barre por delante | `PaperNote` |
+| Stickers + arco | palabra se arma DERECHA→IZQUIERDA con estrella-cursor; arco de 3 bandas crece; stickers pop escalonado y titilan | `StickerBurstBuild` |
+| Fichas por palabra | una ficha por palabra + estrella que gira | `WordChips` |
+| Nube | puf central (4 frames) → cúmulo que tapa la palabra (5 frames) → estalla en nubes de contorno hacia los costados (~18 frames) | `CloudPop` |
+
 ### Reglas que se desprenden
 1. **Nunca dos recursos iguales seguidos.**
 2. **Algo cambia cada ~1–1,5 s**, aunque la frase siga.
