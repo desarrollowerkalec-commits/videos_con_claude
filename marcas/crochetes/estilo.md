@@ -96,8 +96,7 @@ Regla: máximo 2 familias por pantalla (Work Sans + Caveat). Una idea dominante 
   terracota y lino; evitar azul y marino en la ropa (compiten con el acento de la marca).
 - Marca de agua **"✦ generado con IA"** persistente en todo reel donde aparezca.
 - Nunca atribuirle haber probado un producto ni testimonios.
-- ⚠️ La web muestra a María como **ilustración** en la sidebar: contradice al avatar fotorrealista. Decidir cuál
-  es la María oficial (no requiere cambiar el diseño de la web, solo esa imagen).
+- ✅ **La María oficial es la del character sheet** (decisión 16/11). La ilustración de la sidebar de la web queda desactualizada.
 
 ## Subtítulos karaoke
 
@@ -142,6 +141,10 @@ se guarda (es de terceros). Timings medidos a 10 fps (±1 frame); el easing es r
 
 ### Lo que NO copiar
 Arcoíris, amarillo saturado, rosa chicle, el audio y los textos de la referencia. Solo la gramática.
+
+## Kit de edición
+
+`marcas/crochetes/remotion/` (kit.tsx + ejemplo del reel 01 + SFX extra). Ver su README.
 
 ## Sonido
 
