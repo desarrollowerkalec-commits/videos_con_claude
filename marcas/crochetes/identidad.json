@@ -1,25 +1,29 @@
 {
   "brand": "CROCHETES by María",
-  "version": "1.0",
+  "version": "1.1",
   "site": "https://crochetes.com.ar/",
   "concept": "Crochet Editorial",
   "colors": {
-    "ivory": "#F7F2EB",
-    "dusty_rose": "#D9A5A0",
-    "sage": "#A4B6A0",
-    "cocoa": "#73564A",
-    "graphite": "#282623",
+    "lino": "#F0EFEB",
+    "azul_aguja": "#1B97C8",
+    "marino": "#001E42",
+    "chocolate": "#47382F",
+    "terracota": "#B3695C",
+    "arena": "#AF9373",
+    "grafito": "#282828",
+    "gris": "#4E4E4E",
     "white": "#FFFFFF"
   },
   "typography": {
-    "karaoke": "Montserrat Bold/Semibold",
-    "display": "Montserrat ExtraBold",
-    "editorial": "Playfair Display",
-    "body": "DM Sans",
-    "handwritten_accent": "not_selected"
+    "karaoke": "Work Sans 600/700",
+    "display": "Work Sans 800/900",
+    "labels": "Work Sans 600-700 uppercase",
+    "handwritten_accent": "Caveat 400/700",
+    "logo_only": "Open Sans Bold",
+    "script_lettering": "not_selected"
   },
   "subtitles": {
-    "font": "Montserrat",
+    "font": "Work Sans",
     "background": "transparent",
     "shadow": "dark subtle",
     "active_word": "highlight only current spoken word",
@@ -28,7 +32,8 @@
       "black rectangles",
       "oversized text over face",
       "estimated word timing"
-    ]
+    ],
+    "active_word_color": "#1B97C8"
   },
   "photography": "warm natural daytime light, modern real craft studio, pale oak, true crochet textures and tools, elegant editorial",
   "avatar": {
@@ -37,9 +42,8 @@
     "identity_reference": "original uploaded photo and character sheet required separately",
     "keep_face_constant": true,
     "wardrobe": [
-      "dusty rose",
-      "cream",
-      "sage"
+      "rosa/terracota suave",
+      "crema"
     ],
     "scene_duration_seconds": 10
   },
@@ -103,10 +107,30 @@
   },
   "approved_status": {
     "brand_direction": "chosen Crochet Editorial",
-    "visual_tokens": "working palette",
-    "karaoke_font": "Montserrat requested",
+    "visual_tokens": "paleta de la web + logo (decidido 16/11)",
+    "karaoke_font": "Work Sans (unificado con la web; reemplaza Montserrat)",
     "previous_video_edits": "rejected",
     "sound_identity": "provisional"
   },
-  "manual_file": "CROCHETES_MANUAL_DE_MARCA_PARA_CLAUDE.md"
+  "manual_file": "CROCHETES_MANUAL_DE_MARCA_PARA_CLAUDE.md",
+  "decision_2026_11_16": "La marca se adapta a la web: paleta y tipografías tomadas de crochetes.com.ar y del logo. Ver estilo.md.",
+  "colors_previous_superseded": {
+    "ivory": "#F7F2EB",
+    "dusty_rose": "#D9A5A0",
+    "sage": "#A4B6A0",
+    "cocoa": "#73564A",
+    "graphite": "#282623",
+    "white": "#FFFFFF"
+  },
+  "typography_previous_superseded": {
+    "karaoke": "Montserrat Bold/Semibold",
+    "display": "Montserrat ExtraBold",
+    "editorial": "Playfair Display",
+    "body": "DM Sans",
+    "handwritten_accent": "not_selected"
+  },
+  "logo": {
+    "folder": "marcas/crochetes/logo/",
+    "status": "isotipo vectorizado desde PDF de Canva (raster 308px); texto vectorial original"
+  }
 }

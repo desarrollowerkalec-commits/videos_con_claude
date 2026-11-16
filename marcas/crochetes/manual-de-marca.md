@@ -1,3 +1,7 @@
+> ⚠️ **Actualización 16/11/2026:** la paleta (§2) y el sistema tipográfico (§3) de este manual quedaron
+> **reemplazados**: la marca se adapta a la web (azul aguja, marino, lino, chocolate, terracota, arena;
+> Work Sans + Caveat). Fuente vigente: `estilo.md`. El resto del manual sigue valiendo.
+
 # CROCHETES BY MARÍA
 ## Manual maestro de marca, identidad visual y producción de contenido
 **Versión:** 1.0 · **Fecha:** 15 de noviembre de 2026  
