@@ -1,0 +1,112 @@
+{
+  "brand": "CROCHETES by María",
+  "version": "1.0",
+  "site": "https://crochetes.com.ar/",
+  "concept": "Crochet Editorial",
+  "colors": {
+    "ivory": "#F7F2EB",
+    "dusty_rose": "#D9A5A0",
+    "sage": "#A4B6A0",
+    "cocoa": "#73564A",
+    "graphite": "#282623",
+    "white": "#FFFFFF"
+  },
+  "typography": {
+    "karaoke": "Montserrat Bold/Semibold",
+    "display": "Montserrat ExtraBold",
+    "editorial": "Playfair Display",
+    "body": "DM Sans",
+    "handwritten_accent": "not_selected"
+  },
+  "subtitles": {
+    "font": "Montserrat",
+    "background": "transparent",
+    "shadow": "dark subtle",
+    "active_word": "highlight only current spoken word",
+    "alignment": "real word-level audio timing required",
+    "avoid": [
+      "black rectangles",
+      "oversized text over face",
+      "estimated word timing"
+    ]
+  },
+  "photography": "warm natural daytime light, modern real craft studio, pale oak, true crochet textures and tools, elegant editorial",
+  "avatar": {
+    "name": "María",
+    "type": "fictional AI presenter",
+    "identity_reference": "original uploaded photo and character sheet required separately",
+    "keep_face_constant": true,
+    "wardrobe": [
+      "dusty rose",
+      "cream",
+      "sage"
+    ],
+    "scene_duration_seconds": 10
+  },
+  "motion_reference": {
+    "reference_video_required": true,
+    "techniques": [
+      "handwritten reveal",
+      "oversized word typography",
+      "tilted paper notes",
+      "sequential white strips",
+      "scale pops",
+      "flowers and star accents",
+      "drawn underlines",
+      "mixed hierarchy and rotations",
+      "layered staggered word entrances",
+      "cut on graphic accent"
+    ],
+    "avoid": [
+      "generic color blocks",
+      "unsynced karaoke"
+    ],
+    "exact_keyframes": "require source inspection or original project"
+  },
+  "sound": {
+    "music": "warm original instrumental, not yet approved",
+    "sfx": [
+      "soft pops",
+      "swishes",
+      "paper moves",
+      "drawn underline tick",
+      "small sparkle"
+    ],
+    "voice_priority": true
+  },
+  "pillars": [
+    "Aprender crochet",
+    "Amigurumis",
+    "Materiales y herramientas",
+    "Patrones e inspiración",
+    "Emprender con crochet",
+    "Recomendados por María"
+  ],
+  "commercial_angles": [
+    "De cero a tu primera creación",
+    "Creá algo que te llene de orgullo",
+    "No gastes de más ni compres mal",
+    "Inspirate y empezá tu próximo proyecto",
+    "Convertí tu pasión en un emprendimiento",
+    "Elegí mejor con la guía de María"
+  ],
+  "social_formats": {
+    "instagram_carousel": "1080x1350",
+    "reel": "1080x1920",
+    "pinterest_pin": "1000x1500",
+    "youtube_shorts": "9:16"
+  },
+  "affiliate_programs": {
+    "Amazon": "verify",
+    "Hotmart": "verify",
+    "Mercado Libre": "defer until Dec 2026 and verify conditions"
+  },
+  "approved_status": {
+    "brand_direction": "chosen Crochet Editorial",
+    "visual_tokens": "working palette",
+    "karaoke_font": "Montserrat requested",
+    "previous_video_edits": "rejected",
+    "sound_identity": "provisional"
+  },
+  "manual_file": "CROCHETES_MANUAL_DE_MARCA_PARA_CLAUDE.md"
+}

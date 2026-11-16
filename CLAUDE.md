@@ -18,6 +18,7 @@ Sistema repetible para editar reels verticales (1080×1920) de la marca **Daniel
 | Marca | Estilo |
 |---|---|
 | Daniela Werkalec (marca personal) | `marcas/daniela-werkalec/estilo.md` — **sistema base** |
+| CROCHETES by María | `marcas/crochetes/estilo.md` — **independiente** (NO hereda el estilo oscuro de DW, solo el pipeline); Crochet Editorial, presentadora **María (avatar IA)** |
 | Marketing Digital Inmobiliario (MDI) | `marcas/marketing-digital-inmobiliario/estilo.md` — **hereda** del base; verde agua `#6AD5B7`, presentadora **Clara (avatar IA, no es Daniela)** |
 
 Si Daniela no dice la marca y no se deduce del video, preguntar. Para una marca derivada: leer PRIMERO el
