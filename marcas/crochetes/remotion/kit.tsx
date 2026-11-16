@@ -94,7 +94,7 @@ const StickerSvg: React.FC<{ kind: StickerKind; size: number; color: string }> =
 );
 
 // ═════════ RECURSO 1 · script que se escribe + destellos que titilan ═════════
-export const ScriptWrite: React.FC<{ from: number; to: number; text: string; y: number; x?: number; size?: number; color?: string; rot?: number; dur?: number; sparks?: boolean }> = ({ from, to, text, y, x = 540, size = 96, color = C.lino, rot = -4, dur = 0.5, sparks = true }) => {
+export const ScriptWrite: React.FC<{ from: number; to: number; text: string; y: number; x?: number; size?: number; color?: string; rot?: number; dur?: number; sparks?: boolean; shadow?: boolean }> = ({ from, to, text, y, x = 540, size = 96, color = C.lino, rot = -4, dur = 0.5, sparks = true, shadow = true }) => {
   const t = useT();
   if (!vis(t, from, to)) return null;
   const r = prog(t, from, dur, Easing.inOut(Easing.quad));
@@ -102,7 +102,7 @@ export const ScriptWrite: React.FC<{ from: number; to: number; text: string; y: 
   const sp = [[-w / 2 - 40, -10, 22], [w / 2 + 30, -30, 16], [-w / 2 + 30, size * .95, 14], [w / 2 - 10, size * .85, 24], [w * .1, -45, 12]];
   return (
     <Center y={y} x={x} style={{ opacity: fadeOut(t, to) }}>
-      <span style={{ display: "inline-block", fontFamily: HAND, fontWeight: 700, fontSize: size, color, lineHeight: 1.05, textShadow: SHADOW.soft, transform: `rotate(${rot}deg)`, clipPath: `inset(-30% ${100 - r * 100}% -30% -5%)` }}>{text}</span>
+      <span style={{ display: "inline-block", fontFamily: HAND, fontWeight: 700, fontSize: size, color, lineHeight: 1.05, textShadow: shadow ? SHADOW.soft : "none", transform: `rotate(${rot}deg)`, clipPath: `inset(-30% ${100 - r * 100}% -30% -5%)` }}>{text}</span>
       {sparks && sp.map(([dx, dy, s], i) => {
         const a = prog(t, from + 0.06 * i, 0.2, BACK);
         const tw = 0.6 + 0.4 * Math.abs(Math.sin((t - from) * 7 + i * 1.7));
@@ -121,7 +121,7 @@ export const GhostZoom: React.FC<{ at: number; to: number; text: string; y: numb
   const style: React.CSSProperties = { fontFamily: TITLE, fontWeight: 900, fontSize: size, lineHeight: 0.95, letterSpacing: "-0.01em" };
   return (
     <Center y={y} style={{ opacity: fadeOut(t, to) }}>
-      {g < 1 && <span style={{ ...style, position: "absolute", left: 0, top: 0, color, opacity: 0.45 * (1 - g), transform: `scale(${3.2 - 2.2 * g})`, transformOrigin: "50% 50%" }}>{text}</span>}
+      {g < 1 && <span style={{ ...style, position: "absolute", left: 0, top: 0, color, opacity: 0.45 * (1 - g), transform: `scale(${2.6 - 1.6 * g})`, transformOrigin: "50% 0%" }}>{text}</span>}
       <span style={{ ...style, display: "inline-block", color, opacity: prog(t, at, 0.06), transform: `scale(${s})`, textShadow: shadow3d ? `${SHADOW.pop3d}, 0 10px 30px rgba(0,0,0,.25)` : SHADOW.soft }}>{text}</span>
     </Center>
   );
@@ -148,8 +148,8 @@ export const BounceDuo: React.FC<{ to: number; y: number; a: { text: string; at:
   return (
     <Center y={y}>
       <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: size, color: C.white, textShadow: SHADOW.soft, display: "flex", gap: 26, lineHeight: 1 }}>
-        {word(a, [-260, -220], 0, 0)}
-        {word(b, [240, -260], Math.PI, 1)}
+        {word(a, [-300, 200], 0, 0)}
+        {word(b, [300, 240], Math.PI, 1)}
       </div>
     </Center>
   );
@@ -215,7 +215,7 @@ export const OrbitSpin: React.FC<{ at: number; to: number; text: string; y: numb
   const p = prog(t, at, D, Easing.inOut(Easing.cubic));
   const settle = at + D;
   const x = 140 * (1 - p) * (1 - p) + 60 * Math.sin(p * Math.PI) * (1 - p);
-  const yy = -170 * (1 - p) * (1 - p);
+  const yy = 190 * (1 - p) * (1 - p);
   const rot = 72 * (1 - p);
   const sc = 0.32 + 0.68 * p + (t > settle ? 0.06 * Math.exp(-(t - settle) * 14) * Math.sin((t - settle) * 40) : 0);
   const ring = t < settle + 0.05;
@@ -225,7 +225,7 @@ export const OrbitSpin: React.FC<{ at: number; to: number; text: string; y: numb
       <div style={{ position: "relative", transform: `translate(${x}px, ${yy}px) rotate(${rot}deg) scale(${sc})` }}>
         {ring && (
           <svg width={600} height={600} viewBox="-300 -300 600 600" style={{ position: "absolute", left: "50%", top: "50%", transform: `translate(-50%,-50%) rotate(${(t - at) * 900}deg)`, overflow: "visible" }}>
-            <circle r={230 - 80 * p} fill="none" stroke={C.white} strokeWidth={9} strokeLinecap="round" strokeDasharray={`${(230 - 80 * p) * 4} 2000`} opacity={1 - prog(t, settle - 0.05, 0.1)} />
+            <circle r={190 - 60 * p} fill="none" stroke={C.white} strokeWidth={9} strokeLinecap="round" strokeDasharray={`${(190 - 60 * p) * 4} 2000`} opacity={1 - prog(t, settle - 0.05, 0.1)} />
           </svg>
         )}
         <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 30px rgba(0,0,0,.25)` }}>{text}</span>
@@ -234,7 +234,7 @@ export const OrbitSpin: React.FC<{ at: number; to: number; text: string; y: numb
       {t < settle + 0.25 && Array.from({ length: 9 }).map((_, i) => {
         const a = rnd(i) * Math.PI * 2, d = 120 + 260 * prog(t, at + 0.03 * i, 0.5);
         const col = [C.azul, C.arena, C.terracota][i % 3];
-        return <div key={i} style={{ position: "absolute", left: "50%", top: "50%", width: 18, height: 10, background: col, opacity: 1 - prog(t, settle, 0.25), transform: `translate(${Math.cos(a) * d}px, ${Math.sin(a) * d * 0.7 - 60}px) rotate(${(t - at) * 600 + i * 40}deg)` }} />;
+        return <div key={i} style={{ position: "absolute", left: "50%", top: "50%", width: 18, height: 10, background: col, opacity: 1 - prog(t, settle, 0.25), transform: `translate(${Math.cos(a) * d}px, ${Math.abs(Math.sin(a)) * d * 0.45 + 40}px) rotate(${(t - at) * 600 + i * 40}deg)` }} />;
       })}
       {/* fuegos artificiales al asentarse */}
       {t > settle && burst < 1 && (
@@ -242,9 +242,10 @@ export const OrbitSpin: React.FC<{ at: number; to: number; text: string; y: numb
           {Array.from({ length: 16 }).map((_, i) => {
             const a = (i / 16) * Math.PI * 2 + 0.2;
             const r0 = 130 + 260 * burst, r1 = r0 + (i % 2 ? 90 : 50) * (1 - burst);
-            return <line key={i} x1={Math.cos(a) * r0 * 1.5} y1={Math.sin(a) * r0 * 0.75} x2={Math.cos(a) * r1 * 1.5} y2={Math.sin(a) * r1 * 0.75} stroke={i % 2 ? C.white : C.azul} strokeWidth={i % 2 ? 4 : 11} strokeLinecap="round" opacity={1 - burst} />;
+            const fy = Math.sin(a) < 0 ? 0.28 : 0.7;
+            return <line key={i} x1={Math.cos(a) * r0 * 1.5} y1={Math.sin(a) * r0 * fy} x2={Math.cos(a) * r1 * 1.5} y2={Math.sin(a) * r1 * fy} stroke={i % 2 ? C.white : C.azul} strokeWidth={i % 2 ? 4 : 11} strokeLinecap="round" opacity={1 - burst} />;
           })}
-          {Array.from({ length: 10 }).map((_, i) => { const a = rnd(i + 20) * Math.PI * 2, r = 180 + 300 * burst; return <circle key={"d" + i} cx={Math.cos(a) * r} cy={Math.sin(a) * r * 0.6} r={6} fill={C.white} opacity={1 - burst} />; })}
+          {Array.from({ length: 10 }).map((_, i) => { const a = rnd(i + 20) * Math.PI * 2, r = 180 + 300 * burst; return <circle key={"d" + i} cx={Math.cos(a) * r} cy={Math.sin(a) * r * (Math.sin(a) < 0 ? 0.25 : 0.6)} r={6} fill={C.white} opacity={1 - burst} />; })}
         </svg>
       )}
     </Center>
@@ -277,13 +278,13 @@ export const StickerArrow: React.FC<{ at: number; to: number; x: number; y: numb
 };
 
 // ═════════ RECURSO 12 · palabra gigante que se arma LETRA POR LETRA desde abajo con rebote (+ salida en caída) ═════════
-export const LetterDrop: React.FC<{ at: number; to: number; text: string; y: number; x?: number; size?: number; step?: number; color?: string; exitAt?: number }> = ({ at, to, text, y, x = 540, size = 160, step = 0.075, color = C.lino, exitAt }) => {
+export const LetterDrop: React.FC<{ at: number; to: number; text: string; y: number; x?: number; size?: number; step?: number; color?: string; exitAt?: number; shadow?: boolean }> = ({ at, to, text, y, x = 540, size = 160, step = 0.075, color = C.lino, exitAt, shadow = true }) => {
   const t = useT();
   if (!vis(t, at, to)) return null;
   const letters = text.split("");
   return (
     <Center y={y} x={x}>
-      <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` }}>
+      <span style={{ fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: shadow ? `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` : "none" }}>
         {letters.map((l, i) => {
           const a = at + i * step;
           const sc = interpolate(t, [a, a + 0.1, a + 0.2], [0.3, 1.12, 1], cl);
@@ -340,7 +341,7 @@ export const PaperNote: React.FC<{ from: number; to: number; x: number; y: numbe
 };
 
 // ═════════ RECURSO 7 · explosión de stickers + palabra que se arma de DERECHA A IZQUIERDA con estrella-cursor + arco que crece ═════════
-export const StickerBurstBuild: React.FC<{ at: number; to: number; text: string; y: number; size?: number; chip?: { text: string; at: number } }> = ({ at, to, text, y, size = 120, chip }) => {
+export const StickerBurstBuild: React.FC<{ at: number; to: number; text: string; y: number; size?: number; chip?: { text: string; at: number }; color?: string; softShadow?: boolean }> = ({ at, to, text, y, size = 120, chip, color = C.lino, softShadow = true }) => {
   const t = useT();
   if (!vis(t, chip ? Math.min(chip.at, at) : at, to)) return null;
   const letters = text.split("");
@@ -350,13 +351,14 @@ export const StickerBurstBuild: React.FC<{ at: number; to: number; text: string;
   const exit = prog(t, to - 0.16, 0.16, Easing.in(Easing.quad));
   const arc = prog(t, at - 0.05, 0.55, Easing.inOut(Easing.quad));
   const W = letters.length * size * 0.72;
+  const Wk = Math.min(W, 800); // stickers siempre dentro del cuadro
   const stickers: { k: StickerKind; dx: number; dy: number; s: number; c: string; d: number; spin?: boolean }[] = [
-    { k: "spark", dx: -W / 2 - 60, dy: 30, s: 46, c: C.azul, d: 0.0, spin: true },
-    { k: "flower", dx: -W / 2 + 20, dy: -110, s: 34, c: C.azul, d: 0.08 },
-    { k: "heart", dx: W / 2 + 40, dy: -60, s: 32, c: C.terracota, d: 0.12 },
-    { k: "star", dx: W / 2 + 70, dy: 70, s: 40, c: C.terracota, d: 0.05, spin: true },
-    { k: "spark", dx: W / 2 - 40, dy: 160, s: 30, c: C.white, d: 0.18 },
-    { k: "yarn", dx: -W / 2 - 20, dy: 170, s: 30, c: C.arena, d: 0.22 },
+    { k: "spark", dx: -Wk / 2 - 60, dy: 30, s: 46, c: C.azul, d: 0.0, spin: true },
+    { k: "flower", dx: -Wk / 2 + 20, dy: -110, s: 34, c: C.azul, d: 0.08 },
+    { k: "heart", dx: Wk / 2 + 40, dy: -60, s: 32, c: C.terracota, d: 0.12 },
+    { k: "star", dx: Wk / 2 + 70, dy: 70, s: 40, c: C.terracota, d: 0.05, spin: true },
+    { k: "spark", dx: Wk / 2 - 40, dy: 160, s: 30, c: C.white, d: 0.18 },
+    { k: "yarn", dx: -Wk / 2 - 20, dy: 170, s: 30, c: C.arena, d: 0.22 },
     { k: "spark", dx: 0, dy: -150, s: 20, c: C.white, d: 0.26 },
   ];
   return (
@@ -374,7 +376,7 @@ export const StickerBurstBuild: React.FC<{ at: number; to: number; text: string;
           return <path key={i} d={`M ${-r} 20 A ${r} ${r * 0.34} 0 0 1 ${r} 20`} stroke={c} strokeWidth={20} fill="none" strokeLinecap="round" strokeDasharray={L} strokeDashoffset={L * (1 - arc)} opacity={0.92} />;
         })}
       </svg>
-      <span style={{ position: "relative", fontFamily: TITLE, fontWeight: 900, fontSize: size, color: C.lino, lineHeight: 0.95, textShadow: `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` }}>
+      <span style={{ position: "relative", fontFamily: TITLE, fontWeight: 900, fontSize: size, color, lineHeight: 0.95, textShadow: softShadow ? `${SHADOW.pop3d}, 0 10px 26px rgba(0,0,0,.22)` : SHADOW.pop3d }}>
         {letters.map((l, i) => {
           const order = letters.length - 1 - i; // derecha → izquierda
           const shown = t >= at && order < nVis;
@@ -460,7 +462,7 @@ export const typeSfx = (at: number, text: string, cps = 30, v = 0.5): SfxItem[] 
   Array.from({ length: Math.ceil(text.replace(/ /g, "").length / 2) }, (_, i) => ({ at: at + (i * 2) / cps, f: "type" as const, v }));
 
 // ───────── placa final ─────────
-export const EndCard: React.FC<{ from: number; kicker: string; title: string; items: string[]; cta: string; url: string }> = ({ from, kicker, title, items, cta, url }) => {
+export const EndCard: React.FC<{ from: number; kicker: string; title: string; items: string[]; cta: string; handle: string }> = ({ from, kicker, title, items, cta, handle }) => {
   const t = useT();
   if (t < from) return null;
   const up = prog(t, from, 0.32);
@@ -475,8 +477,8 @@ export const EndCard: React.FC<{ from: number; kicker: string; title: string; it
           <Img src={staticFile("logos/crochetes-logo-horizontal-color.png")} style={{ width: 420 }} />
         </div>
       </AbsoluteFill>
-      <ScriptWrite from={from + 0.4} to={99} text={kicker} y={590} size={64} color={C.terracota} rot={-3} sparks={false} />
-      <LetterDrop at={from + 0.55} to={99} text={title} y={680} size={96} color={C.grafito} step={0.04} />
+      <ScriptWrite from={from + 0.4} to={99} text={kicker} y={590} size={64} color={C.terracota} rot={-3} sparks={false} shadow={false} />
+      <LetterDrop at={from + 0.55} to={99} text={title} y={680} size={96} color={C.grafito} step={0.04} shadow={false} />
       <div style={{ position: "absolute", top: 860, left: 210, width: 700 }}>
         {items.map((it, i) => {
           const at = from + 1.0 + i * 0.2;
@@ -495,9 +497,8 @@ export const EndCard: React.FC<{ from: number; kicker: string; title: string; it
         <div style={{ display: "inline-block", transform: `scale(${prog(t, from + 2.2, 0.25, BACK)})` }}>
           <span style={{ display: "inline-block", background: C.marino, color: C.white, fontFamily: TITLE, fontWeight: 800, fontSize: 50, padding: "18px 40px", borderRadius: 12 }}>{cta}</span>
         </div>
-        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.chocolate, marginTop: 22, opacity: prog(t, from + 2.4, 0.2) }}>{url}</div>
+        <div style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40, color: C.chocolate, marginTop: 22, opacity: prog(t, from + 2.4, 0.2) }}>{handle}</div>
       </div>
-      <StickerArrow at={from + 2.5} to={99} x={700} y={1010} text="¡guardalo!" bg={C.terracota} fg={C.white} arrow={false} />
     </AbsoluteFill>
   );
 };

@@ -7,6 +7,8 @@ Para cada reel nuevo, después de `reel_prep.py`:
 4. `mkdir -p <reel>/remotion/public/logos && cp editor-video-ia/assets/logos/crochetes-*.png <reel>/remotion/public/logos/`
 5. Extraer el último cuadro para la placa: `ffmpeg -ss <DURATION-0.05> -i public/cam.mp4 -frames:v 1 public/last.jpg`
 6. Escribir `video.tsx` tomando como modelo `ejemplo-reel01-video.tsx`.
+7. Portada: copiar `Cover.tsx`, registrar la composition `Cover` en `Root.tsx` (ver estilo.md → Portadas), cambiar textos y foto (`public/img/cover-bg.jpg`).
+8. Placa final: SIN sombras, SIN "link en la bio" (no hay guía en el link).
 
 Render SIN música mientras la identidad sonora no esté aprobada (si no, render.sh mete la de Daniela Werkalec):
 `bash editor-video-ia/scripts/render.sh <reel> "$PWD/Reels - CROCHETES/<nombre>.mp4" none`

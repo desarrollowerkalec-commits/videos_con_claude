@@ -134,7 +134,7 @@ se guarda (es de terceros). Timings medidos a 10 fps (±1 frame); el easing es r
 ### Regla de posición (aprendida en el reel 01 — Daniela rechazó la v1 por tapar la cara)
 En la referencia la cara está ABAJO del cuadro y el texto vive arriba. **En los clips de María la cara está ARRIBA**
 (mentón y ≈ 360–490 según la toma): copiar las posiciones de la referencia la tapa. Todo gráfico va **debajo del
-mentón + 80 px** (pecho/cintura, y ≈ 560–1000); karaoke en y ≈ 1490 (mesa). Medir el mentón en cada toma con un
+mentón + 80 px** (pecho/cintura, y ≈ 560–1000); karaoke en y ≈ 1490 (mesa). **Las entradas también: nada entra desde arriba** (el eco gigante crece hacia abajo; rayos y papelitos no suben). Medir el mentón en cada toma con un
 fotograma con grilla ANTES de ubicar nada, y revisar fotogramas a MITAD de cada animación (lo que entra deslizando
 puede cruzar la cara aunque termine bien ubicado).
 
@@ -169,6 +169,23 @@ Arcoíris, amarillo saturado, rosa chicle, el audio y los textos de la referenci
 ## Kit de edición
 
 `marcas/crochetes/remotion/` (kit.tsx + ejemplo del reel 01 + SFX extra). Ver su README.
+
+## Portadas (estándar desde el reel 01 — `remotion/Cover.tsx`, ejemplo en `referencia/portada-ejemplo-reel01.jpg`)
+
+La portada es el **último cuadro de una mini-animación** hecha con las mismas piezas del kit (así portada y reel hablan igual).
+Composition `Cover` (1080×1920, 90 frames) → `npx remotion still src/index.ts Cover out/portada.png --frame=89`.
+
+| Elemento | Pieza del kit | Posición | Nota |
+|---|---|---|---|
+| Foto | cuadro del reel con **boca cerrada y sonrisa**, con materiales a la vista | fondo completo | **sin oscurecer** (marca clara); solo un velo lino muy suave en la franja del texto |
+| Pregunta (2 renglones) | `TypeStrips` (tiras blancas, Work Sans 500, 64 px) | y ≈ 790 (debajo del mentón) | se lee en < 2 s; va **por encima** del arco |
+| Palabra clave | `StickerBurstBuild` (Work Sans 900, ~164 px, arco de 3 bandas + stickers) | y ≈ 1020 | sombra = solo desplazamiento marino (sin desenfoque negro) |
+| Etiqueta | `TypeTag` terracota, texto blanco | y ≈ 1240 | promesa concreta y verificable ("5 cosas · sin gastar de más") |
+| Logo | logo horizontal en píldora lino | y ≈ 1545 | dentro del recorte 3:4 de la grilla (y 240–1680) |
+| Marca de agua | `AiMark` | arriba a la derecha | obligatoria (María es IA) |
+
+Reglas: **nada sobre la cara** (todo del cuello para abajo), **sin sombras negras**, nada de "link en la bio" ni de
+guías que no existan. Todo el bloque de texto queda en la franja segura de la grilla.
 
 ## Sonido
 
